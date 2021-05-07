@@ -1,0 +1,20 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-title">Aviso</h4>
+      <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p><strong>¿Ud. está seguro de eliminar la ruta <span class="text-primary"></span> {{deleteRoute}}?</strong></p>
+      <p>Toda la información asociada con esta ruta será eliminada.</p>
+      <span class="text-danger">Esta operación no se puede deshacer.</span>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancelar</button>
+      <button type="button" ngbAutofocus class="btn btn-danger" (click)="modal.close('Ok click')">Aceptar</button>
+    </div>
+  </ng-template>
+  <table-list-route  *ngIf="!isEdited && !isAdded && !isDetailed" [updateTableEvent] = "updatedTableEvent" (detailed) = "onDetailed($event)" (added)= "onAdded($event)" (edited)="onEdited($event)" (deleted)="onDeleted($event)"></table-list-route>  
+  <route-form *ngIf="isEdited || isAdded || isDetailed" (updateTableEvent) = "updateTableData($event)" (closeFormEvent)="onClose($event)" [isDetailed]="isDetailed" [editedRoute]="selectedRoute"></route-form>
+                                                             

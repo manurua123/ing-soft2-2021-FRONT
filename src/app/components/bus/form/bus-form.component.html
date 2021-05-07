@@ -1,0 +1,81 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Vehiculos</h4>
+                        <p class="card-category"> Administracion de vehiculos</p>
+                    </div>
+
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input required="true" [disabled]="isDetailed"
+                                            [(ngModel)]="this.editedBus.identification" name="identification" matInput
+                                            placeholder="Identificacion" type="text">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <mat-label>Conductor</mat-label>
+                                        <mat-select [disabled]="isDetailed" name="diver" [(ngModel)]="selectedBus"
+                                            [disableOptionCentering]="true" [(value)]="selectedBus">
+                                            <mat-option *ngFor="let item of driverDatasource" [value]="item">
+                                                {{item.firstName + item.lastName}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <mat-label>Tipo</mat-label>
+                                        <mat-select [disabled]="isDetailed" name="type" [(ngModel)]="selectedType"
+                                            [disableOptionCentering]="true" [(value)]="selectedType">
+                                            <mat-option *ngFor="let item of typeyBus" [value]="item">
+                                                {{item}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input required="true" [disabled]="isDetailed"
+                                            [(ngModel)]="this.editedBus.model" name="model" matInput
+                                            placeholder="Modelo" type="text">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input required="true" [disabled]="isDetailed"
+                                            [(ngModel)]="this.editedBus.licencePlate" name="licencePlate" matInput
+                                            placeholder="Patente" type="text">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input required="true" [disabled]="isDetailed"
+                                            [(ngModel)]="this.editedBus.seatNumbers" name="seatNumbers" matInput
+                                            placeholder="Asientos" type="number">
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+                            <button mat-raised-button (click)="close()" class="btn btn-dark pull-right">Cerrar</button>
+
+                            <button *ngIf="!isDetailed" mat-raised-button type="submit" (click)="save()"
+                                class="btn btn-danger pull-right">Grabar</button>
+                            <div class="clearfix"></div>
+                            <div class="clearfix"></div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

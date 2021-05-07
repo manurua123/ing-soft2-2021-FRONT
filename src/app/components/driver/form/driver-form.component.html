@@ -1,0 +1,58 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Conductor</h4>
+                        <p class="card-category"> Administracion de conductores</p>
+                    </div>
+
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input required="true" [disabled]="isDetailed"
+                                                [(ngModel)]="this.editedDriver.firstName" name="firstName" matInput
+                                                placeholder="Nombre" type="text">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input required="true" [disabled]="isDetailed"
+                                                [(ngModel)]="this.editedDriver.lastName" name="lastName" matInput
+                                                placeholder="Apellido" type="text">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input required="true" [disabled]="isDetailed"
+                                                [(ngModel)]="this.editedDriver.email" name="email" matInput
+                                                placeholder="Email" type="email">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input required="true" [disabled]="isDetailed"
+                                                [(ngModel)]="this.editedDriver.phone" name="phone" matInput
+                                                placeholder="Telefono" type="number">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                </div>
+                                <button mat-raised-button (click)="close()"
+                                    class="btn btn-dark pull-right">Cerrar</button>
+                                <button *ngIf="!isDetailed" mat-raised-button type="submit" (click)="save()"
+                                    class="btn btn-danger pull-right">Grabar</button>
+                                <div class="clearfix"></div>
+                                <div class="clearfix"></div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
