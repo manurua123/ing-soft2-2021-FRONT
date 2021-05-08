@@ -14,7 +14,8 @@
                                 <div class="col-md-4">
                                     <mat-form-field>
                                         <mat-label>Origen</mat-label>
-                                        <mat-select [disabled]="isDetailed"  name="origin" [(ngModel)]="selectedOrigen" [disableOptionCentering]="true" [(value)]="selectedOrigen">
+                                        <mat-select [disabled]="isDetailed" name="origin" [(ngModel)]="selectedOrigen"
+                                            [disableOptionCentering]="true" [(value)]="selectedOrigen">
                                             <mat-option *ngFor="let item of originDatasource" [value]="item">
                                                 {{item.place}}
                                             </mat-option>
@@ -24,7 +25,9 @@
                                 <div class="col-md-4">
                                     <mat-form-field>
                                         <mat-label>Destino</mat-label>
-                                        <mat-select required="true" [disabled]="isDetailed" name="destination" [(ngModel)]="selectedDestination"  [disableOptionCentering]="true" [(value)]="selectedDestination">
+                                        <mat-select required="true" [disabled]="isDetailed" name="destination"
+                                            [(ngModel)]="selectedDestination" [disableOptionCentering]="true"
+                                            [(value)]="selectedDestination">
                                             <mat-option *ngFor="let item of destinationDatasource" [value]="item">
                                                 {{item.place}}
                                             </mat-option>
@@ -34,8 +37,10 @@
                                 <div class="col-md-2">
                                     <mat-form-field>
                                         <mat-label>Vehículo</mat-label>
-                                        <mat-select [disabled]="isDetailed" name="bus" [(ngModel)]="selectedBus" [disableOptionCentering]="true" [(value)]="selectedBus">
+                                        <mat-select [disabled]="isDetailed" name="bus" [(ngModel)]="selectedBus"
+                                            [disableOptionCentering]="true" [(value)]="selectedBus">
                                             <mat-option *ngFor="let item of busDatasource" [value]="item">
+                                                {{item.identification}}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>
@@ -44,19 +49,21 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                        <input required="true" [disabled]="isDetailed" [(ngModel)]="this.editedRoute.duration" name="duration" matInput placeholder="Duración" type="number">
+                                        <input required="true" [disabled]="isDetailed"
+                                            [(ngModel)]="this.editedRoute.duration" name="duration" matInput
+                                            placeholder="Duración" type="number">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                        <input [disabled]="isDetailed" [(ngModel)]="this.editedRoute.distance"  name="distance" type="number" matInput placeholder="Distancia">
+                                        <input [disabled]="isDetailed" [(ngModel)]="this.editedRoute.distance"
+                                            name="distance" type="number" matInput placeholder="Distancia">
                                     </mat-form-field>
                                 </div>
                             </div>
-                            <button mat-raised-button (click)="close()"
-                            class="btn btn-dark pull-right">Cerrar</button>
-                            
-                            <button *ngIf = "!isDetailed" mat-raised-button type="submit" (click)="save()"
+                            <button mat-raised-button (click)="close()" class="btn btn-dark pull-right">Cerrar</button>
+
+                            <button *ngIf="!isDetailed" mat-raised-button type="submit" (click)="save()"
                                 class="btn btn-danger pull-right">Grabar</button>
                             <div class="clearfix"></div>
                             <div class="clearfix"></div>
@@ -67,4 +74,4 @@
             </div>
         </div>
     </div>
-</div>            
+</div>

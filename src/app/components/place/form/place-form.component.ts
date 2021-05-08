@@ -26,41 +26,42 @@ export class PlaceFormComponent implements OnInit {
   @Input()
   isDetailed: boolean;
 
-  @Input() provincias: string[];
+  @Input() provincias = [
+    "Buenos Aires",
+    "Capital Federal",
+    "Catamarca",
+    "Chaco",
+    "Chubut",
+    "Córdoba",
+    "Corrientes",
+    "Entre Ríos",
+    "Formosa",
+    "Jujuy",
+    "La Pampa",
+    "La Rioja",
+    "Mendoza",
+    "Misiones",
+    "Neuquén",
+    "Río Negro",
+    "Salta",
+    "San Juan",
+    "San Luis",
+    "Santa Cruz",
+    "Santa Fe",
+    "Santiago del Estero",
+    "Tierra del Fuego",
+    "Tucumán"];
   @Input() selectedProvince: string;
+
   town: string;
   province: string;
 
   constructor(private placeService: PlaceService) { }
 
   ngOnInit() {
-    this.provincias = [
-      "Buenos Aires",
-      "Capital Federal",
-      "Catamarca",
-      "Chaco",
-      "Chubut",
-      "Córdoba",
-      "Corrientes",
-      "Entre Ríos",
-      "Formosa",
-      "Jujuy",
-      "La Pampa",
-      "La Rioja",
-      "Mendoza",
-      "Misiones",
-      "Neuquén",
-      "Río Negro",
-      "Salta",
-      "San Juan",
-      "San Luis",
-      "Santa Cruz",
-      "Santa Fe",
-      "Santiago del Estero",
-      "Tierra del Fuego",
-      "Tucumán"
-    ]
-    this.selectedProvince = this.editedPlace.province
+    this.selectedProvince =""
+    if(this.editedPlace)
+      this.selectedProvince = this.editedPlace.province
     if (!this.editedPlace) {
       this.editedPlace =
       {

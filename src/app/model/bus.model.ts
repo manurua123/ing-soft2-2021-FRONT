@@ -6,7 +6,7 @@ export interface Bus {
     model: string;
     licencePlate: string;
     seatNumbers: number;
-    type: String;
+    type: string;
 }
 
 export interface BusData {

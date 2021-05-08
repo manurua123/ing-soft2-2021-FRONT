@@ -24,7 +24,7 @@
                                         <mat-select [disabled]="isDetailed" name="diver" [(ngModel)]="selectedBus"
                                             [disableOptionCentering]="true" [(value)]="selectedBus">
                                             <mat-option *ngFor="let item of driverDatasource" [value]="item">
-                                                {{item.firstName + item.lastName}}
+                                                {{item.lastName +", " + item.firstName}}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>
@@ -32,8 +32,9 @@
                                 <div class="col-md-4">
                                     <mat-form-field>
                                         <mat-label>Tipo</mat-label>
-                                        <mat-select [disabled]="isDetailed" name="type" [(ngModel)]="selectedType"
-                                            [disableOptionCentering]="true" [(value)]="selectedType">
+                                        <mat-select required="true" [disabled]="isDetailed" name="type"
+                                            [(ngModel)]="selectedType" [disableOptionCentering]="true"
+                                            [(value)]="selectedType">
                                             <mat-option *ngFor="let item of typeyBus" [value]="item">
                                                 {{item}}
                                             </mat-option>
@@ -63,7 +64,6 @@
                                             placeholder="Asientos" type="number">
                                     </mat-form-field>
                                 </div>
-
                             </div>
                             <button mat-raised-button (click)="close()" class="btn btn-dark pull-right">Cerrar</button>
 

@@ -18,16 +18,10 @@
                                             placeholder="Ciudad" type="text">
                                     </mat-form-field>
                                 </div>
-                                <!-- <div class="col-md-4">
-                                    <mat-form-field class="example-full-width">
-                                        <input [disabled]="isDetailed" [(ngModel)]="this.editedPlace.province"  name="province" type="text" matInput placeholder="Provincia">
-                                    </mat-form-field>
-                                </div> -->
-
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <mat-form-field>
                                         <mat-label>Provincia</mat-label>
-                                        <mat-select [disabled]="isDetailed" name="province"
+                                        <mat-select required="true" [disabled]="isDetailed" name="province"
                                             [(ngModel)]="selectedProvince" [disableOptionCentering]="true"
                                             [(value)]="selectedProvince">
                                             <mat-option *ngFor="let item of provincias" [value]="item">

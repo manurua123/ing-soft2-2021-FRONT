@@ -51,7 +51,6 @@ export class RouteFormComponent implements OnInit {
     this.busService.getAllBus().subscribe((busList: Bus[]) => {
       this.busDatasource = busList;
       this.selectedBus = this.busDatasource.filter(bus => bus.id == this.editedRoute.bus_id)[0];
-
     });
     this.placeService.getAllPlace().subscribe((listPlace: Place[]) => {
       this.originDatasource = listPlace;
@@ -118,7 +117,14 @@ export class RouteFormComponent implements OnInit {
         )
     else
       this.routeService.update(
-        { id: this.editedRoute.id, origin: this.selectedOrigen.id, destination: this.selectedDestination.id, bus: this.selectedBus.id, duration: this.editedRoute.duration, distance: this.editedRoute.distance })
+        {
+          id: this.editedRoute.id,
+          origin: this.selectedOrigen.id,
+          destination: this.selectedDestination.id,
+          bus: this.selectedBus.id,
+          duration: this.editedRoute.duration,
+          distance: this.editedRoute.distance
+        })
         .subscribe(route => {
           $.notify({
             title: '<strong>Operanción exitosa.</strong>',
