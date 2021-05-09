@@ -12,8 +12,7 @@ export interface Bus {
 export interface BusData {
     id?: number;
     identification: string;
-    driver_id: number;
-    driver: string;
+    driver: number;
     model: string;
     licencePlate: string;
     seatNumbers: number;

@@ -21,8 +21,8 @@
                                 <div class="col-md-4">
                                     <mat-form-field>
                                         <mat-label>Conductor</mat-label>
-                                        <mat-select [disabled]="isDetailed" name="diver" [(ngModel)]="selectedBus"
-                                            [disableOptionCentering]="true" [(value)]="selectedBus">
+                                        <mat-select [disabled]="isDetailed" name="diver" [(ngModel)]="selectedDriver"
+                                            [disableOptionCentering]="true" [(value)]="selectedDriver">
                                             <mat-option *ngFor="let item of driverDatasource" [value]="item">
                                                 {{item.lastName +", " + item.firstName}}
                                             </mat-option>
@@ -35,7 +35,7 @@
                                         <mat-select required="true" [disabled]="isDetailed" name="type"
                                             [(ngModel)]="selectedType" [disableOptionCentering]="true"
                                             [(value)]="selectedType">
-                                            <mat-option *ngFor="let item of typeyBus" [value]="item">
+                                            <mat-option *ngFor="let item of typeBus" [value]="item">
                                                 {{item}}
                                             </mat-option>
                                         </mat-select>

@@ -73,8 +73,6 @@ export class RouteFormComponent implements OnInit {
         distance: undefined
       }
     }
-
-
   }
 
   close() {

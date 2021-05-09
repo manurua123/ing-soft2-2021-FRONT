@@ -35,14 +35,14 @@ export class BusFormComponent implements OnInit {
 
   @Input() driverDatasource: Driver[];
 
-  @Input() typeyBus: ["C", "SC"];
-  @Input() selectedType: String;
-
+  @Input() typeBus: string[];
+  @Input() selectedType: string;
+  
   identification: string;
   model: string;
   licencePlate: string;
   seatNumber: number;
-  type: String;
+  type: string;
 
   constructor(private driverService: DriverService, private busService: BusService) { }
 
@@ -60,14 +60,14 @@ export class BusFormComponent implements OnInit {
         type: undefined,
       }
     }
-   
-    this.selectedType = this.editedBus.type
+    this.typeBus= ["C", "SC"];
+    this.selectedType = this.editedBus.type;
     this.driverService.getAllDriver().subscribe((driverList: Driver[]) => {
       this.driverDatasource = driverList;
       this.selectedDriver = this.driverDatasource.filter(driver => driver.id == this.editedBus.driver_id)[0];
     });
 
-    
+
   }
 
   close() {
@@ -75,6 +75,7 @@ export class BusFormComponent implements OnInit {
   }
 
   save() {
+    // debugger;
     this.editedBus.driver_id = this.selectedDriver.id;
     if (!this.editedBus.id)
       this.busService.save(
@@ -84,7 +85,7 @@ export class BusFormComponent implements OnInit {
           model: this.editedBus.model,
           licencePlate: this.editedBus.licencePlate,
           seatNumbers: this.editedBus.seatNumbers,
-          type: this.editedBus.identification,
+          type: this.selectedType
         }
       )
         .subscribe(bus => {
@@ -110,12 +111,13 @@ export class BusFormComponent implements OnInit {
     else
       this.busService.update(
         {
+          id: this.editedBus.id,
           driver: this.selectedDriver.id,
           identification: this.editedBus.identification,
           model: this.editedBus.model,
           licencePlate: this.editedBus.licencePlate,
           seatNumbers: this.editedBus.seatNumbers,
-          type: this.editedBus.identification,
+          type: this.editedBus.type
         })
         .subscribe(bus => {
           $.notify({
@@ -127,7 +129,7 @@ export class BusFormComponent implements OnInit {
           this.isDetailed = true
         },
           errorResponse => {
-            if (errorResponse.error.code == "bus_exists_error") {
+            if (errorResponse.error.code == "bus_exists_in_route_error") {
               $.notify({
                 title: '<strong>Operanción erronea.</strong>',
                 message: errorResponse.error.message

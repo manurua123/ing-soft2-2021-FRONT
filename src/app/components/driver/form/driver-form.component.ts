@@ -101,7 +101,7 @@ export class DriverFormComponent implements OnInit {
           this.isDetailed = true
         },
           errorResponse => {
-            if (errorResponse.error.code == "driver_exists_error") {
+            if (errorResponse.error.code == "Driver_update_already_exists") {
               $.notify({
                 title: '<strong>Operanción erronea.</strong>',
                 message: errorResponse.error.message

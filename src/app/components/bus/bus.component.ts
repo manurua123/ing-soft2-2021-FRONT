@@ -42,6 +42,16 @@ export class BusComponent {
         type: 'success'
       });
       this.updatedTableEvent.emit()
+    },
+    errorResponse => {
+      if (errorResponse.error.code == "bus_exists_in_route_error") {
+        $.notify({
+          title: '<strong>Operanción erronea.</strong>',
+          message: errorResponse.error.message
+        }, {
+          type: 'danger'
+        })
+      }
     }
     );
 
