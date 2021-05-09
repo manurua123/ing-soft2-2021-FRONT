@@ -37,7 +37,7 @@ export class BusComponent {
     this.busService.delete(bus).subscribe(response => {
       $.notify({
         title: '<strong>Operanción exitosa.</strong>',
-        message: 'Se ha eliminado correctamente el vehiculo' + bus.identification
+        message: 'Se ha eliminado correctamente el vehiculo ' + bus.identification
       }, {
         type: 'success'
       });
