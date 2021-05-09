@@ -137,7 +137,16 @@ export class BusFormComponent implements OnInit {
                 type: 'danger'
               })
             }
-          }
+            if (errorResponse.error.code == "driver_exists_in_bus_error") {
+              $.notify({
+                title: '<strong>Operanción erronea.</strong>',
+                message: errorResponse.error.message
+              }, {
+                type: 'danger'
+              })
+            }
+          },
+          
         )
   }
 }
