@@ -16,10 +16,10 @@
     <button type="button" ngbAutofocus class="btn btn-danger" (click)="modal.close('Ok click')">Aceptar</button>
   </div>
 </ng-template>
-<div *ngIf="userRole == 'ADMIN'">
+<div *ngIf="this.userRole == 'ADMIN'"> 
   <table-list-route *ngIf="!isEdited && !isAdded && !isDetailed" [updateTableEvent]="updatedTableEvent"
     (detailed)="onDetailed($event)" (added)="onAdded($event)" (edited)="onEdited($event)" (deleted)="onDeleted($event)">
   </table-list-route>
   <route-form *ngIf="isEdited || isAdded || isDetailed" (updateTableEvent)="updateTableData($event)"
     (closeFormEvent)="onClose($event)" [isDetailed]="isDetailed" [editedRoute]="selectedRoute"></route-form>
-</div>
+  </div> 

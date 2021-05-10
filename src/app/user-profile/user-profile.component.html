@@ -71,16 +71,13 @@
               <div class="row">
                 <mat-checkbox (click)="isGold($event)" class="example-margin ml-3">Subscribirme a GOLD.</mat-checkbox>
               </div>
-
-
-
               <form #goldForm="ngForm">
                 <div *ngIf="gold">
                   <div class="row">
                     <div class="col-md-8">
                       <mat-form-field class="example-full-width">
                         <input name="card_holder" matInput placeholder="Titular" [(ngModel)]="this.user.card_holder"
-                          type="text">
+                          type="text" maxlength="50">
                       </mat-form-field>
                     </div>
                   </div>
@@ -88,7 +85,7 @@
                     <div class="col-md-6">
                       <mat-form-field class="example-full-width">
                         <input name="card_number" matInput placeholder="Nro de tarjeta"
-                          [(ngModel)]="this.user.card_number" type="text">
+                          [(ngModel)]="this.user.card_number" type="number" min=0 max= 9999999999999999>
                       </mat-form-field>
                     </div>
                   </div>
@@ -99,7 +96,7 @@
                     <div class="col-md-2">
                       <mat-form-field class="example-full-width">
                         <input name="month_exp" [(ngModel)]="this.user.month_exp" matInput placeholder="Mes"
-                          type="number">
+                          type="number" >
                       </mat-form-field>
                     </div>
                     <div class="col-md-2">
@@ -113,7 +110,7 @@
                     <div class="col-md-2">
                       <mat-form-field class="example-full-width">
                         <input name="security_code" matInput [(ngModel)]="this.user.security_code" placeholder="CVV"
-                          type="number">
+                          type="number" >
                       </mat-form-field>
                     </div>
                   </div>
@@ -123,7 +120,7 @@
 
               <button mat-raised-button class="btn btn-dark pull-right">Cancelar</button>
 
-              <button mat-raised-button [disabled]="checkFormulario(registerForm,goldForm)" type="submit"
+              <button mat-raised-button [disabled]="registerForm.form.invalid" type="submit"
                 (click)="save()" class="btn btn-danger pull-right">Grabar</button>
               <div class="clearfix"></div>
             </form>

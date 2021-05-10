@@ -42,6 +42,16 @@ export class UserProfileComponent implements OnInit {
       return
     }
 
+    if(!this.checkDate()){
+      $.notify({
+        title: '<strong>Atención</strong>',
+        message: 'Las tarjeta esta vencida.'
+      }, {
+        type: 'warning'
+      })
+      return
+    }
+
     this.user.username = this.user.email;
     this.user.birth_date = new Date(this.user.birth_date).toISOString().slice(0, 10);
     this.userService.save(this.user)
@@ -64,13 +74,18 @@ export class UserProfileComponent implements OnInit {
           }
         }
       )
-
-
-
-
-
   }
 
+  checkDate() {
+    var today = new Date();
+    if ((this.user.year_exp = today.getFullYear()))
+      if (this.user.month_exp < today.getMonth())
+        return (true)
+      else
+        return(false)
+    if ((this.user.year_exp > today.getFullYear()))
+       return(true)
+  }
 
   getAge() {
     var today = new Date();
@@ -84,20 +99,5 @@ export class UserProfileComponent implements OnInit {
     return age;
   }
 
-  checkFormulario(form, formGold) {
-    if (!this.gold) {
-      if (form.form.invalid) {
-        return (true)
-      }
-      return (false)
-    }
-    else {
-      if (form.form.invalid || formGold.from.invalid) {
-        return (true)
-      }
-      else 
-        return (false)
 
-    }
-  }
 }

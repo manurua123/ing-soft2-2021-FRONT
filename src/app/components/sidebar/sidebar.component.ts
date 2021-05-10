@@ -10,8 +10,8 @@ declare interface RouteInfo {
     roles?: string;
 }
 export const ROUTES: RouteInfo[] = [
-    { path: '/users', title: 'Usuarios',  icon:'person', class: '' , roles:'ADMIN'},
-    { path: '/travels', title: 'Viajes',  icon:'content_paste', class: '', roles:'ADMIN' },
+    // { path: '/#', title: 'Usuarios',  icon:'person', class: '' , roles:'ADMIN'},
+    // { path: '/#', title: 'Viajes',  icon:'content_paste', class: '', roles:'ADMIN' },
     { path: '/routes', title: 'Rutas',  icon:'map', class: '' , roles:'ADMIN'},
     { path: '/places', title: 'Destinos',  icon:'room', class: '', roles:'ADMIN' },
     { path: '/drivers', title: 'Conductores',  icon:'badge', class: '', roles:'ADMIN' },

@@ -1,16 +1,31 @@
-.w-30{
+.w-30 {
     width: 30%;
-}
-
-.w-20{
+    font-size:large;
+    font-weight: bold;
+  }
+  
+  .w-20 {
     width: 20%;
-}
-
-.w-10{
+    font-size:large;
+    font-weight: bold;
+  }
+  
+  .w-10 {
     width: 10%;
-}
-
-
-a {
-     color: black !important;
-}
+    font-size:large;
+    font-weight: bold;
+  }
+  .w-40 {
+    width: 40%;
+    font-size:large;
+    font-weight: bold;
+  }
+  
+  a {
+    color: black !important;
+  }
+  .card-title {
+    margin-left: 10px;
+    font-size: xx-large;
+  }
+  
