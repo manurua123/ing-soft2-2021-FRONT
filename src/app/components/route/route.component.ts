@@ -1,9 +1,9 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { NgbModule, NgbDate, NgbActiveModal, NgbModal, ModalDismissReasons, NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
-
 import { Route } from 'app/model/route.model';
 import { RouteService } from 'app/service/route.service';
+import { AuthorizationService } from 'app/service/authorization.service';
 
 declare var $: any;
 @Component({
@@ -11,7 +11,7 @@ declare var $: any;
   templateUrl: './route.component.html',
   styleUrls: ['./route.component.css']
 })
-export class RouteComponent {
+export class RouteComponent implements OnInit {
   closeResult = '';
   deleteRoute = '';
   @ViewChild('content') content: any;
@@ -19,10 +19,16 @@ export class RouteComponent {
   isAdded: boolean = false;
   isDetailed: boolean = false;
   selectedRoute: Route;
+  userRole: string;
 
   updatedTableEvent: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private _modalService: NgbModal, private routeService: RouteService) { }
+  constructor(private _modalService: NgbModal, private routeService: RouteService, private authorizationService: AuthorizationService) { }
+
+  ngOnInit() {
+    this.authorizationService.getUserLogged().subscribe(userAccount =>
+      this.userRole = userAccount.rol)
+  }
 
   open(content: any, route: Route) {
     this.deleteRoute = route.origin + '-' + route.destination;

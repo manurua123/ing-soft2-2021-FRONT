@@ -1,8 +1,8 @@
 export class Session {
-  public token?: string;
-  public usuario?: string;
-}
+    public token?: string;
+    public usuario?: string;
+  }
 export interface UserCredential {
-  username?: string;
-  password?: string;
+ username?: string;
+ password?: string;
 }

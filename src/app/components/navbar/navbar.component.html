@@ -16,17 +16,17 @@
                     <i class="material-icons pl-2">person</i>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="#"> <i class="fa fa-home pr-2"></i> <span></span>Incio </a>
-                        <a (click)="showLoginPanel()" class="dropdown-item" href="#"> <i
+                        <a *ngIf="this.username == ''" (click)="showLoginPanel()" class="dropdown-item" href="#"> <i
                                 class="fa fa-address-book pr-2"></i> 
-                               <span *ngIf="this.username == ''">Iniciar sesión </span> 
+                               <span >Iniciar sesión </span> 
                             </a>
                         
-                        <a (click)="closeSession()" class="dropdown-item" href="#"> <i
+                        <a *ngIf="this.username != ''" (click)="closeSession()" class="dropdown-item" href="#"> <i
                             class="fa fa-address-book pr-2"></i> 
-                            <span  *ngIf="this.username != ''">Cerrar sesión </span> 
+                            <span >Cerrar sesión </span> 
                         </a>    
 
-                        <a *ngIf="this.username == ''" class="dropdown-item" href="#"> 
+                        <a *ngIf="this.username == ''" class="dropdown-item" [routerLink]="['/registration']"> 
                             <i class="fa fa-bell pr-2"></i> 
                             Registrarse 
                         </a>

@@ -1,6 +1,7 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { NgbModule, NgbDate, NgbActiveModal, NgbModal, ModalDismissReasons, NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { AuthorizationService } from 'app/service/authorization.service';
 
 import { Place, PlaceData } from 'app/model/place.model';
 import { PlaceService } from 'app/service/place.service';
@@ -19,10 +20,17 @@ export class PlaceComponent {
   isAdded: boolean = false;
   isDetailed: boolean = false;
   selectedPlace: PlaceData;
+ public userRole: string;
 
   updatedTableEvent: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private _modalService: NgbModal, private placeService: PlaceService) { }
+  constructor(private _modalService: NgbModal, private placeService: PlaceService, private authorizationService: AuthorizationService) { }
+
+  ngOnInit() {
+    this.authorizationService.getUserLogged().subscribe(userAccount =>
+      {
+      this.userRole = userAccount.rol; console.log("Rol" , this.userRole)})
+  }
 
   open(content: any, place: PlaceData) {
     this.deletePlace = place.town + '-' + place.province;
@@ -33,7 +41,7 @@ export class PlaceComponent {
     });
   }
 
-  delete( place: PlaceData) {
+  delete(place: PlaceData) {
     this.placeService.delete(place).subscribe(response => {
       $.notify({
         title: '<strong>Operanción exitosa.</strong>',
@@ -43,16 +51,16 @@ export class PlaceComponent {
       });
       this.updatedTableEvent.emit()
     },
-    errorResponse => {
-      if (errorResponse.error.code == "place_exists_in_route_error") {
-        $.notify({
-          title: '<strong>Operanción erronea.</strong>',
-          message: errorResponse.error.message
-        }, {
-          type: 'danger'
-        })
+      errorResponse => {
+        if (errorResponse.error.code == "place_exists_in_route_error") {
+          $.notify({
+            title: '<strong>Operanción erronea.</strong>',
+            message: errorResponse.error.message
+          }, {
+            type: 'danger'
+          })
+        }
       }
-    }
     );
 
   }
@@ -60,7 +68,7 @@ export class PlaceComponent {
   updateTableData(event) {
     this.updatedTableEvent.emit()
   }
-  onEdited( place: PlaceData) {
+  onEdited(place: PlaceData) {
     this.isEdited = true;
     this.selectedPlace = place;
   }
@@ -69,7 +77,7 @@ export class PlaceComponent {
     this.open(this.content, place);
   }
 
-  onDetailed( place: PlaceData) {
+  onDetailed(place: PlaceData) {
     this.selectedPlace = place;
     this.isDetailed = true;
   }

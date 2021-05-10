@@ -1,6 +1,7 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { NgbModule, NgbDate, NgbActiveModal, NgbModal, ModalDismissReasons, NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { AuthorizationService } from 'app/service/authorization.service';
 
 import { Bus } from 'app/model/bus.model';
 import { BusService } from 'app/service/bus.service';
@@ -19,11 +20,16 @@ export class BusComponent {
   isAdded: boolean = false;
   isDetailed: boolean = false;
   selectedBus: Bus;
+  userRole: string;
+
 
   updatedTableEvent: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private _modalService: NgbModal, private busService: BusService) { }
-
+  constructor(private _modalService: NgbModal, private busService: BusService,private authorizationService: AuthorizationService) { }
+  ngOnInit() {
+    this.authorizationService.getUserLogged().subscribe(userAccount =>
+      this.userRole = userAccount.rol)
+  }
   open(content: any, bus: Bus) {
     this.deleteBus = bus.identification;
     this._modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
