@@ -30,6 +30,8 @@ export class DriverFormComponent implements OnInit {
   lastName: string;
   email: string;
   phone: number;
+  birth_date: Date;
+  dni: number;
 
 
   constructor(private driverService: DriverService) { }
@@ -44,6 +46,8 @@ export class DriverFormComponent implements OnInit {
         lastName: undefined,
         email: undefined,
         phone: undefined,
+        birth_date: undefined,
+        dni: undefined,
       }
     }
   }
@@ -60,6 +64,9 @@ export class DriverFormComponent implements OnInit {
           lastName: this.editedDriver.lastName,
           email: this.editedDriver.email,
           phone: this.editedDriver.phone,
+          birth_date: this.editedDriver.birth_date,
+          dni: this.editedDriver.dni,
+
         }
       )
         .subscribe(driver => {
@@ -79,6 +86,14 @@ export class DriverFormComponent implements OnInit {
               }, {
                 type: 'danger'
               })
+            };
+            if (errorResponse.error.code == "driver_exists_error") {
+              $.notify({
+                title: '<strong>Operanción erronea.</strong>',
+                message: errorResponse.error.message
+              }, {
+                type: 'danger'
+              })
             }
           }
         )
@@ -90,6 +105,9 @@ export class DriverFormComponent implements OnInit {
           lastName: this.editedDriver.lastName,
           email: this.editedDriver.email,
           phone: this.editedDriver.phone,
+          birth_date: this.editedDriver.birth_date,
+          dni: this.editedDriver.dni,
+
         })
         .subscribe(driver => {
           $.notify({
@@ -101,7 +119,7 @@ export class DriverFormComponent implements OnInit {
           this.isDetailed = true
         },
           errorResponse => {
-            if (errorResponse.error.code == "Driver_update_already_exists") {
+            if (errorResponse.error.code == "driver_update_already_exists") {
               $.notify({
                 title: '<strong>Operanción erronea.</strong>',
                 message: errorResponse.error.message

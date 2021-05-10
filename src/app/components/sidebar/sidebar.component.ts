@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-
+import { AuthorizationService } from 'app/service/authorization.service';
 declare const $: any;
 declare interface RouteInfo {
     path: string;
     title: string;
     icon: string;
     class: string;
+    roles?: string;
 }
 export const ROUTES: RouteInfo[] = [
     { path: '/users', title: 'Usuarios',  icon:'person', class: '' },
@@ -25,11 +26,17 @@ export const ROUTES: RouteInfo[] = [
 })
 export class SidebarComponent implements OnInit {
   menuItems: any[];
-
-  constructor() { }
+  userRole: string;
+  constructor( private authorizationService: AuthorizationService) { }
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
+    this.authorizationService.getUserLogged().subscribe(userAccount=> 
+      {console.log(userAccount);
+        console.log(userAccount.rol)
+      this.userRole = userAccount.rol}
+      
+    )
   }
   isMobileMenu() {
       if ($(window).width() > 991) {
@@ -38,3 +45,4 @@ export class SidebarComponent implements OnInit {
       return true;
   };
 }
+

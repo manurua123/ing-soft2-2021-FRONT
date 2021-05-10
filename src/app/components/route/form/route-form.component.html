@@ -9,7 +9,7 @@
                     </div>
 
                     <div class="card-body">
-                        <form>
+                        <form #loginForm="ngForm">
                             <div class="row">
                                 <div class="col-md-4">
                                     <mat-form-field>
@@ -63,8 +63,8 @@
                             </div>
                             <button mat-raised-button (click)="close()" class="btn btn-dark pull-right">Cerrar</button>
 
-                            <button *ngIf="!isDetailed" mat-raised-button type="submit" (click)="save()"
-                                class="btn btn-danger pull-right">Grabar</button>
+                            <button [disabled]="loginForm.form.invalid" *ngIf="!isDetailed" mat-raised-button
+                                type="submit" (click)="save()" class="btn btn-danger pull-right">Grabar</button>
                             <div class="clearfix"></div>
                             <div class="clearfix"></div>
 

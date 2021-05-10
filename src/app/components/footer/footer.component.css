@@ -1,8 +1,9 @@
-.footer{position: absolute;
-    bottom: 0;
-padding: 0px;
-font-size: small;
+.footer {
+  position: absolute;
+  bottom: 0;
+  padding: 0px;
+  font-size: small;
 }
-.footer a{
-    font-size: xx-small;
+.footer a {
+  font-size: xx-small;
 }

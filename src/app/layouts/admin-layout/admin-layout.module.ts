@@ -10,17 +10,17 @@ import { IconsComponent } from './icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
-import {MatRippleModule} from '@angular/material/core';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatSelectModule} from '@angular/material/select';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatTableModule} from '@angular/material/table';
-import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatRippleModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSelectModule } from '@angular/material/select';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTableModule } from '@angular/material/table';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { RouteComponent } from 'app/components/route/route.component';
 import { TableListRouteComponent } from 'app/components/route/table/table-list-route.component';
@@ -36,7 +36,7 @@ import { PlaceFormComponent } from 'app/components/place/form/place-form.compone
 
 import { BusComponent } from 'app/components/bus/bus.component';
 import { TableListBusComponent } from 'app/components/bus/table/table-list-bus.component';
-import {  BusFormComponent } from 'app/components/bus/form/bus-form.component';
+import { BusFormComponent } from 'app/components/bus/form/bus-form.component';
 
 
 @NgModule({
@@ -85,4 +85,4 @@ import {  BusFormComponent } from 'app/components/bus/form/bus-form.component';
   ]
 })
 
-export class AdminLayoutModule {}
+export class AdminLayoutModule { }
