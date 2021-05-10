@@ -5,7 +5,7 @@ export interface Driver {
     email: string;
     phone: number;
     birth_date: Date;
-    dni: number;
+    idCards: number;
 
 }
 
@@ -16,5 +16,5 @@ export interface DriverData {
     email: string;
     phone: number;
     birth_date: Date;
-    dni: number;
+    idCards: number;
 }

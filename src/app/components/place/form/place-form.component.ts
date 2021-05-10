@@ -103,6 +103,14 @@ export class PlaceFormComponent implements OnInit {
               }, {
                 type: 'danger'
               })
+            };
+            if (errorResponse.error.code == "place_exists_in_route_error") {
+              $.notify({
+                title: '<strong>Operanción erronea.</strong>',
+                message: errorResponse.error.message
+              }, {
+                type: 'danger'
+              })
             }
           }
         )
@@ -124,6 +132,14 @@ export class PlaceFormComponent implements OnInit {
         },
           errorResponse => {
             if (errorResponse.error.code == "place_exists_error") {
+              $.notify({
+                title: '<strong>Operanción erronea.</strong>',
+                message: errorResponse.error.message
+              }, {
+                type: 'danger'
+              })
+            }
+            if (errorResponse.error.code == "place_exists_in_route_error") {
               $.notify({
                 title: '<strong>Operanción erronea.</strong>',
                 message: errorResponse.error.message

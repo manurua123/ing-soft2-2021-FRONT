@@ -25,13 +25,12 @@ export class DriverFormComponent implements OnInit {
   @Input()
   isDetailed: boolean;
 
-
   firstName: string;
   lastName: string;
   email: string;
   phone: number;
   birth_date: Date;
-  dni: number;
+  idCards: number;
 
 
   constructor(private driverService: DriverService) { }
@@ -47,7 +46,7 @@ export class DriverFormComponent implements OnInit {
         email: undefined,
         phone: undefined,
         birth_date: undefined,
-        dni: undefined,
+        idCards: undefined,
       }
     }
   }
@@ -65,7 +64,7 @@ export class DriverFormComponent implements OnInit {
           email: this.editedDriver.email,
           phone: this.editedDriver.phone,
           birth_date: this.editedDriver.birth_date,
-          dni: this.editedDriver.dni,
+          idCards: this.editedDriver.idCards,
 
         }
       )
@@ -106,7 +105,7 @@ export class DriverFormComponent implements OnInit {
           email: this.editedDriver.email,
           phone: this.editedDriver.phone,
           birth_date: this.editedDriver.birth_date,
-          dni: this.editedDriver.dni,
+          idCards: this.editedDriver.idCards,
 
         })
         .subscribe(driver => {
@@ -127,7 +126,15 @@ export class DriverFormComponent implements OnInit {
                 type: 'danger'
               })
             }
-          }
+            if (errorResponse.error.code == "driver_update_not_exists") {
+              $.notify({
+                title: '<strong>Operanción erronea.</strong>',
+                message:"El email no puede ser modificado"
+              }, {
+                type: 'danger'
+              })
+            }
+          },
         )
   }
 

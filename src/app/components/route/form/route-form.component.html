@@ -51,13 +51,13 @@
                                     <mat-form-field class="example-full-width">
                                         <input required="true" [disabled]="isDetailed"
                                             [(ngModel)]="this.editedRoute.duration" name="duration" matInput
-                                            placeholder="Duración" type="number">
+                                            placeholder="Duración en horas" type="number">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
                                         <input [disabled]="isDetailed" [(ngModel)]="this.editedRoute.distance"
-                                            name="distance" type="number" matInput placeholder="Distancia">
+                                            name="distance" type="number" matInput placeholder="Distancia en kilometros">
                                     </mat-form-field>
                                 </div>
                             </div>

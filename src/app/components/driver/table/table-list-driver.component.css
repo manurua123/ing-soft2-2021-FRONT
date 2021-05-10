@@ -16,3 +16,6 @@
 a {
   color: black !important;
 }
+.card-title {
+  margin-left: 10px;
+}

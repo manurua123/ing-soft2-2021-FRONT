@@ -16,21 +16,21 @@
                                         <mat-form-field class="example-full-width">
                                             <input required="true" [disabled]="isDetailed"
                                                 [(ngModel)]="this.editedDriver.firstName" name="firstName" matInput
-                                                placeholder="Nombre" type="text">
+                                                placeholder="Nombre" type="text" maxlength="60">
                                         </mat-form-field>
                                     </div>
                                     <div class="col-md-4">
                                         <mat-form-field class="example-full-width">
                                             <input required="true" [disabled]="isDetailed"
                                                 [(ngModel)]="this.editedDriver.lastName" name="lastName" matInput
-                                                placeholder="Apellido" type="text">
+                                                placeholder="Apellido" type="text" maxlength="60">
                                         </mat-form-field>
                                     </div>
                                     <div class="col-md-4">
                                         <mat-form-field class="example-full-width">
                                             <input required="true" [disabled]="isDetailed"
                                                 [(ngModel)]="this.editedDriver.email" name="email" matInput
-                                                placeholder="Email" type="email">
+                                                placeholder="Email" type="email" >
                                         </mat-form-field>
                                     </div>
                                     <div class="col-md-4">
@@ -50,19 +50,17 @@
                                     <div class="col-md-4">
                                         <mat-form-field class="example-full-width">
                                             <input required="true" [disabled]="isDetailed"
-                                                [(ngModel)]="this.editedDriver.dni" name="dni" matInput
-                                                placeholder="DNI" type="number">
+                                                [(ngModel)]="this.editedDriver.idCards" name="idCards" matInput
+                                                placeholder="DNI" type="number"  >
                                         </mat-form-field>
                                     </div>
                                 </div>
-                                </div>
-                                <button mat-raised-button (click)="close()"
-                                    class="btn btn-dark pull-right">Cerrar</button>
-                                <button [disabled]="loginForm.form.invalid" *ngIf="!isDetailed" mat-raised-button type="submit" (click)="save()"
-                                    class="btn btn-danger pull-right">Grabar</button>
-                                <div class="clearfix"></div>
-                                <div class="clearfix"></div>
-                            
+                            </div>
+                            <button mat-raised-button (click)="close()" class="btn btn-dark pull-right">Cerrar</button>
+                            <button [disabled]="loginForm.form.invalid" *ngIf="!isDetailed" mat-raised-button
+                                type="submit" (click)="save()" class="btn btn-danger pull-right">Grabar</button>
+                            <div class="clearfix"></div>
+                            <div class="clearfix"></div>
                         </form>
                     </div>
                 </div>

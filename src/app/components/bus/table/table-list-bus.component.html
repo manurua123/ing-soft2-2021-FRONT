@@ -70,8 +70,8 @@
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
               </table>
 
-              <mat-paginator #paginator [pageSize]="7" (page)="pageEvent = getServerData($event)" [length]="length"
-                [pageSizeOptions]="[7]" showFirstLastButtons></mat-paginator>
+              <mat-paginator #paginator [pageSize]="4" (page)="pageEvent = getServerData($event)" [length]="length"
+                [pageSizeOptions]="[4]" showFirstLastButtons></mat-paginator>
             </div>
           </div>
         </div>

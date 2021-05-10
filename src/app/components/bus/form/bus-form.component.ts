@@ -81,7 +81,7 @@ export class BusFormComponent implements OnInit {
       this.busService.save(
         {
           driver: this.selectedDriver.id,
-          identification: this.editedBus.identification,
+          identification: this.editedBus.identification.toUpperCase( ),
           model: this.editedBus.model,
           licencePlate: this.editedBus.licencePlate,
           seatNumbers: this.editedBus.seatNumbers,
@@ -106,6 +106,14 @@ export class BusFormComponent implements OnInit {
                 type: 'danger'
               })
             }
+            if (errorResponse.error.code == "driver_exists_in_bus_error") {
+              $.notify({
+                title: '<strong>Operanción erronea.</strong>',
+                message: errorResponse.error.message
+              }, {
+                type: 'danger'
+              })
+            }
           }
         )
     else
@@ -113,7 +121,7 @@ export class BusFormComponent implements OnInit {
         {
           id: this.editedBus.id,
           driver: this.selectedDriver.id,
-          identification: this.editedBus.identification,
+          identification: this.editedBus.identification.toUpperCase( ),
           model: this.editedBus.model,
           licencePlate: this.editedBus.licencePlate,
           seatNumbers: this.editedBus.seatNumbers,
@@ -145,7 +153,16 @@ export class BusFormComponent implements OnInit {
                 type: 'danger'
               })
             }
+            if (errorResponse.error.code == "bus_exists_error") {
+              $.notify({
+                title: '<strong>Operanción erronea.</strong>',
+                message: "errorResponse.error.message"
+              }, {
+                type: 'danger'
+              })
+            }
           },
+          
           
         )
   }

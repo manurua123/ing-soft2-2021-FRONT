@@ -15,7 +15,7 @@
                                     <mat-form-field class="example-full-width">
                                         <input required="true" [disabled]="isDetailed"
                                             [(ngModel)]="this.editedBus.identification" name="identification" matInput
-                                            placeholder="Identificacion" type="text">
+                                            placeholder="Identificacion" type="text"  maxlength="5">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
@@ -47,21 +47,21 @@
                                     <mat-form-field class="example-full-width">
                                         <input required="true" [disabled]="isDetailed"
                                             [(ngModel)]="this.editedBus.model" name="model" matInput
-                                            placeholder="Modelo" type="text">
+                                            placeholder="Modelo" type="text" maxlength="30">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
                                         <input required="true" [disabled]="isDetailed"
                                             [(ngModel)]="this.editedBus.licencePlate" name="licencePlate" matInput
-                                            placeholder="Patente" type="text">
+                                            placeholder="Patente" type="text" maxlength="7">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
                                         <input required="true" [disabled]="isDetailed"
                                             [(ngModel)]="this.editedBus.seatNumbers" name="seatNumbers" matInput
-                                            placeholder="Asientos" type="number">
+                                            placeholder="Asientos" type="number" maxlength="2" >
                                     </mat-form-field>
                                 </div>
                             </div>
