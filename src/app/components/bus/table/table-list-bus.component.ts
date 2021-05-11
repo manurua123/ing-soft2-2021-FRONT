@@ -19,7 +19,7 @@ export class TableListBusComponent implements OnInit {
 
   pageEvent: PageEvent;
 
-  displayedColumns: string[] = ['identification', 'model', 'seatNumbers', 'type', 'edit', 'delete', 'overview'];
+  displayedColumns: string[] = ['identification', 'model', 'driver','seatNumbers', 'type', 'edit', 'delete', 'overview'];
   dataSource: any;
 
   @Output() deleted = new EventEmitter<Bus>();
