@@ -47,7 +47,7 @@ export class RouteComponent implements OnInit {
     this.routeService.delete(route).subscribe(response => {
       $.notify({
         title: '<strong>Operanción exitosa.</strong>',
-        message: 'Se ha eliminado correctamente la ruta ' + route.origin + '- ' + route.destination
+        message: 'Se ha eliminado correctamente la ruta: <br/>' + route.origin + ' | ' + route.destination
       }, {
         type: 'success'
       });

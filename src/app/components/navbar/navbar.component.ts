@@ -59,7 +59,10 @@ export class NavbarComponent implements OnInit {
         this.isLoginPanelOpen = true;
         this.isMenuOpen = false;
     }
-
+    cancel() {
+        this.isLoginPanelOpen = false;
+        this.isMenuOpen = false;
+    }
     singIn() {
         this.authorizationService.singIn(this.credential.username, this.credential.password).subscribe(data => {
             this.username = this.credential.username;

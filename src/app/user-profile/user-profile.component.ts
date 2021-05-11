@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'app/model/user.model';
 import { USerService } from 'app/service/user.service';
-import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms'
+import { FormGroup, FormControl, Validators, NgForm, AbstractControl } from '@angular/forms'
 import { Router } from '@angular/router';
+import { DateAdapter } from '@angular/material/core';
 declare var $: any;
 @Component({
   selector: 'app-user-profile',
@@ -16,14 +17,13 @@ export class UserProfileComponent implements OnInit {
   public rpassword: string;
   isEnabled: boolean = false;
   
-  profileFormGroup: FormGroup; /* = new FormGroup({
-    email: new FormControl('',[
-      Validators.required,
-      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
- });*/
+  profileFormGroup: FormGroup; 
 
-  constructor(private userService: USerService, private router: Router) { }
-
+  constructor(private userService: USerService, private router: Router, private dateAdapter: DateAdapter<Date>) {
+    
+    this.dateAdapter.setLocale('en-GB'); //dd/MM/yyyy
+   }
+  
   ngOnInit() {
     this.user = new User();
     this.profileFormGroup = new FormGroup({
@@ -51,7 +51,7 @@ export class UserProfileComponent implements OnInit {
             'month_exp', new FormControl({ value: '' },Validators.compose([Validators.required,  Validators.minLength(2), Validators.maxLength(2)]))
         );
       this.profileFormGroup.addControl(
-              'month_year', new FormControl({ value: '' },Validators.compose([Validators.required,  Validators.minLength(2), Validators.maxLength(2)]))
+              'year_exp', new FormControl({ value: '' },Validators.compose([Validators.required,  Validators.minLength(2), Validators.maxLength(2)]))
         );
     
       this.profileFormGroup.addControl(
@@ -63,7 +63,7 @@ export class UserProfileComponent implements OnInit {
     this.profileFormGroup.removeControl('card_holder');
     this.profileFormGroup.removeControl('card_number');
     this.profileFormGroup.removeControl('month_exp');
-    this.profileFormGroup.removeControl('month_year');
+    this.profileFormGroup.removeControl('month_exp');
     this.profileFormGroup.removeControl('security_code');
   }
   this.profileFormGroup.updateValueAndValidity();
@@ -105,6 +105,7 @@ export class UserProfileComponent implements OnInit {
     }
 
     this.user.username = this.user.email;
+    const temporary_birth_date = this.user.birth_date;
     this.user.birth_date = new Date(this.user.birth_date).toISOString().slice(0, 10);
     this.userService.save(this.user)
       .subscribe(route => {
@@ -119,6 +120,7 @@ export class UserProfileComponent implements OnInit {
         this.profileFormGroup.disable();
       },
         errorResponse => {
+          this.user.birth_date = temporary_birth_date;
           if (errorResponse.error.code == "profile_exists_error") {
             $.notify({
               title: '<strong>Operanción erronea.</strong>',
@@ -132,23 +134,21 @@ export class UserProfileComponent implements OnInit {
   }
 
   checkDate() {
-    var today = new Date();
-    if ((this.user.year_exp = today.getFullYear()))
-      if (this.user.month_exp > today.getMonth())
-        return (true)
-      else
-        return(false)
-    if ((this.user.year_exp > today.getFullYear()))
-       return(true)
+    const year_card_value: number = this.user.year_exp;
+    const current_year: number  = 2021;
+    const month_card_value: number =  this.user.month_exp;
+    const current_month: number  = 5;
+    return year_card_value >=  current_year && month_card_value >= current_month
+    
   }
 
   getAge() {
     var today = new Date();
-    var birth_date = new Date(this.user.birth_date);
-    var age = today.getFullYear() - birth_date.getFullYear();
-    var m = today.getMonth() - birth_date.getMonth();
+    var birth_date_to_calc = new Date(this.user.birth_date);
+    var age = today.getFullYear() - birth_date_to_calc.getFullYear();
+    var m = today.getMonth() - birth_date_to_calc.getMonth();
 
-    if (m < 0 || (m === 0 && today.getDate() < birth_date.getDate())) {
+    if (m < 0 || (m === 0 && today.getDate() < birth_date_to_calc.getDate())) {
       age--;
     }
     return age;

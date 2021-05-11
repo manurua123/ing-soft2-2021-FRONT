@@ -96,7 +96,7 @@ export class RouteFormComponent implements OnInit {
         .subscribe(route => {
           $.notify({
             title: '<strong>Operanción exitosa.</strong>',
-            message: 'Se ha guardado correctamente la ruta ' + this.selectedOrigen.place + '- ' + this.selectedDestination.place
+            message: 'Se ha guardado correctamente la ruta: <br/>'+ this.selectedOrigen.place + ' a ' + this.selectedDestination.place
           }, {
             type: 'success'
           });
@@ -126,7 +126,7 @@ export class RouteFormComponent implements OnInit {
         .subscribe(route => {
           $.notify({
             title: '<strong>Operanción exitosa.</strong>',
-            message: 'Se ha guardado correctamente la ruta ' + this.selectedOrigen.place + '- ' + this.selectedDestination.place
+            message: 'Se ha modifico correctamente la ruta: <br/>'+ this.selectedOrigen.place + ' a ' + this.selectedDestination.place
           }, {
             type: 'success'
           });
