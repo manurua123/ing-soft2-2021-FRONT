@@ -156,7 +156,7 @@ export class BusFormComponent implements OnInit {
             if (errorResponse.error.code == "bus_exists_error") {
               $.notify({
                 title: '<strong>Operanción erronea.</strong>',
-                message: "errorResponse.error.message"
+                message: errorResponse.error.message
               }, {
                 type: 'danger'
               })
