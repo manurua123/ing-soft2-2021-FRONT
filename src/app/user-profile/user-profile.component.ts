@@ -134,7 +134,7 @@ export class UserProfileComponent implements OnInit {
   checkDate() {
     var today = new Date();
     if ((this.user.year_exp = today.getFullYear()))
-      if (this.user.month_exp < today.getMonth())
+      if (this.user.month_exp > today.getMonth())
         return (true)
       else
         return(false)
