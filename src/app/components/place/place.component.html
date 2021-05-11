@@ -17,10 +17,10 @@
   </div>
 </ng-template>
 
-<div *ngIf="this.userRole == 'ADMIN'"> 
+<ng-container *ngIf = "this.userRole === 'ADMIN'">
   <table-list-place *ngIf="!isEdited && !isAdded && !isDetailed" [updateTableEvent]="updatedTableEvent"
     (detailed)="onDetailed($event)" (added)="onAdded($event)" (edited)="onEdited($event)" (deleted)="onDeleted($event)">
   </table-list-place>
   <place-form *ngIf="isEdited || isAdded || isDetailed" (updateTableEvent)="updateTableData($event)"
     (closeFormEvent)="onClose($event)" [isDetailed]="isDetailed" [editedPlace]="selectedPlace"></place-form>
-</div> 
+</ng-container>

@@ -19,15 +19,19 @@ export class RouteComponent implements OnInit {
   isAdded: boolean = false;
   isDetailed: boolean = false;
   selectedRoute: Route;
-  userRole: string;
+  userRole: string ='';
 
   updatedTableEvent: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private _modalService: NgbModal, private routeService: RouteService, private authorizationService: AuthorizationService) { }
 
   ngOnInit() {
-    this.authorizationService.getUserLogged().subscribe(userAccount =>
-      this.userRole = userAccount.rol)
+    this.authorizationService.getUserLogged().subscribe(userAccount=> 
+      {
+      this.userRole = userAccount.rol
+      console.log('rutas');
+      });
+    this.authorizationService.updateUserLogged();
   }
 
   open(content: any, route: Route) {

@@ -21,15 +21,20 @@ export class DriverComponent {
   isAdded: boolean = false;
   isDetailed: boolean = false;
   selectedDriver: Driver;
-  userRole: string;
+  userRole: string ='';
 
   updatedTableEvent: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private _modalService: NgbModal, private driverService: DriverService,private authorizationService: AuthorizationService) { }
+
   ngOnInit() {
-    this.authorizationService.getUserLogged().subscribe(userAccount =>
-      this.userRole = userAccount.rol)
+    this.authorizationService.getUserLogged().subscribe(userAccount=> 
+      {
+      this.userRole = userAccount.rol
+      });
+    this.authorizationService.updateUserLogged();
   }
+
   open(content: any, driver: Driver) {
     this.deleteDriver = driver.firstName + ', ' + driver.lastName;
     this._modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {

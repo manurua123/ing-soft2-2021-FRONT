@@ -1,5 +1,5 @@
-.w-30 {
-  width: 30%;
+.w-25 {
+  width: 35%;
   font-size: large;
   font-weight: bold;
 }
@@ -12,6 +12,11 @@
 
 .w-10 {
   width: 10%;
+  font-size: large;
+  font-weight: bold;
+}
+.w-15 {
+  width: 15%;
   font-size: large;
   font-weight: bold;
 }

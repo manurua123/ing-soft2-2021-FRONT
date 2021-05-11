@@ -25,13 +25,16 @@ export const ROUTES: RouteInfo[] = [
 })
 export class SidebarComponent implements OnInit {
   menuItems: any[];
-  userRole: string;
+  userRole: string ='';
   constructor( private authorizationService: AuthorizationService) { }
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
     this.authorizationService.getUserLogged().subscribe(userAccount=> 
-      this.userRole = userAccount.rol)
+      {
+      this.userRole = userAccount.rol;
+      });
+    this.authorizationService.updateUserLogged();
   }
   isMobileMenu() {
       if ($(window).width() > 991) {

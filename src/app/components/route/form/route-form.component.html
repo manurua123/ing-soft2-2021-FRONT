@@ -14,7 +14,7 @@
                                 <div class="col-md-4">
                                     <mat-form-field>
                                         <mat-label>Origen</mat-label>
-                                        <mat-select [disabled]="isDetailed" name="origin" [(ngModel)]="selectedOrigen"
+                                        <mat-select required="true" [disabled]="isDetailed" name="origin" [(ngModel)]="selectedOrigen"
                                             [disableOptionCentering]="true" [(value)]="selectedOrigen">
                                             <mat-option *ngFor="let item of originDatasource" [value]="item">
                                                 {{item.place}}
@@ -37,7 +37,7 @@
                                 <div class="col-md-2">
                                     <mat-form-field>
                                         <mat-label>Vehículo</mat-label>
-                                        <mat-select [disabled]="isDetailed" name="bus" [(ngModel)]="selectedBus"
+                                        <mat-select required="true" [disabled]="isDetailed" name="bus" [(ngModel)]="selectedBus"
                                             [disableOptionCentering]="true" [(value)]="selectedBus">
                                             <mat-option *ngFor="let item of busDatasource" [value]="item">
                                                 {{item.identification}}
@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                        <input [disabled]="isDetailed" [(ngModel)]="this.editedRoute.distance"
+                                        <input required="true" [disabled]="isDetailed" [(ngModel)]="this.editedRoute.distance"
                                             name="distance" type="number" matInput placeholder="Distancia en kilometros">
                                     </mat-form-field>
                                 </div>

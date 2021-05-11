@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
     credential: UserCredential;
     isInvalidCredential = false;
     username = '';
+    userRole ='';
     private listTitles: any[];
     location: Location;
     mobile_menu_visible: any = 0;
@@ -42,6 +43,13 @@ export class NavbarComponent implements OnInit {
             }
         });
         this.credential = { username: '', password: '' };
+        this.authorizationService.getUserLogged().subscribe(userAccount=> 
+            {
+            this.userRole = userAccount.rol;
+            this.username = userAccount.username;
+            });
+          this.authorizationService.updateUserLogged();
+
     }
     menuOpen() {
         this.isMenuOpen = true;
@@ -58,8 +66,10 @@ export class NavbarComponent implements OnInit {
             this.isLoginPanelOpen = false;
             this.isMenuOpen = false;
             this.authorizationService.getRoles(this.credential.username).subscribe(roles =>
-                this.authorizationService.saveRolByUserLogged(this.credential.username, roles[0].name));
-            this.authorizationService.updateUserLogged();
+              {
+               this.authorizationService.saveRolByUserLogged(this.credential.username, roles[0].name)
+               this.authorizationService.updateUserLogged();
+              });
         },
             errorResponse => {
                 if (errorResponse.error.detail) {
@@ -73,7 +83,9 @@ export class NavbarComponent implements OnInit {
         this.username = '';
         this.isLoginPanelOpen = false;
         this.isMenuOpen = false;
-        this.authorizationService.saveRolByUserLogged('', '')
+        this.authorizationService.saveRolByUserLogged('', '');
+        this.authorizationService.updateUserLogged();
+
     }
 
     sidebarOpen() {

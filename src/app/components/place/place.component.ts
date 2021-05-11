@@ -27,9 +27,11 @@ export class PlaceComponent {
   constructor(private _modalService: NgbModal, private placeService: PlaceService, private authorizationService: AuthorizationService) { }
 
   ngOnInit() {
-    this.authorizationService.getUserLogged().subscribe(userAccount =>
+    this.authorizationService.getUserLogged().subscribe(userAccount=> 
       {
-      this.userRole = userAccount.rol; console.log("Rol" , this.userRole)})
+      this.userRole = userAccount.rol
+      });
+    this.authorizationService.updateUserLogged();
   }
 
   open(content: any, place: PlaceData) {

@@ -9,20 +9,21 @@
                     </div>
 
                     <div class="card-body">
-                        <form  #loginForm="ngForm">
+                        <form #loginForm="ngForm">
                             <div class="row">
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
                                         <input required="true" [disabled]="isDetailed"
                                             [(ngModel)]="this.editedBus.identification" name="identification" matInput
-                                            placeholder="Identificacion" type="text"  maxlength="5">
+                                            placeholder="Identificacion" type="text" maxlength="5">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field>
                                         <mat-label>Conductor</mat-label>
-                                        <mat-select [disabled]="isDetailed" name="diver" [(ngModel)]="selectedDriver"
-                                            [disableOptionCentering]="true" [(value)]="selectedDriver">
+                                        <mat-select required="true" [disabled]="isDetailed" name="diver"
+                                            [(ngModel)]="selectedDriver" [disableOptionCentering]="true"
+                                            [(value)]="selectedDriver">
                                             <mat-option *ngFor="let item of driverDatasource" [value]="item">
                                                 {{item.lastName +", " + item.firstName}}
                                             </mat-option>
@@ -61,14 +62,14 @@
                                     <mat-form-field class="example-full-width">
                                         <input required="true" [disabled]="isDetailed"
                                             [(ngModel)]="this.editedBus.seatNumbers" name="seatNumbers" matInput
-                                            placeholder="Asientos" type="number" maxlength="2" >
+                                            placeholder="Asientos" type="number" maxlength="2">
                                     </mat-form-field>
                                 </div>
                             </div>
                             <button mat-raised-button (click)="close()" class="btn btn-dark pull-right">Cerrar</button>
 
-                            <button  [disabled]="loginForm.form.invalid" *ngIf="!isDetailed" mat-raised-button type="submit" (click)="save()"
-                                class="btn btn-danger pull-right">Grabar</button>
+                            <button [disabled]="loginForm.form.invalid" *ngIf="!isDetailed" mat-raised-button
+                                type="submit" (click)="save()" class="btn btn-danger pull-right">Grabar</button>
                             <div class="clearfix"></div>
                             <div class="clearfix"></div>
 

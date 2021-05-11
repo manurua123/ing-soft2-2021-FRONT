@@ -26,10 +26,16 @@ export class BusComponent {
   updatedTableEvent: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private _modalService: NgbModal, private busService: BusService,private authorizationService: AuthorizationService) { }
+  
+  
   ngOnInit() {
-    this.authorizationService.getUserLogged().subscribe(userAccount =>
-      this.userRole = userAccount.rol)
+    this.authorizationService.getUserLogged().subscribe(userAccount=> 
+      {
+      this.userRole = userAccount.rol
+      });
+    this.authorizationService.updateUserLogged();
   }
+  
   open(content: any, bus: Bus) {
     this.deleteBus = bus.identification;
     this._modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
