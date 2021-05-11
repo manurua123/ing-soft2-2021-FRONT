@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'app/model/user.model';
 import { USerService } from 'app/service/user.service';
+import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms'
+import { Router } from '@angular/router';
 declare var $: any;
 @Component({
   selector: 'app-user-profile',
@@ -12,16 +14,66 @@ export class UserProfileComponent implements OnInit {
   public gold: boolean = false;
   public user: User;
   public rpassword: string;
-  constructor(private userService: USerService) { }
+  isEnabled: boolean = false;
+  
+  profileFormGroup: FormGroup; /* = new FormGroup({
+    email: new FormControl('',[
+      Validators.required,
+      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+ });*/
+
+  constructor(private userService: USerService, private router: Router) { }
 
   ngOnInit() {
     this.user = new User();
+    this.profileFormGroup = new FormGroup({
+      firstName: new FormControl({ value: '' }, Validators.compose([Validators.required, Validators.maxLength(30)])),
+      lastName: new FormControl({ value: '' }, Validators.compose([Validators.required, Validators.maxLength(30)])),
+      idCards: new FormControl({ value: '' }, Validators.compose([Validators.required, Validators.maxLength(8)])),
+      birth_date: new FormControl({ value: '' }, Validators.compose([Validators.required])),
+      email: new FormControl({ value: '' }, Validators.compose([Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$") ])),
+      phone: new FormControl({ value: '' }, Validators.compose([Validators.required,  Validators.maxLength(20) ])),
+      password: new FormControl({ value: '' }, Validators.compose([Validators.required,  Validators.minLength(6), Validators.maxLength(20) ])),
+      rpassword: new FormControl({ value: '' }, Validators.compose([Validators.required,  Validators.minLength(6), Validators.maxLength(20) ]))
+    }, {updateOn: 'submit'});
   }
 
   isGold(value) {
     this.gold = !this.gold;
+    if (this.gold) {
+      this.profileFormGroup.addControl(
+        'card_holder', new FormControl({ value: '' },Validators.compose([Validators.required,  Validators.minLength(4), Validators.maxLength(20)]))
+        );
+      this.profileFormGroup.addControl(
+          'card_number', new FormControl({ value: '' },Validators.compose([Validators.required,  Validators.minLength(16), Validators.maxLength(160)]))
+        );
+      this.profileFormGroup.addControl(
+            'month_exp', new FormControl({ value: '' },Validators.compose([Validators.required,  Validators.minLength(2), Validators.maxLength(2)]))
+        );
+      this.profileFormGroup.addControl(
+              'month_year', new FormControl({ value: '' },Validators.compose([Validators.required,  Validators.minLength(2), Validators.maxLength(2)]))
+        );
+    
+      this.profileFormGroup.addControl(
+          'security_code', new FormControl({ value: '' },Validators.compose([Validators.required,  Validators.minLength(3), Validators.maxLength(3)]))
+    );
+    }
+  else
+  {
+    this.profileFormGroup.removeControl('card_holder');
+    this.profileFormGroup.removeControl('card_number');
+    this.profileFormGroup.removeControl('month_exp');
+    this.profileFormGroup.removeControl('month_year');
+    this.profileFormGroup.removeControl('security_code');
   }
-  save() {
+  this.profileFormGroup.updateValueAndValidity();
+  }
+  save(form: NgForm) {
+    if (!form.valid) {
+      return
+    }
+      
+    console.log("garbando");
     if (this.getAge() < 18) {
       $.notify({
         title: '<strong>Operanción erronea.</strong>',
@@ -42,7 +94,7 @@ export class UserProfileComponent implements OnInit {
       return
     }
 
-    if(!this.checkDate()){
+    if(!this.checkDate() && this.gold){
       $.notify({
         title: '<strong>Atención</strong>',
         message: 'Las tarjeta esta vencida.'
@@ -56,12 +108,15 @@ export class UserProfileComponent implements OnInit {
     this.user.birth_date = new Date(this.user.birth_date).toISOString().slice(0, 10);
     this.userService.save(this.user)
       .subscribe(route => {
+
         $.notify({
           title: '<strong>Operanción exitosa.</strong>',
           message: 'El usuario ' + this.user.email + ' ha sido registrado correctamente'
         }, {
           type: 'success'
         });
+        this.isEnabled = true;
+        this.profileFormGroup.disable();
       },
         errorResponse => {
           if (errorResponse.error.code == "profile_exists_error") {
@@ -98,6 +153,9 @@ export class UserProfileComponent implements OnInit {
     }
     return age;
   }
+  cancel() {
+    this.router.navigate([''])
 
+  }
 
 }

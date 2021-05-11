@@ -8,17 +8,17 @@
             <p class="card-category">Complete sus datos</p>
           </div>
           <div class="card-body">
-            <form #registerForm="ngForm">
+            <form [formGroup]="profileFormGroup" (ngSubmit) ="save(registerForm)" #registerForm="ngForm">
               <div class="row">
                 <div class="col-md-5">
                   <mat-form-field class="example-full-width">
-                    <input matInput name="firstName" [(ngModel)]="this.user.firstname" placeholder="Nombre" required
+                    <input  matInput formControlName="firstName" name="firstName" [(ngModel)]="this.user.firstname" placeholder="Nombre" required
                       type="text">
                   </mat-form-field>
                 </div>
                 <div class="col-md-5">
                   <mat-form-field class="example-full-width">
-                    <input matInput name="lastName" placeholder="Apellido" [(ngModel)]="this.user.lastname" required
+                    <input  matInput formControlName="lastName" name="lastName" placeholder="Apellido" [(ngModel)]="this.user.lastname" required
                       type="text">
                   </mat-form-field>
                 </div>
@@ -26,13 +26,13 @@
               <div class="row">
                 <div class="col-md-5">
                   <mat-form-field class="example-full-width">
-                    <input matInput name="idCards" placeholder="DNI" [(ngModel)]="this.user.idCards" type="number"
+                    <input  matInput formControlName="idCards" name="idCards" placeholder="DNI" [(ngModel)]="this.user.idCards" type="number"
                       required>
                   </mat-form-field>
                 </div>
                 <div class="col-md-5">
                   <mat-form-field>
-                    <input type="text" name="birth_date" matInput [matDatepicker]="picker"
+                    <input  type="text" formControlName="birth_date" name="birth_date" matInput [matDatepicker]="picker"
                       [(ngModel)]="this.user.birth_date" required placeholder="Fecha de nacimiento">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
@@ -42,13 +42,13 @@
               <div class="row">
                 <div class="col-md-5">
                   <mat-form-field class="example-full-width">
-                    <input name="email" matInput placeholder="Correo electrónico" [(ngModel)]="this.user.email"
+                    <input  name="email" matInput formControlName="email" placeholder="Correo electrónico" [(ngModel)]="this.user.email"
                       type="email" required>
                   </mat-form-field>
                 </div>
                 <div class="col-md-4">
                   <mat-form-field class="example-full-width">
-                    <input name="phone" matInput placeholder="Teléfono" [(ngModel)]="this.user.phone" type="number"
+                    <input  name="phone" formControlName="phone" matInput placeholder="Teléfono" [(ngModel)]="this.user.phone" type="number"
                       required>
                   </mat-form-field>
                 </div>
@@ -56,27 +56,25 @@
               <div class="row">
                 <div class="col-md-5">
                   <mat-form-field class="example-full-width">
-                    <input name="password" matInput placeholder="Contraseña" [(ngModel)]="this.user.password"
+                    <input  name="password" formControlName="password" matInput placeholder="Contraseña" [(ngModel)]="this.user.password"
                       type="password" required>
                   </mat-form-field>
                 </div>
                 <div class="col-md-5">
                   <mat-form-field class="example-full-width">
-                    <input name="repassword" [(ngModel)]="this.rpassword" matInput placeholder="Repita Contraseña"
+                    <input  name="repassword" formControlName="rpassword" [(ngModel)]="this.rpassword" matInput placeholder="Repita Contraseña"
                       type="password" required>
                   </mat-form-field>
                 </div>
               </div>
-
               <div class="row">
-                <mat-checkbox (click)="isGold($event)" class="example-margin ml-3 goldCheckbox">Subscribirme a GOLD.</mat-checkbox>
+                <mat-checkbox (click)="isGold($event)" class="example-margin ml-3">Subscribirme a GOLD.</mat-checkbox>
               </div>
-              <form #goldForm="ngForm">
-                <div *ngIf="gold">
+              <div *ngIf="gold">
                   <div class="row">
                     <div class="col-md-8">
                       <mat-form-field class="example-full-width">
-                        <input name="card_holder" matInput placeholder="Titular" [(ngModel)]="this.user.card_holder"
+                        <input  name="card_holder" formControlName="card_holder" matInput placeholder="Titular" [(ngModel)]="this.user.card_holder"
                           type="text" maxlength="50">
                       </mat-form-field>
                     </div>
@@ -84,7 +82,7 @@
                   <div class="row">
                     <div class="col-md-6">
                       <mat-form-field class="example-full-width">
-                        <input name="card_number" matInput placeholder="Nro de tarjeta"
+                        <input  name="card_number" formControlName="card_number" matInput placeholder="Nro de tarjeta"
                           [(ngModel)]="this.user.card_number" type="number" min=0 max= 9999999999999999>
                       </mat-form-field>
                     </div>
@@ -95,13 +93,13 @@
                   <div class="row">
                     <div class="col-md-2">
                       <mat-form-field class="example-full-width">
-                        <input name="month_exp" [(ngModel)]="this.user.month_exp" matInput placeholder="Mes"
+                        <input  name="month_exp" formControlName="month_exp"  [(ngModel)]="this.user.month_exp" matInput placeholder="Mes"
                           type="number" >
                       </mat-form-field>
                     </div>
                     <div class="col-md-2">
                       <mat-form-field class="example-full-width">
-                        <input name="month_year" [(ngModel)]="this.user.month_year" matInput placeholder="Año"
+                        <input  name="month_year" formControlName="month_year" [(ngModel)]="this.user.month_year" matInput placeholder="Año"
                           type="number">
                       </mat-form-field>
                     </div>
@@ -109,19 +107,15 @@
                   <div class="row">
                     <div class="col-md-2">
                       <mat-form-field class="example-full-width">
-                        <input name="security_code" matInput [(ngModel)]="this.user.security_code" placeholder="CVV"
+                        <input  name="security_code" formControlName="security_code"  matInput [(ngModel)]="this.user.security_code" placeholder="CVV"
                           type="number" >
                       </mat-form-field>
                     </div>
                   </div>
                 </div>
-              </form>
-
-
-              <button mat-raised-button class="btn btn-dark pull-right">Cancelar</button>
-
-              <button mat-raised-button [disabled]="registerForm.form.invalid" type="submit"
-                (click)="save()" class="btn btn-danger pull-right">Grabar</button>
+              <button mat-raised-button  (click)="cancel()"  class="btn btn-dark pull-right">Cancelar</button>
+              <button mat-raised-button *ngIf="!this.isEnabled"  type="submit"
+                 class="btn btn-danger pull-right">Grabar</button>
               <div class="clearfix"></div>
             </form>
           </div>
