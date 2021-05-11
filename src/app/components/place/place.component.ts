@@ -47,7 +47,7 @@ export class PlaceComponent {
     this.placeService.delete(place).subscribe(response => {
       $.notify({
         title: '<strong>Operanción exitosa.</strong>',
-        message: 'Se ha eliminado correctamente el destino ' + place.town + '-' + place.province,
+        message: 'Se ha eliminado correctamente el lugar ' + place.town + '-' + place.province,
       }, {
         type: 'success'
       });
