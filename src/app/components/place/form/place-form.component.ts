@@ -89,7 +89,7 @@ export class PlaceFormComponent implements OnInit {
         .subscribe(place => {
           $.notify({
             title: '<strong>Operanción exitosa.</strong>',
-            message: 'Se ha guardado correctamente el destino ' + this.editedPlace.town + '- ' + this.editedPlace.province,
+            message: 'Se ha guardado correctamente el lugar <br/>' + this.editedPlace.town + '- ' + this.editedPlace.province,
           }, {
             type: 'success'
           });
@@ -124,7 +124,7 @@ export class PlaceFormComponent implements OnInit {
         .subscribe(place => {
           $.notify({
             title: '<strong>Operanción exitosa.</strong>',
-            message: 'Se ha guardado correctamente el destino ' + this.editedPlace.town + '- ' + this.editedPlace.province,
+            message: 'Se ha modifico correctamente el lugar <br/>' + this.editedPlace.town + '- ' + this.editedPlace.province,
           }, {
             type: 'success'
           });
