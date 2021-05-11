@@ -130,7 +130,7 @@ export class BusFormComponent implements OnInit {
         .subscribe(bus => {
           $.notify({
             title: '<strong>Operanción exitosa.</strong>',
-            message: 'Se ha guardado correctamente el vehiculo ' + this.editedBus.identification,
+            message: 'Se ha modifico correctamente el vehiculo ' + this.editedBus.identification,
           }, {
             type: 'success'
           });
