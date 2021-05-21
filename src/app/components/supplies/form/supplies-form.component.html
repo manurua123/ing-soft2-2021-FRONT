@@ -1,0 +1,41 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Insumos</h4>
+                        <p class="card-category"> Administracion de insumos</p>
+                    </div>
+
+                    <div class="card-body">
+                        <form #loginForm="ngForm">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input required="true" [disabled]="isDetailed"
+                                            [(ngModel)]="this.editedSupplies.description" name="description" matInput
+                                            placeholder="Producto" type="text" maxlength="50">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-2">
+                                    <mat-form-field class="example-full-width">
+                                        <input required="true" [disabled]="isDetailed"
+                                            [(ngModel)]="this.editedSupplies.price" name="price" matInput
+                                            placeholder="Precio" type="number" maxlength="50">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <button mat-raised-button (click)="close()" class="btn btn-dark pull-right">Cerrar</button>
+
+                            <button *ngIf="!isDetailed" mat-raised-button [disabled]="loginForm.form.invalid"
+                                type="submit" (click)="save()" class="btn btn-danger pull-right">Grabar</button>
+                            <div class="clearfix"></div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

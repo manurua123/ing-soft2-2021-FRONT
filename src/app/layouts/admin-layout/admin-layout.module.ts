@@ -41,6 +41,9 @@ import { BusComponent } from 'app/components/bus/bus.component';
 import { TableListBusComponent } from 'app/components/bus/table/table-list-bus.component';
 import { BusFormComponent } from 'app/components/bus/form/bus-form.component';
 
+import { SuppliesComponent } from 'app/components/supplies/supplies.component';
+import { TableListSuppliesComponent } from 'app/components/supplies/table/table-list-supplies.component';
+import { SuppliesFormComponent } from 'app/components/supplies/form/supplies-form.component';
 
 @NgModule({
   imports: [
@@ -88,6 +91,12 @@ import { BusFormComponent } from 'app/components/bus/form/bus-form.component';
     BusComponent,
     TableListBusComponent,
     BusFormComponent,
+
+    SuppliesComponent,
+    TableListSuppliesComponent,
+    SuppliesFormComponent,
+
+
   ]
 })
 

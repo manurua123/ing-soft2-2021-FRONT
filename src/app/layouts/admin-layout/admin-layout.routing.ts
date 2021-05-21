@@ -14,6 +14,8 @@ import { RouteComponent } from 'app/components/route/route.component';
 import { DriverComponent } from 'app/components/driver/driver.component';
 import { PlaceComponent } from 'app/components/place/place.component';
 import {BusComponent } from 'app/components/bus/bus.component';
+import {SuppliesComponent } from 'app/components/supplies/supplies.component';
+
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -24,6 +26,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'drivers',        component: DriverComponent },
     { path: 'places',         component: PlaceComponent },
     { path: 'bus',            component: BusComponent },
+    { path: 'supplies',       component: SuppliesComponent },
     { path: 'typography',     component: TypographyComponent },
     { path: 'icons',          component: IconsComponent },
     { path: 'maps',           component: MapsComponent },

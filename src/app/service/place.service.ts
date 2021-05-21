@@ -8,10 +8,7 @@ import { Place, PlaceData } from 'app/model/place.model';
 export class PlaceService {
     private resourceURL = ' http://localhost:8000/api/place/';
 
-    /*    private headers: HttpHeaders = new HttpHeaders({
-            'Content-Type': 'application/json'
-        });
-      */
+
 
     constructor(private http: HttpClient) { }
 
