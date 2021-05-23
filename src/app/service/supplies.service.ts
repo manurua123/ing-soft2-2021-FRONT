@@ -15,7 +15,6 @@ export class SuppliesService {
 
 
     getAllSupplies(): Observable<Supplies[]> {
-
         return this.http.get<Supplies[]>(this.resourceURL + 'all/');
     }
 
