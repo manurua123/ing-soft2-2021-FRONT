@@ -3,8 +3,6 @@ import { Time } from "@angular/common"
 export interface Travel {
     id: number;
     route: number;
-    origin: string;
-    destination: string;
     price: number;
     departure_date: Date;
     departure_time: Time;
@@ -16,8 +14,7 @@ export interface Travel {
 export interface TravelData {
     id?: number;
     route: number;
-    origin: string;
-    destination: string;
+  
     price: number;
     departure_date: Date;
     departure_time: Time;

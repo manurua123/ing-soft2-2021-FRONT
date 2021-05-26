@@ -11,29 +11,16 @@
                     <div class="card-body">
                         <form #loginForm="ngForm">
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-12">
                                     <mat-form-field>
                                         <mat-label>Ruta</mat-label>
-                                        <mat-select required="true" [disabled]="isDetailed" name="route" (selectionChange) = "actualizarOrigenDestino($event.value)"
+                                        <mat-select required="true" [disabled]="isDetailed" name="route" 
                                             [(ngModel)]="selectedRoute" [disableOptionCentering]="true"
                                             [(value)]="selectedRoute">
                                             <mat-option *ngFor="let item of routeDatasource" [value]="item">
-                                             ID: {{item.id}}
+                                            Origen {{item.origin}}  Destino   {{item.destination}}
                                             </mat-option>
                                         </mat-select>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-md-5">
-                                    <mat-form-field class="example-full-width">
-                                        <input required="true" [disabled]="true" [(ngModel)]="this.editedTravel.origin"
-                                            name="origin" matInput placeholder="Origen" type="text">
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-md-5">
-                                    <mat-form-field class="example-full-width">
-                                        <input required="true" [disabled]="true"
-                                            [(ngModel)]="this.editedTravel.destination" name="destination" matInput
-                                            placeholder="Destino" type="text">
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -88,8 +75,6 @@
                                             type="number" matInput placeholder="Lugares Disponibles">
                                     </mat-form-field>
                                 </div>
-                              
-                               
                             </div>
                             <button mat-raised-button (click)="close()" class="btn btn-dark pull-right">Cerrar</button>
 

@@ -36,8 +36,7 @@ export class TravelFormComponent {
 
 
   id: number;
-  origin: string;
-  destination: string;
+ 
   route: number;
   price: number;
   departure_date: Time;
@@ -46,17 +45,28 @@ export class TravelFormComponent {
   arrival_time: Time;
   available_seats: number
 
+  departure_full: string;
+  arrival_full:string;
+
 
   constructor(private routeService: RouteService, private travelService: TravelService) { }
 
 
-  actualizarOrigenDestino(route: Route) {
-    this.editedTravel.origin = route.origin;
-    this.editedTravel.destination = route.destination;
+  // castToDate(current_datetime: Date, time: Time){
 
-  }
+  //   let formatted_date = current_datetime.getFullYear() + "-" + 
+  //   (current_datetime.getMonth() + 1) + "-" + 
+  //   current_datetime.getDate() + " " + 
+  //   time.hours + ":" +
+  //   time.minutes
+  //  return formatted_date
 
+  // }
 
+  // calculateArrival(date: Date, time: Time, duration: Time){
+  //     let dateTimeDeparture:
+  //     let timeArrival =  date + time + duration; 
+  // }
 
   ngOnInit() {
 
@@ -64,11 +74,9 @@ export class TravelFormComponent {
       this.editedTravel =
       {
         id: undefined,
-        route: undefined,
-        origin: undefined,
+        route: undefined, 
         departure_date: undefined,
         departure_time: undefined,
-        destination: undefined,
         arrival_date: undefined,
         arrival_time: undefined,
         price: undefined,
@@ -90,17 +98,18 @@ export class TravelFormComponent {
 
   save() {
     this.editedTravel.route = this.selectedRoute.id;
-    this.editedTravel.origin = this.selectedRoute.origin;
-    this.editedTravel.destination = this.selectedRoute.destination;
+    // this.departure_full = this.castToDate(this.editedTravel.departure_date,this.editedTravel.departure_time)
+    
     if (!this.editedTravel.id)
       this.travelService.save(
         {
+
           id: this.editedTravel.id,
           route: this.selectedRoute.id,
-          origin: this.selectedRoute.origin,
+         
           departure_date: this.editedTravel.departure_date,
           departure_time: this.editedTravel.departure_time,
-          destination: this.selectedRoute.destination,
+          
           arrival_date: undefined,
           arrival_time: undefined,
           price: this.editedTravel.price,
@@ -132,10 +141,10 @@ export class TravelFormComponent {
         {
           id: this.editedTravel.id,
           route: this.selectedRoute.id,
-          origin: this.selectedRoute.origin,
+         
           departure_date: this.editedTravel.departure_date,
           departure_time: this.editedTravel.departure_time,
-          destination: this.selectedRoute.destination,
+         
           arrival_date: undefined,
           arrival_time: undefined,
           price: this.editedTravel.price,

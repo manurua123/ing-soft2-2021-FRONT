@@ -13,7 +13,7 @@ declare var $: any;
 })
 export class TravelComponent implements OnInit {
   closeResult = '';
-  deleteTravel = '';
+  deleteTravel = 0;
   @ViewChild('content') content: any;
   isEdited: boolean = false;
   isAdded: boolean = false;
@@ -35,19 +35,19 @@ export class TravelComponent implements OnInit {
   }
 
   open(content: any, travel: Travel) {
-    this.deleteTravel = travel.origin + '-' + travel.destination;
-    this._modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      this.delete(travel);
-    }, (reason) => {
-      // Ver si se puede sacar esto
-    });
-  }
+ this.deleteTravel = travel.id;
+ this._modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+this.delete(travel);
+ }, (reason) => {
+
+   });
+}
 
   delete(travel: Travel) {
     this.travelService.delete(travel).subscribe(response => {
       $.notify({
         title: '<strong>Operanción exitosa.</strong>',
-        message: 'Se ha eliminado correctamente el viaje : <br/>' + travel.origin + '-' + travel.destination
+        message: 'Se ha eliminado correctamente el viaje : <br/>' + travel.id
       }, {
         type: 'success'
       });
