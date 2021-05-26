@@ -141,6 +141,14 @@ export class RouteFormComponent implements OnInit {
                 type: 'danger'
               })
             }
+            if (errorResponse.error.code == "route_exists_in_travel_error") {
+              $.notify({
+                title: '<strong>Operanción erronea.</strong>',
+                message: errorResponse.error.message
+              }, {
+                type: 'danger'
+              })
+            }
           }
         )
 

@@ -15,13 +15,14 @@ import { DriverComponent } from 'app/components/driver/driver.component';
 import { PlaceComponent } from 'app/components/place/place.component';
 import {BusComponent } from 'app/components/bus/bus.component';
 import {SuppliesComponent } from 'app/components/supplies/supplies.component';
+import {TravelComponent } from 'app/components/travel/travel.component';
 
 
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'registration',   component: UserProfileComponent },
     { path: 'users',          component: DashboardComponent },
-    { path: 'travels',        component: UserProfileComponent },
+    { path: 'travels',        component: TravelComponent },
     { path: 'routes',         component: RouteComponent } ,
     { path: 'drivers',        component: DriverComponent },
     { path: 'places',         component: PlaceComponent },

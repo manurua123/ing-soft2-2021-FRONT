@@ -21,9 +21,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { RouteComponent } from 'app/components/route/route.component';
 import { TableListRouteComponent } from 'app/components/route/table/table-list-route.component';
@@ -44,6 +44,10 @@ import { BusFormComponent } from 'app/components/bus/form/bus-form.component';
 import { SuppliesComponent } from 'app/components/supplies/supplies.component';
 import { TableListSuppliesComponent } from 'app/components/supplies/table/table-list-supplies.component';
 import { SuppliesFormComponent } from 'app/components/supplies/form/supplies-form.component';
+
+import { TravelComponent } from 'app/components/travel/travel.component';
+import { TableListTravelComponent } from 'app/components/travel/table/table-list-travel.component';
+import { TravelFormComponent } from 'app/components/travel/form/travel-form.component';
 
 @NgModule({
   imports: [
@@ -95,6 +99,10 @@ import { SuppliesFormComponent } from 'app/components/supplies/form/supplies-for
     SuppliesComponent,
     TableListSuppliesComponent,
     SuppliesFormComponent,
+
+    TravelComponent,
+    TableListTravelComponent,
+    TravelFormComponent,
 
 
   ]

@@ -1,69 +1,68 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { NgbModule, NgbDate, NgbActiveModal, NgbModal, ModalDismissReasons, NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
-import { Route } from 'app/model/route.model';
-import { RouteService } from 'app/service/route.service';
+import { Travel } from 'app/model/travel.model';
+import { TravelService } from 'app/service/travel.service';
 import { AuthorizationService } from 'app/service/authorization.service';
 
 declare var $: any;
 @Component({
-  selector: 'app-route',
-  templateUrl: './route.component.html',
-  styleUrls: ['./route.component.css']
+  selector: 'app-travel',
+  templateUrl: './travel.component.html',
+  styleUrls: ['./travel.component.css']
 })
-export class RouteComponent implements OnInit {
+export class TravelComponent implements OnInit {
   closeResult = '';
-  deleteRoute = '';
+  deleteTravel = '';
   @ViewChild('content') content: any;
   isEdited: boolean = false;
   isAdded: boolean = false;
   isDetailed: boolean = false;
-  selectedRoute: Route;
+  selectedTravel: Travel;
   userRole: string ='';
 
   updatedTableEvent: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private _modalService: NgbModal, private routeService: RouteService, private authorizationService: AuthorizationService) { }
+  constructor(private _modalService: NgbModal, private travelService: TravelService, private authorizationService: AuthorizationService) { }
 
   ngOnInit() {
     this.authorizationService.getUserLogged().subscribe(userAccount=> 
       {
       this.userRole = userAccount.rol
-      console.log('rutas');
+      console.log('Viajes');
       });
     this.authorizationService.updateUserLogged();
   }
 
-  open(content: any, route: Route) {
-    this.deleteRoute = route.origin + '-' + route.destination;
+  open(content: any, travel: Travel) {
+    this.deleteTravel = travel.origin + '-' + travel.destination;
     this._modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      this.delete(route);
+      this.delete(travel);
     }, (reason) => {
       // Ver si se puede sacar esto
     });
   }
 
-  delete(route: Route) {
-    this.routeService.delete(route).subscribe(response => {
+  delete(travel: Travel) {
+    this.travelService.delete(travel).subscribe(response => {
       $.notify({
         title: '<strong>Operanción exitosa.</strong>',
-        message: 'Se ha eliminado correctamente la ruta: <br/>' + route.origin + ' | ' + route.destination
+        message: 'Se ha eliminado correctamente el viaje : <br/>' + travel.origin + '-' + travel.destination
       }, {
         type: 'success'
       });
       this.updatedTableEvent.emit()
     },
-      errorResponse => {
-        if (errorResponse.error.code == "route_exists_in_travel_error") {
-          $.notify({
-            title: '<strong>Operanción erronea.</strong>',
-            message: errorResponse.error.message
-          }, {
-            type: 'danger'
-          })
-        }
+    errorResponse => {
+      if (errorResponse.error.code == "travel_exists_in_ticket_error") {
+        $.notify({
+          title: '<strong>Operanción erronea.</strong>',
+          message: errorResponse.error.message
+        }, {
+          type: 'danger'
+        })
       }
-    
+    }
     );
 
   }
@@ -71,17 +70,17 @@ export class RouteComponent implements OnInit {
   updateTableData(event) {
     this.updatedTableEvent.emit()
   }
-  onEdited(route: Route) {
+  onEdited(travel: Travel) {
     this.isEdited = true;
-    this.selectedRoute = route;
+    this.selectedTravel = travel;
   }
 
-  onDeleted(route: Route) {
-    this.open(this.content, route);
+  onDeleted(travel: Travel) {
+    this.open(this.content, travel);
   }
 
-  onDetailed(route: Route) {
-    this.selectedRoute = route;
+  onDetailed(travel: Travel) {
+    this.selectedTravel = travel;
     this.isDetailed = true;
   }
 
@@ -92,7 +91,7 @@ export class RouteComponent implements OnInit {
   }
 
   onAdded() {
-    this.selectedRoute = null;
+    this.selectedTravel = null;
     this.isAdded = true;
   }
 }

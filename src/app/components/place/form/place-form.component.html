@@ -11,14 +11,14 @@
                     <div class="card-body">
                         <form #loginForm="ngForm">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
                                         <input required="true" [disabled]="isDetailed"
                                             [(ngModel)]="this.editedPlace.town" name="town" matInput
                                             placeholder="Ciudad" type="text" maxlength="50">
                                     </mat-form-field>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-4">
                                     <mat-form-field>
                                         <mat-label>Provincia</mat-label>
                                         <mat-select required="true" [disabled]="isDetailed" name="province"

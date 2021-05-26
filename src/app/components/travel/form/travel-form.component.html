@@ -1,0 +1,107 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Viajes</h4>
+                        <p class="card-category"> Administracion de viajes</p>
+                    </div>
+
+                    <div class="card-body">
+                        <form #loginForm="ngForm">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <mat-form-field>
+                                        <mat-label>Ruta</mat-label>
+                                        <mat-select required="true" [disabled]="isDetailed" name="route" (selectionChange) = "actualizarOrigenDestino($event.value)"
+                                            [(ngModel)]="selectedRoute" [disableOptionCentering]="true"
+                                            [(value)]="selectedRoute">
+                                            <mat-option *ngFor="let item of routeDatasource" [value]="item">
+                                             ID: {{item.id}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-5">
+                                    <mat-form-field class="example-full-width">
+                                        <input required="true" [disabled]="true" [(ngModel)]="this.editedTravel.origin"
+                                            name="origin" matInput placeholder="Origen" type="text">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-5">
+                                    <mat-form-field class="example-full-width">
+                                        <input required="true" [disabled]="true"
+                                            [(ngModel)]="this.editedTravel.destination" name="destination" matInput
+                                            placeholder="Destino" type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <mat-label>Dia de salida</mat-label>
+                                    <mat-form-field class="example-full-width">
+                                        <input required="true" [disabled]="isDetailed"
+                                            [(ngModel)]="this.editedTravel.departure_date" name="departure_date"
+                                            type="Date" matInput>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-label>Hora de salida</mat-label>
+                                    <mat-form-field class="example-full-width">
+                                        <input required="true" [disabled]="isDetailed"
+                                            [(ngModel)]="this.editedTravel.departure_time" name="departure_time"
+                                            type="Time" matInput>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-label>Dia de llegada</mat-label>
+                                    <mat-form-field class="example-full-width">
+                                        <input required="true" [disabled]="true"
+                                            [(ngModel)]="this.editedTravel.arrival_date" name="arrival_date"
+                                            type="Date" matInput>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-label>Hora de llegada</mat-label>
+                                    <mat-form-field class="example-full-width">
+                                        <input required="true" [disabled]="true"
+                                            [(ngModel)]="this.editedTravel.arrival_time" name="arrival_time"
+                                            type="Time" matInput>
+                                    </mat-form-field>
+                                </div>
+                                </div>
+
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input required="true" [disabled]="isDetailed"
+                                            [(ngModel)]="this.editedTravel.price" name="price" matInput
+                                            placeholder="precio" type="number">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input required="true" [disabled]="isDetailed"
+                                            [(ngModel)]="this.editedTravel.available_seats" name="available_seats"
+                                            type="number" matInput placeholder="Lugares Disponibles">
+                                    </mat-form-field>
+                                </div>
+                              
+                               
+                            </div>
+                            <button mat-raised-button (click)="close()" class="btn btn-dark pull-right">Cerrar</button>
+
+                            <button [disabled]="loginForm.form.invalid" *ngIf="!isDetailed" mat-raised-button
+                                type="submit" (click)="save()" class="btn btn-danger pull-right">Grabar</button>
+                            <div class="clearfix"></div>
+                            <div class="clearfix"></div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

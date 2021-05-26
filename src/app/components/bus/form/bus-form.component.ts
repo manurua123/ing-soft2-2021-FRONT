@@ -161,6 +161,14 @@ export class BusFormComponent implements OnInit {
                 type: 'danger'
               })
             }
+            if (errorResponse.error.code == "bus_exists_in_travel_error") {
+              $.notify({
+                title: '<strong>Operanción erronea.</strong>',
+                message: errorResponse.error.message
+              }, {
+                type: 'danger'
+              })
+            }
           },
           
           
