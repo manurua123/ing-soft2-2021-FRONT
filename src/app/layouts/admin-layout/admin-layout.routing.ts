@@ -16,10 +16,14 @@ import { PlaceComponent } from 'app/components/place/place.component';
 import {BusComponent } from 'app/components/bus/bus.component';
 import {SuppliesComponent } from 'app/components/supplies/supplies.component';
 import {TravelComponent } from 'app/components/travel/travel.component';
+import { TicketFormComponent } from 'app/components/ticket/form/ticket-form.component';
+import { TravelSearchComponent } from 'app/components/travelSearch/travel-search.component';
+import { UserProfileChangePasswordComponent } from 'app/user-profile/user-profile-change-password.component';
 
 
 
 export const AdminLayoutRoutes: Routes = [
+    { path: 'changePassword', component: UserProfileChangePasswordComponent },
     { path: 'registration',   component: UserProfileComponent },
     { path: 'users',          component: DashboardComponent },
     { path: 'travels',        component: TravelComponent },
@@ -28,10 +32,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'places',         component: PlaceComponent },
     { path: 'bus',            component: BusComponent },
     { path: 'supplies',       component: SuppliesComponent },
-    { path: 'typography',     component: TypographyComponent },
-    { path: 'icons',          component: IconsComponent },
-    { path: 'maps',           component: MapsComponent },
     { path: 'notifications',  component: NotificationsComponent },
-    { path: 'upgrade',        component: UpgradeComponent },
+    { path: 'ticket',         component: TicketFormComponent },
+    { path: 'searchTravels',  component: TravelSearchComponent },
    
 ];

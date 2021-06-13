@@ -26,28 +26,28 @@ export class TravelComponent implements OnInit {
   constructor(private _modalService: NgbModal, private travelService: TravelService, private authorizationService: AuthorizationService) { }
 
   ngOnInit() {
+    console.log('Ingresando a travel');
     this.authorizationService.getUserLogged().subscribe(userAccount=> 
       {
       this.userRole = userAccount.rol
-      console.log('Viajes');
       });
     this.authorizationService.updateUserLogged();
   }
 
   open(content: any, travel: Travel) {
- this.deleteTravel = travel.id;
- this._modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-this.delete(travel);
- }, (reason) => {
+     this.deleteTravel = travel.id;
+    this._modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.delete(travel);
+    }, (reason) => {
 
-   });
+    });
 }
 
   delete(travel: Travel) {
     this.travelService.delete(travel).subscribe(response => {
       $.notify({
         title: '<strong>Operanción exitosa.</strong>',
-        message: 'Se ha eliminado correctamente el viaje : <br/>' + travel.id
+        message: 'Se ha eliminado el viaje exitosamente.'
       }, {
         type: 'success'
       });
