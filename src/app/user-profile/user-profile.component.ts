@@ -73,7 +73,6 @@ export class UserProfileComponent implements OnInit {
       return
     }
       
-    console.log("garbando");
     if (this.getAge() < 18) {
       $.notify({
         title: '<strong>Operanción erronea.</strong>',

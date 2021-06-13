@@ -68,11 +68,7 @@ export class NavbarComponent implements OnInit {
             this.username = this.credential.username;
             this.isLoginPanelOpen = false;
             this.isMenuOpen = false;
-            this.authorizationService.getRoles(this.credential.username).subscribe(roles =>
-              {
-               this.authorizationService.saveRolByUserLogged(this.credential.username, roles[0].name)
-               this.authorizationService.updateUserLogged();
-              });
+            this.authorizationService.saveUserData(this.credential.username, data.rol, data.user_id, data.gold)
         },
             errorResponse => {
                 if (errorResponse.error.detail) {
@@ -86,7 +82,7 @@ export class NavbarComponent implements OnInit {
         this.username = '';
         this.isLoginPanelOpen = false;
         this.isMenuOpen = false;
-        this.authorizationService.saveRolByUserLogged('', '');
+        this.authorizationService.saveUserData('', '','',false);
         this.authorizationService.updateUserLogged();
 
     }

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 import { ResponseBody } from './utils/response.body.model';
-import { Travel, TravelData } from 'app/model/travel.model';
+import { Travel, TravelData, TravelTicketData } from 'app/model/travel.model';
 
 @Injectable({ providedIn: 'root' })
 export class TravelService {
@@ -18,6 +18,14 @@ export class TravelService {
 
     getTravel(url: string): Observable<ResponseBody> {
         return this.http.get<ResponseBody>(url);
+    }
+
+    getAvailableTravel(origen: number, destination: number, departure: string): Observable<TravelTicketData[]> {
+        let params = new HttpParams();
+        params = params.append('origin', origen.toString());
+        params = params.append('destination', destination.toString());
+        params = params.append('departure', departure);
+        return this.http.get<TravelTicketData[]>(this.resourceURL+'get_available_travel',{params: params});
     }
 
     save(travel: TravelData): Observable<Travel> {

@@ -16,7 +16,7 @@ export interface UserParameters {
 
 @Injectable({ providedIn: 'root' })
 export class AuthorizationService implements OnInit {
-    private resourceURL = ' http://localhost:8000/api/token/';
+    private resourceURL = ' http://localhost:8000/api/user/';
     private resourceAuthorityURL = 'http://localhost:8000/api/roles/get_roles_by_user';
     
      
@@ -27,25 +27,34 @@ export class AuthorizationService implements OnInit {
     ngOnInit() {
         
     }
+    
+    changePassword (user:number, password:string): Observable<any> {
+        return this.http.post(this.resourceURL+'change_password/', {'user': user, 'password': password})
+    }
 
-
-    singIn(user: string, password: string): Observable<any> {
-        return this.http.post(this.resourceURL, {'username': user, 'password': password});
+   singIn(user: string, password: string): Observable<any> {
+        return this.http.post(this.resourceURL+'sign_in/', {'username': user, 'password': password});
    }
     
    getRoles(username:string) {
         return this.http.get<any>(this.resourceAuthorityURL, {params :{"username":username}});
    }
    
-   saveRolByUserLogged(username: string, rol:string) {
-        this.localStore.set('username',username ); 
-        this.localStore.set('rol',rol); 
-   }
+   saveUserData(username: string, rol: string, id: string, gold: boolean) {
+    this.localStore.set('username', username);
+    this.localStore.set('rol', rol);
+    this.localStore.set('id', id);
+    this.localStore.set('gold', gold ? '1' : '0')
+}
    
-   updateUserLogged() {
-     this.userEvent.emit({username:this.localStore.get('username'), 'rol': this.localStore.get('rol')})
-   }
-
+    updateUserLogged() {
+    this.userEvent.emit({
+        username: this.localStore.get('username'),
+        'rol': this.localStore.get('rol'),
+        'id': this.localStore.get('id'),
+        'gold': this.localStore.get('gold')
+    })
+}
 
    getUserLogged():Observable<any> {
        return this.userEvent;

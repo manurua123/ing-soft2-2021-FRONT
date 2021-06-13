@@ -1,4 +1,4 @@
-<div class="main-content">
+|<div class="main-content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -9,14 +9,18 @@
                     </div>
 
                     <div class="card-body">
-                        <form #loginForm="ngForm">
+                        <form #loginForm="ngForm" name="loginForm">
                             <div class="row">
                                 <div class="col-md-12">
                                     <mat-form-field>
                                         <mat-label>Ruta</mat-label>
                                         <mat-select required="true" [disabled]="isDetailed" name="route" 
                                             [(ngModel)]="selectedRoute" [disableOptionCentering]="true"
-                                            [(value)]="selectedRoute">
+                                            [(value)]="selectedRoute"
+                                            (selectionChange)="changeRoute($event.value)" 
+                                            
+                                            >
+                                            
                                             <mat-option *ngFor="let item of routeDatasource" [value]="item">
                                             Origen {{item.origin}}  Destino   {{item.destination}}
                                             </mat-option>
@@ -26,40 +30,46 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-3">
-                                    <mat-label>Dia de salida</mat-label>
-                                    <mat-form-field class="example-full-width">
-                                        <input required="true" [disabled]="isDetailed"
-                                            [(ngModel)]="this.editedTravel.departure_date" name="departure_date"
-                                            type="Date" matInput>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-md-3">
-                                    <mat-label>Hora de salida</mat-label>
-                                    <mat-form-field class="example-full-width">
-                                        <input required="true" [disabled]="isDetailed"
-                                            [(ngModel)]="this.editedTravel.departure_time" name="departure_time"
-                                            type="Time" matInput>
-                                    </mat-form-field>
+                                    <mat-label>Fecha y hora de salida</mat-label>
+                                    <mat-form-field>
+                                        <input matInput [ngxMatDatetimePicker]="picker" 
+                                                        [min]="minDate" [max]="maxDate" 
+                                                        [disabled]="false"
+                                                        (dateChange)="calculatedArrival()" [(ngModel)]="this.editedTravel.departure_date" id="departure_date" name="departure_date"
+                                                        >
+                                                        
+                                        <mat-datepicker-toggle matSuffix [for]="picker">
+                                        </mat-datepicker-toggle>
+                                        <ngx-mat-datetime-picker #picker 
+                                          [showSpinners]="true" 
+                                          [showSeconds]="false"
+                                          [stepHour]="1" [stepMinute]="1" 
+                                          [touchUi]="false"
+                                          [color]="color">
+                                        </ngx-mat-datetime-picker>
+                                      </mat-form-field>
                                 </div>
                                 <div class="col-md-3">
                                     <mat-label>Dia de llegada</mat-label>
                                     <mat-form-field class="example-full-width">
-                                        <input required="true" [disabled]="true"
-                                            [(ngModel)]="this.editedTravel.arrival_date" name="arrival_date"
-                                            type="Date" matInput>
+                                        <input matInput [ngxMatDatetimePicker]="pickerArrival" 
+                                         [min]="minDate" [max]="maxDate" 
+                                         [disabled]="true"
+                                         [(ngModel)]="this.editedTravel.arrival_date" name="arrival_date" id="arrival_date" 
+                                         >
+                                        <mat-datepicker-toggle matSuffix [for]="pickerArrival">
+                                        </mat-datepicker-toggle>
+                                        <ngx-mat-datetime-picker #pickerArrival 
+                                        [showSpinners]="showSpinners" 
+                                        [showSeconds]="showSeconds"
+                                        [stepHour]="stepHour" [stepMinute]="stepMinute" 
+                                        [stepSecond]="stepSecond"
+                                        [touchUi]="touchUi"
+                                        [color]="color">
+                                        </ngx-mat-datetime-picker>
                                     </mat-form-field>
                                 </div>
-                                <div class="col-md-3">
-                                    <mat-label>Hora de llegada</mat-label>
-                                    <mat-form-field class="example-full-width">
-                                        <input required="true" [disabled]="true"
-                                            [(ngModel)]="this.editedTravel.arrival_time" name="arrival_time"
-                                            type="Time" matInput>
-                                    </mat-form-field>
                                 </div>
-                                </div>
-
-
                             <div class="row">
                                 <div class="col-md-3">
                                     <mat-form-field class="example-full-width">
@@ -70,7 +80,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <mat-form-field class="example-full-width">
-                                        <input required="true" [disabled]="isDetailed"
+                                        <input required="true" [disabled]="true"
                                             [(ngModel)]="this.editedTravel.available_seats" name="available_seats"
                                             type="number" matInput placeholder="Lugares Disponibles">
                                     </mat-form-field>
