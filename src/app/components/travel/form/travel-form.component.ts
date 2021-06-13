@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange, } from '@angular/core';
 import { Time } from "@angular/common"
-import { Route } from 'app/model/Route.model';
+import { Route } from 'app/model/route.model';
 import { Travel, TravelData } from 'app/model/travel.model';
 import { BusService } from 'app/service/bus.service';
 import { RouteService } from 'app/service/route.service';

@@ -1,0 +1,82 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title ">Mis Viajes</h4>
+
+            <p class="card-category"> </p>
+
+            <div class="clearfix"></div>
+
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <div  class="no-ticket" *ngIf="!this.dataSource">
+
+                <P>El usuario no posee pasajes adquiridos</P>
+                
+              </div>
+              <table mat-table [dataSource]="dataSource"  *ngIf="this.dataSource">
+
+                <ng-container matColumnDef="departure_date">
+                  <th class="w-10" mat-header-cell *matHeaderCellDef> Dia de<br>Salida</th>
+                  <td  class="salida" mat-cell *matCellDef="let element"> {{element['travel'].departure_date}} </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="departure_time">
+                  <th class="w-10" mat-header-cell *matHeaderCellDef> Horario de<br>Salida </th>
+                  <td mat-cell *matCellDef="let element"> {{element['travel'].departure_time}} </td>
+                </ng-container>
+                <ng-container matColumnDef="arrival_date">
+                  <th class="w-10" mat-header-cell *matHeaderCellDef> Dia de<br>llegada</th>
+                  <td mat-cell *matCellDef="let element"> {{element['travel'].arrival_date}} </td>
+                </ng-container>
+                <ng-container matColumnDef="arrival_time">
+                  <th class="w-10" mat-header-cell *matHeaderCellDef> Horario de<br>Llegada</th>
+                  <td mat-cell *matCellDef="let element"> {{element['travel'].arrival_time}} </td>
+                </ng-container>
+               
+                <ng-container matColumnDef="origin">
+                  <th class="w-15" mat-header-cell *matHeaderCellDef> Ciudad de<br>Origen</th>
+
+                  <td mat-cell *matCellDef="let element"> {{element['travel'].origin}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="destination">
+                  <th class="w-15" mat-header-cell *matHeaderCellDef>Ciudad de<br> Destino</th>
+                  <td mat-cell *matCellDef="let element"> {{element['travel'].destination}} </td>
+                </ng-container>
+                <ng-container matColumnDef="type_bus">
+                  <th class="w-5" mat-header-cell *matHeaderCellDef> Tipo Bus</th>
+                  <td mat-cell *matCellDef="let element"> {{element['travel'].type_bus}} </td>
+                </ng-container>
+                <ng-container matColumnDef="ticket">
+                  <th class="w-15" mat-header-cell *matHeaderCellDef> Estado del ticket</th>
+                  <td class="{{element.state}}" mat-cell *matCellDef="let element"> {{element.state}} </td>
+                </ng-container>
+                <ng-container matColumnDef="state">
+                  <th class="w-15 " mat-header-cell *matHeaderCellDef> Estado del viaje</th>
+                  <td class="{{element['travel'].state}}" mat-cell *matCellDef="let element">
+                    {{element['travel'].state}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="delete" stickyEnd >
+                  <th mat-header-cell *matHeaderCellDef></th>
+                  <td mat-cell (click)="delete(element)" *matCellDef="let element">
+                    <a *ngIf ="element.state !== 'Devuelto' || element['travel'].state === 'Pendiente' " href="javascript:void(0)" class="nav-link" matTooltip="Devolver Pasaje">
+                      <i class="material-icons">cancel_presentation</i>
+                    </a>
+                  </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

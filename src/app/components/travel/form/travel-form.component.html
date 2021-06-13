@@ -18,7 +18,7 @@
                                             [(ngModel)]="selectedRoute" [disableOptionCentering]="true"
                                             [(value)]="selectedRoute">
                                             <mat-option *ngFor="let item of routeDatasource" [value]="item">
-                                            Origen {{item.origin}}  Destino   {{item.destination}}
+                                            Origen {{item.origin}}  Destino   {{item.destination}} Vehiculo   {{item.bus}}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>

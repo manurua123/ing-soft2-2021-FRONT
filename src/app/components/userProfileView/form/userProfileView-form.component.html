@@ -1,0 +1,115 @@
+<div class="main-content" >
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form #loginForm="ngForm">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3>DATOS PERSONALES</h3>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input required="true" [disabled]="isDetailed"
+                                            [(ngModel)]="this.editedUser.firstname" name="firstName" matInput
+                                            placeholder="Nombre" type="text" maxlength="60">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input required="true" [disabled]="isDetailed"
+                                            [(ngModel)]="this.editedUser.lastname" name="lastName" matInput
+                                            placeholder="Apellido" type="text" maxlength="60">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input required="true" [disabled]="true" [(ngModel)]="this.editedUser.email"
+                                            name="email" matInput placeholder="Email" type="email">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input required="true" [disabled]="isDetailed"
+                                            [(ngModel)]="this.editedUser.idCards" name="phone" matInput
+                                            placeholder="Telefono" type="number">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input required="true" [disabled]="isDetailed"
+                                            [(ngModel)]="this.editedUser.birth_date" name="birth_date" matInput
+                                            placeholder="Fecha de nacimiento" type="date">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input required="true" [disabled]="isDetailed"
+                                            [(ngModel)]="this.editedUser.phone" name="idCards" matInput
+                                            placeholder="DNI" type="number">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <div  *ngIf="this.editedUser.gold"
+                                        name="gold" type="checkbox">USUARIO GOLD
+                                        <i class="material-icons pl-2" style="color: #ffd700 ; " >military_tech</i>
+                                        </div>
+                                </div>
+                            </div>
+                           
+                            <div class="row" *ngIf="this.editedUser.gold === true">
+                                <div class="col-md-12">
+                                    <h3>DATOS DE FACTURACION</h3>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input required="true" [disabled]="isDetailed"
+                                            [(ngModel)]="this.editedUser.card_holder" name="card_holder" matInput
+                                            placeholder="Titular" type="text">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input required="true" [disabled]="isDetailed"
+                                            [(ngModel)]="this.editedUser.card_number" name="card_number" matInput
+                                            placeholder="Numero Tarjeta" type="number">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-2">
+                                    <mat-form-field class="example-full-width">
+                                        <input required="true" [disabled]="isDetailed"
+                                            [(ngModel)]="this.editedUser.month_exp" name="month_exp" matInput
+                                            placeholder="Mes de vencimiento" type="number">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-2">
+                                    <mat-form-field class="example-full-width">
+                                        <input required="true" [disabled]="isDetailed"
+                                            [(ngModel)]="this.editedUser.year_exp" name="year_exp" matInput
+                                            placeholder="Año de vencimiento" type="number">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-2">
+                                    <mat-form-field class="example-full-width">
+                                        <input required="true" [disabled]="isDetailed"
+                                            [(ngModel)]="this.editedUser.security_code" name="security_code" matInput
+                                            placeholder="Codigo de seguridad" type="password">
+                                    </mat-form-field>
+                                </div>
+
+
+                            </div>
+                            <button mat-raised-button [routerLink]="'/'" class="btn btn-dark pull-right">Cerrar</button>
+                        
+                            <button [disabled]="loginForm.form.invalid" *ngIf="!isDetailed" mat-raised-button
+                                type="submit" (click)="update()" class="btn btn-danger pull-right">Grabar</button>
+                            <div class="clearfix"></div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

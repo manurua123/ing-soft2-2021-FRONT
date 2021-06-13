@@ -72,8 +72,7 @@ export class UserProfileComponent implements OnInit {
     if (!form.valid) {
       return
     }
-      
-    console.log("garbando");
+
     if (this.getAge() < 18) {
       $.notify({
         title: '<strong>Operanción erronea.</strong>',
@@ -109,7 +108,6 @@ export class UserProfileComponent implements OnInit {
     this.user.birth_date = new Date(this.user.birth_date).toISOString().slice(0, 10);
     this.userService.save(this.user)
       .subscribe(route => {
-
         $.notify({
           title: '<strong>Operanción exitosa.</strong>',
           message: 'El usuario ' + this.user.email + ' ha sido registrado correctamente'
@@ -139,7 +137,6 @@ export class UserProfileComponent implements OnInit {
     const month_card_value: number =  this.user.month_exp;
     const current_month: number  = 5;
     return year_card_value >=  current_year && month_card_value >= current_month
-    
   }
 
   getAge() {
@@ -147,7 +144,6 @@ export class UserProfileComponent implements OnInit {
     var birth_date_to_calc = new Date(this.user.birth_date);
     var age = today.getFullYear() - birth_date_to_calc.getFullYear();
     var m = today.getMonth() - birth_date_to_calc.getMonth();
-
     if (m < 0 || (m === 0 && today.getDate() < birth_date_to_calc.getDate())) {
       age--;
     }
@@ -155,7 +151,5 @@ export class UserProfileComponent implements OnInit {
   }
   cancel() {
     this.router.navigate([''])
-
   }
-
 }

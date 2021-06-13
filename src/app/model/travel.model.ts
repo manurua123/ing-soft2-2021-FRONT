@@ -14,7 +14,6 @@ export interface Travel {
 export interface TravelData {
     id?: number;
     route: number;
-  
     price: number;
     departure_date: Date;
     departure_time: Time;

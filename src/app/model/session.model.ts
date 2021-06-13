@@ -5,4 +5,5 @@ export class Session {
 export interface UserCredential {
  username?: string;
  password?: string;
+ gold?:boolean
 }

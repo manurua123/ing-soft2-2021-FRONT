@@ -2,24 +2,26 @@ import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { NgbModule, NgbDate, NgbActiveModal, NgbModal, ModalDismissReasons, NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { Travel } from 'app/model/travel.model';
+import { Ticket } from 'app/model/ticket.model';
 import { TravelService } from 'app/service/travel.service';
 import { AuthorizationService } from 'app/service/authorization.service';
 
 declare var $: any;
 @Component({
-  selector: 'app-travel',
-  templateUrl: './travel.component.html',
-  styleUrls: ['./travel.component.css']
+  selector: 'app-userTravelView',
+  templateUrl: './userTravelView.component.html',
+  styleUrls: ['./userTravelView.component.css']
 })
-export class TravelComponent implements OnInit {
+export class UserTravelViewComponent implements OnInit {
   closeResult = '';
-  deleteTravel = 0;
+  deleteTicket = 0;
   @ViewChild('content') content: any;
   isEdited: boolean = false;
   isAdded: boolean = false;
   isDetailed: boolean = false;
   selectedTravel: Travel;
   userRole: string ='';
+  userId : number;
 
   updatedTableEvent: EventEmitter<any> = new EventEmitter<any>();
 
@@ -28,33 +30,48 @@ export class TravelComponent implements OnInit {
   ngOnInit() {
     this.authorizationService.getUserLogged().subscribe(userAccount=> 
       {
-      this.userRole = userAccount.rol
-      
+      this.userId = userAccount.id
       });
     this.authorizationService.updateUserLogged();
   }
 
-  open(content: any, travel: Travel) {
- this.deleteTravel = travel.id;
- this._modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-this.delete(travel);
- }, (reason) => {
+  open(content: any, ticket: Ticket) {
+   
+    this.deleteTicket = ticket.id;
+    this._modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+   this.delete(ticket);
+    }, (reason) => {
+   
+      });
+   }
+   onDeleted(ticket: Ticket) {
+  
+    this.open(this.content, ticket);
+  }
 
-   });
-}
-
-  delete(travel: Travel) {
-    this.travelService.delete(travel).subscribe(response => {
+  delete(ticket: Ticket) {
+   
+    this.travelService.returnTicket(ticket).subscribe(response => {
       $.notify({
         title: '<strong>Operanción exitosa.</strong>',
-        message: 'Se ha eliminado correctamente el viaje : <br/>' + travel.id
+        message: response.message
       }, {
+        delay:30000,
         type: 'success'
+        
       });
       this.updatedTableEvent.emit()
     },
     errorResponse => {
-      if (errorResponse.error.code == "travel_exists_in_ticket_error") {
+      if (errorResponse.error.code == "ticket_return__error") {
+        $.notify({
+          title: '<strong>Operanción exitosa</strong>',
+          message: errorResponse.error.message
+        }, {
+          type: 'danger'
+        })
+      }
+      if (errorResponse.error.code == "ticket_no_exists__error") {
         $.notify({
           title: '<strong>Operanción erronea.</strong>',
           message: errorResponse.error.message
@@ -70,28 +87,7 @@ this.delete(travel);
   updateTableData(event) {
     this.updatedTableEvent.emit()
   }
-  onEdited(travel: Travel) {
-    this.isEdited = true;
-    this.selectedTravel = travel;
-  }
 
-  onDeleted(travel: Travel) {
-    this.open(this.content, travel);
-  }
 
-  onDetailed(travel: Travel) {
-    this.selectedTravel = travel;
-    this.isDetailed = true;
-  }
 
-  onClose(event: any) {
-    this.isDetailed = false;
-    this.isEdited = false;
-    this.isAdded = false;
-  }
-
-  onAdded() {
-    this.selectedTravel = null;
-    this.isAdded = true;
-  }
 }

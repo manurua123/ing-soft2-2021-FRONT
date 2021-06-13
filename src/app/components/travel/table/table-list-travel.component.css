@@ -1,3 +1,11 @@
+.mat-cell {
+  text-align: center !important;
+}
+
+th {
+  border-bottom-width: 2px !important;
+}
+
 .w-25 {
   width: 25%;
   font-size: large;
@@ -9,30 +17,28 @@
   width: 20%;
   font-size: large;
   font-weight: bold;
- 
+  align-items: center !important;
 }
-.table-responsive{
- 
-}
+
 .w-10 {
   width: 10%;
   font-size: large;
   font-weight: bold;
- 
+  text-align: center;
 }
+
 .w-15 {
   width: 15%;
   font-size: large;
   font-weight: bold;
- 
+  text-align: center;
 }
 .w-5 {
   width: 5%;
   font-size: large;
   font-weight: bold;
- 
+  text-align: center;
 }
-
 a {
   color: black !important;
 }

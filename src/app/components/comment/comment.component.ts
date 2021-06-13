@@ -1,60 +1,61 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { NgbModule, NgbDate, NgbActiveModal, NgbModal, ModalDismissReasons, NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
-import { Travel } from 'app/model/travel.model';
-import { TravelService } from 'app/service/travel.service';
 import { AuthorizationService } from 'app/service/authorization.service';
+
+import { Comment } from 'app/model/comment.model';
+import { CommentService } from 'app/service/comment.service';
+
 
 declare var $: any;
 @Component({
-  selector: 'app-travel',
-  templateUrl: './travel.component.html',
-  styleUrls: ['./travel.component.css']
+  selector: 'app-comment',
+  templateUrl: './comment.component.html',
+  styleUrls: ['./comment.component.css']
 })
-export class TravelComponent implements OnInit {
+export class CommentComponent {
   closeResult = '';
-  deleteTravel = 0;
+  deleteComment = '';
   @ViewChild('content') content: any;
   isEdited: boolean = false;
   isAdded: boolean = false;
   isDetailed: boolean = false;
-  selectedTravel: Travel;
-  userRole: string ='';
+  selectedComment: Comment;
+  userID: number = -10;
 
   updatedTableEvent: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private _modalService: NgbModal, private travelService: TravelService, private authorizationService: AuthorizationService) { }
+  constructor(private _modalService: NgbModal, private commentService: CommentService,private authorizationService: AuthorizationService) { }
 
   ngOnInit() {
     this.authorizationService.getUserLogged().subscribe(userAccount=> 
       {
-      this.userRole = userAccount.rol
-      
+      this.userID = userAccount.id
       });
     this.authorizationService.updateUserLogged();
   }
 
-  open(content: any, travel: Travel) {
- this.deleteTravel = travel.id;
- this._modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-this.delete(travel);
- }, (reason) => {
+  open(content: any, comment: Comment) {
+    this.deleteComment = comment.date + ', ' + comment.user;
+    this._modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.delete(comment);
+    }, (reason) => {
+      // Ver si se puede sacar esto
+    });
+  }
 
-   });
-}
-
-  delete(travel: Travel) {
-    this.travelService.delete(travel).subscribe(response => {
+  delete(comment: Comment) {
+    this.commentService.delete(comment).subscribe(response => {
       $.notify({
         title: '<strong>Operanción exitosa.</strong>',
-        message: 'Se ha eliminado correctamente el viaje : <br/>' + travel.id
+        message: 'Se ha eliminado correctamente el coemtnario ' 
       }, {
         type: 'success'
       });
       this.updatedTableEvent.emit()
     },
     errorResponse => {
-      if (errorResponse.error.code == "travel_exists_in_ticket_error") {
+      if (errorResponse.error.code == "comment_exists_in_bus_error") {
         $.notify({
           title: '<strong>Operanción erronea.</strong>',
           message: errorResponse.error.message
@@ -64,23 +65,22 @@ this.delete(travel);
       }
     }
     );
-
   }
 
   updateTableData(event) {
     this.updatedTableEvent.emit()
   }
-  onEdited(travel: Travel) {
+  onEdited(comment: Comment) {
     this.isEdited = true;
-    this.selectedTravel = travel;
+    this.selectedComment = comment;
   }
 
-  onDeleted(travel: Travel) {
-    this.open(this.content, travel);
+  onDeleted(comment: Comment) {
+    this.open(this.content, comment);
   }
 
-  onDetailed(travel: Travel) {
-    this.selectedTravel = travel;
+  onDetailed(comment: Comment) {
+    this.selectedComment = comment;
     this.isDetailed = true;
   }
 
@@ -91,7 +91,7 @@ this.delete(travel);
   }
 
   onAdded() {
-    this.selectedTravel = null;
+    this.selectedComment = null;
     this.isAdded = true;
   }
 }

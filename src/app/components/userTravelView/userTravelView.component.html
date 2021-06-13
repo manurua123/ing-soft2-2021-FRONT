@@ -1,0 +1,25 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Aviso</h4>
+    <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
+      (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p><strong>¿Ud. está seguro de devolver este pasaje? <span class="text-primary"></span> {{deleteTravel}}?</strong></p>
+    <p>Puede que no se reintegre la totalidad del costo del pasaje</p>
+    <span class="text-danger">Esta operación no se puede deshacer.</span>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancelar</button>
+    <button type="button" ngbAutofocus class="btn btn-danger" (click)="modal.close('Ok click')">Aceptar</button>
+  </div>
+</ng-template>
+
+<ng-container>
+  <table-list-userTravelView [updateTableEvent]="updatedTableEvent" (deleted)="onDeleted($event)">
+  </table-list-userTravelView>
+
+
+</ng-container>

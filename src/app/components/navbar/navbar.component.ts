@@ -1,3 +1,4 @@
+import { UserProfileViewComponent } from 'app/components/userProfileView/userProfileView.component';
 import { Component, OnInit, ElementRef, Output, EventEmitter } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
@@ -5,6 +6,7 @@ import { Router } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import { AuthorizationService } from 'app/service/authorization.service';
 import { UserCredential } from 'app/model/session.model';
+
 @Component({
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
@@ -16,7 +18,9 @@ export class NavbarComponent implements OnInit {
     credential: UserCredential;
     isInvalidCredential = false;
     username = '';
-    userRole ='';
+    userRole = '';
+    userGold = false;
+
     private listTitles: any[];
     location: Location;
     mobile_menu_visible: any = 0;
@@ -42,14 +46,14 @@ export class NavbarComponent implements OnInit {
                 this.mobile_menu_visible = 0;
             }
         });
-        this.credential = { username: '', password: '' };
-        this.authorizationService.getUserLogged().subscribe(userAccount=> 
-            {
+
+        this.credential = { username: '', password: '', gold: false };
+        this.authorizationService.getUserLogged().subscribe(userAccount => {
             this.userRole = userAccount.rol;
             this.username = userAccount.username;
-            });
-          this.authorizationService.updateUserLogged();
-
+            this.userGold = userAccount.gold;
+        });
+        this.authorizationService.updateUserLogged();
     }
     menuOpen() {
         this.isMenuOpen = true;
@@ -66,13 +70,14 @@ export class NavbarComponent implements OnInit {
     singIn() {
         this.authorizationService.singIn(this.credential.username, this.credential.password).subscribe(data => {
             this.username = this.credential.username;
+            this.userGold = this.credential.gold;
             this.isLoginPanelOpen = false;
             this.isMenuOpen = false;
-            this.authorizationService.getRoles(this.credential.username).subscribe(roles =>
-              {
-               this.authorizationService.saveRolByUserLogged(this.credential.username, roles[0].name)
-               this.authorizationService.updateUserLogged();
-              });
+            this.authorizationService.getUserData(this.credential.username, this.credential.password).subscribe(user => {
+                console.log(user)
+                this.authorizationService.saveUserData(user.user, user.rol, user.user_id, user.gold);
+                this.authorizationService.updateUserLogged();
+            })
         },
             errorResponse => {
                 if (errorResponse.error.detail) {
@@ -80,14 +85,18 @@ export class NavbarComponent implements OnInit {
                 }
             }
         );
+
     }
+
 
     closeSession() {
         this.username = '';
         this.isLoginPanelOpen = false;
         this.isMenuOpen = false;
-        this.authorizationService.saveRolByUserLogged('', '');
+        // this.authorizationService.saveRolByUserLogged('', '',);
+        this.authorizationService.saveUserData('', '', '-1', false)
         this.authorizationService.updateUserLogged();
+        this.userGold = false;
 
     }
 
@@ -104,7 +113,7 @@ export class NavbarComponent implements OnInit {
     };
     sidebarClose() {
         const body = document.getElementsByTagName('body')[0];
-        this.toggleButton.classList.remove('toggled');
+        // this.toggleButton.classList.remove('toggled');
         this.sidebarVisible = false;
         body.classList.remove('nav-open');
     };

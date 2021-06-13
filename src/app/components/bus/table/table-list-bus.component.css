@@ -1,31 +1,41 @@
+.mat-cell {
+  text-align: center !important;
+}
+
+th {
+  border-bottom-width: 2px !important;
+}
 .w-30 {
-    width: 30%;
-    font-size:large;
-    font-weight: bold;
-  }
-  
-  .w-20 {
-    width: 20%;
-    font-size:large;
-    font-weight: bold;
-  }
-  
-  .w-10 {
-    width: 10%;
-    font-size:large;
-    font-weight: bold;
-  }
-  .w-40 {
-    width: 40%;
-    font-size:large;
-    font-weight: bold;
-  }
-  
-  a {
-    color: black !important;
-  }
-  .card-title {
-    margin-left: 10px;
-    font-size: xx-large;
-  }
-  
+  width: 30%;
+  font-size: large;
+  font-weight: bold;
+  text-align: center;
+}
+
+.w-20 {
+  width: 20%;
+  font-size: large;
+  font-weight: bold;
+  text-align: center;
+}
+
+.w-10 {
+  width: 10%;
+  font-size: large;
+  font-weight: bold;
+  text-align: center;
+}
+.w-40 {
+  width: 40%;
+  font-size: large;
+  font-weight: bold;
+  text-align: center;
+}
+
+a {
+  color: black !important;
+}
+.card-title {
+  margin-left: 10px;
+  font-size: xx-large;
+}

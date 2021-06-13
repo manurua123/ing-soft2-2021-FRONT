@@ -222,7 +222,7 @@
     .card-header-danger .card-icon,
     .card-header-danger:not(.card-header-icon):not(.card-header-text),
     .card-header-danger .card-text{
-        @include shadow-big-color($brand-danger);
+        @include shadow-big-color($brand-combi19);
     }
 
     .card-header-rose .card-icon,

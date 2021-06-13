@@ -3,32 +3,55 @@
 </div> -->
 
 
-<nav class="navbar navbar-expand-lg navbar-transparent fixed-top" >
+<nav class="navbar navbar-expand-lg navbar-transparent fixed-top">
     <div class="container-fluid">
         <div class="collapse navbar-collapse justify-content-end text-right" id="navigation">
             <div class="dropdown" style="width: 25%;">
                 <button type="button" (click)="menuOpen()" class="btn btn-danger pull-right dropdown-toggle"
                     data-toggle="dropdown">
                     <strong>
-                        <span *ngIf="this.username == ''" >Iniciar sesión </span> 
-                        <span *ngIf="this.username != ''" style="text-transform: none !important">{{username}} </span> 
+
+                        <span *ngIf="this.username == ''">Iniciar sesión </span>
+                        <span *ngIf="this.username != ''" style="text-transform: none !important">{{username}} </span>
+                        <span *ngIf="this.userGold === true " style="text-transform: none !important">
+                            <i class="material-icons pl-2" style="color: #ffd700 ; "
+                                matTooltip="Usuario GOLD">military_tech</i>
+                        </span>
                     </strong>
                     <i class="material-icons pl-2">person</i>
                     <div class="dropdown-menu">
-                        <a class=" dropdown-item buttonMenu" href="#"> <i class="fa fa-home pr-2"></i> <span></span>Inicio </a>
-                        <a *ngIf="this.username == ''" (click)="showLoginPanel()" class=" dropdown-item buttonMenu" href="#"> <i
-                                class="fa fa-address-book pr-2"></i> 
-                               <span >Iniciar sesión </span> 
-                            </a>
-                        
-                        <a *ngIf="this.username != ''" (click)="closeSession()" class=" dropdown-item buttonMenu" href="#"> <i
-                            class="fa fa-address-book pr-2"></i> 
-                            <span >Cerrar sesión </span> 
-                        </a>    
+                        <a class=" dropdown-item buttonMenu" href="#" [routerLink]="'/'"> <i class="material-icons pl-2"
+                                style="margin-right: 1em; font-size: large; ">home</i>
+                            <span></span>Inicio </a>
+                        <a *ngIf="this.username == ''" (click)="showLoginPanel()" class=" dropdown-item buttonMenu"
+                            [routerLink]="'/'"> <i class="material-icons pl-2"
+                                style="margin-right: 1em; font-size: large; ">login</i>
+                            <span>Iniciar sesión </span>
+                        </a>
+                        <a *ngIf="this.username != ''" [routerLink]="'/profile'" class=" dropdown-item buttonMenu"
+                            href="#"> <i class="material-icons pl-2"
+                                style="margin-right: 1em; font-size: large; ">settings</i>
+                            <span> Perfil </span>
+                        </a>
 
-                        <a *ngIf="this.username == ''" class=" dropdown-item buttonMenu" [routerLink]="['/registration']"> 
-                            <i class="fa fa-bell pr-2"></i> 
-                            Registrarse 
+
+                        <!-- <a *ngIf="this.username != ''" [routerLink]="'/my-travels'" class=" dropdown-item buttonMenu"
+                            href="#"> <i class="material-icons pl-2"
+                                style="margin-right: 1em; font-size: large; ">luggage</i>
+                            <span> Mis Viajes </span>
+                        </a> -->
+
+                        <a *ngIf="this.username != ''" (click)="closeSession()" class=" dropdown-item buttonMenu"
+                            [routerLink]="'/'"><i class="material-icons pl-2"
+                                style="margin-right: 1em; font-size: large; ">logout</i>
+                            <span>Cerrar sesión </span>
+                        </a>
+
+                        <a *ngIf="this.username == ''" class=" dropdown-item buttonMenu"
+                            [routerLink]="['/registration']">
+                            <i class="material-icons pl-2" style="margin-right: 1em; font-size: large; "
+                                matTooltip="Usuario GOLD">app_registration</i>
+                            Registrarse
                         </a>
                     </div>
                 </button>
@@ -44,29 +67,33 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <mat-form-field class="example-full-width">
-                                       <input required="true" id="inputEmail" [(ngModel)]="this.credential.username" name= "username" matInput placeholder="Correo electrónico"
-                                            type="text">
+                                        <input required="true" id="inputEmail" [(ngModel)]="this.credential.username"
+                                            name="username" matInput placeholder="Correo electrónico" type="text">
                                     </mat-form-field>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <mat-form-field class="example-full-width">
-                                        <input type="password" id="inputPassword" [(ngModel)]="this.credential.password" name= "password" matInput placeholder="Contraseña">
+                                        <input type="password" id="inputPassword" [(ngModel)]="this.credential.password"
+                                            name="password" matInput placeholder="Contraseña">
                                     </mat-form-field>
                                 </div>
                             </div>
                             <div>
-                                <span *ngIf="this.isInvalidCredential" style="color: red;"> Usuario o contraseña incorrectas</span>
+                                <span *ngIf="this.isInvalidCredential" style="color: red;"> Usuario o contraseña
+                                    incorrectas</span>
                             </div>
                             <div class="row row pt-3">
                                 <div class="col-md-12">
-                                    <button mat-raised-button  (click)="cancel()"  class="btn btn-dark pull-right">Cancelar</button>
-                                    <button stle="width:100%" (click) ="singIn()" type="submit" class="btn btn-danger pull-right  text-uppercase">
-                                     Inciar Sesión   
+                                    <button mat-raised-button (click)="cancel()"
+                                        class="btn btn-dark pull-right">Cancelar</button>
+                                    <button stle="width:100%" (click)="singIn()" type="submit"
+                                        class="btn btn-danger pull-right  text-uppercase">
+                                        Inciar Sesión
                                     </button>
-                                </div>        
-                            </div>            
+                                </div>
+                            </div>
                         </form>
 
                     </div>
@@ -75,59 +102,3 @@
         </div>
     </div>
 </nav>
-
-<!--
-
-<nav class="navbar navbar-transparent navbar-absolute">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button mat-raised-button type="button" class="navbar-toggle" data-toggle="collapse" (click)="sidebarToggle()">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="javascript:void(0)">{{getTitle()}}</a>
-        </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="material-icons">dashboard</i>
-                        <p class="hidden-lg hidden-md">Dashboard</p>
-                    </a>
-                </li>
-                <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="material-icons">notifications</i>
-                        <span class="notification">5</span>
-                        <p class="hidden-lg hidden-md">Notifications</p>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="javascript:void(0)">Mike John responded to your email</a></li>
-                        <li><a href="javascript:void(0)">You have 5 new tasks</a></li>
-                        <li><a href="javascript:void(0)">You're now friend with Andrew</a></li>
-                        <li><a href="javascript:void(0)">Another Notification</a></li>
-                        <li><a href="javascript:void(0)">Another One</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-                       <i class="material-icons">person</i>
-                       <p class="hidden-lg hidden-md">Profile</p>
-                    </a>
-                </li>
-            </ul>
-
-            <form class="navbar-form navbar-right" role="search">
-                <div class="form-group form-black is-empty">
-                    <input type="text" class="form-control" placeholder="Search">
-                    <span class="material-input"></span>
-                </div>
-                <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">
-                    <i class="material-icons">search</i><div class="ripple-container"></div>
-                </button>
-            </form>
-        </div>
-    </div>
-</nav> -->

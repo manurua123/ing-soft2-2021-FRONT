@@ -114,7 +114,7 @@
                   </div>
                 </div>
               <button mat-raised-button  (click)="cancel()"  class="btn btn-dark pull-right">Cancelar</button>
-              <button mat-raised-button *ngIf="!this.isEnabled"  type="submit"
+              <button mat-raised-button *ngIf="!this.isEnabled"  type="submit" [routerLink]="'/'"
                  class="btn btn-danger pull-right">Grabar</button>
               <div class="clearfix"></div>
             </form>

@@ -49,6 +49,15 @@ import { TravelComponent } from 'app/components/travel/travel.component';
 import { TableListTravelComponent } from 'app/components/travel/table/table-list-travel.component';
 import { TravelFormComponent } from 'app/components/travel/form/travel-form.component';
 
+import { CommentComponent } from 'app/components/comment/comment.component';
+import { TableListCommentComponent } from 'app/components/comment/table/table-list-comment.component';
+
+import { UserProfileViewComponent } from 'app/components/userProfileView/userProfileView.component';
+import { UserProfileViewFormComponent  } from 'app/components/userProfileView/form/userProfileView-form.component';
+
+import { UserTravelViewComponent } from 'app/components/userTravelView/userTravelView.component'
+import { TableListUserTravelViewComponent  } from 'app/components/userTravelView/table/table-list-userTravelView.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -104,7 +113,13 @@ import { TravelFormComponent } from 'app/components/travel/form/travel-form.comp
     TableListTravelComponent,
     TravelFormComponent,
 
+    CommentComponent,
+    TableListCommentComponent,
+   
 
+    UserProfileViewFormComponent,
+    TableListUserTravelViewComponent,
+    UserTravelViewComponent,
   ]
 })
 

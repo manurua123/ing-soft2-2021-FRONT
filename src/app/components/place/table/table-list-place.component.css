@@ -1,3 +1,11 @@
+.mat-cell{
+  text-align: center !important;
+}
+
+th{
+  border-bottom-width: 2px !important;
+}
+
 .w-30 {
     width: 30%;
     font-size:large;
@@ -19,7 +27,10 @@
     width: 50%;
     font-size:large;
     font-weight: bold;
+    text-align: center;
   }
+  
+
   
   a {
     color: black !important;

@@ -16,12 +16,24 @@ import { PlaceComponent } from 'app/components/place/place.component';
 import {BusComponent } from 'app/components/bus/bus.component';
 import {SuppliesComponent } from 'app/components/supplies/supplies.component';
 import {TravelComponent } from 'app/components/travel/travel.component';
+import {CommentComponent } from 'app/components/comment/comment.component';
+import {UserProfileViewFormComponent } from 'app/components/userProfileView/form/userProfileView-form.component';
+import  {AppComponent} from '../../app.component'
+import { UserTravelViewComponent } from 'app/components/userTravelView/userTravelView.component'
 
 
 
 export const AdminLayoutRoutes: Routes = [
+    // { path: '',          component: AppComponent },
+  
+
+
     { path: 'registration',   component: UserProfileComponent },
     { path: 'users',          component: DashboardComponent },
+    { path: 'my-travels',     component: UserTravelViewComponent },
+    { path: 'profile',        component: UserProfileViewFormComponent },
+    { path: '',               component: CommentComponent },
+    { path: 'comments',               component: CommentComponent },
     { path: 'travels',        component: TravelComponent },
     { path: 'routes',         component: RouteComponent } ,
     { path: 'drivers',        component: DriverComponent },
