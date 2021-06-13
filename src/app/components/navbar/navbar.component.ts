@@ -74,7 +74,7 @@ export class NavbarComponent implements OnInit {
             this.isLoginPanelOpen = false;
             this.isMenuOpen = false;
             this.authorizationService.getUserData(this.credential.username, this.credential.password).subscribe(user => {
-                console.log(user)
+               
                 this.authorizationService.saveUserData(user.user, user.rol, user.user_id, user.gold);
                 this.authorizationService.updateUserLogged();
             })

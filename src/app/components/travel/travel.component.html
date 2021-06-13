@@ -17,7 +17,7 @@
   </div>
 </ng-template>
 
-<ng-container *ngIf = "this.userRole === 'ADMIN'">
+<ng-container *ngIf = "this.userRole === 'CLIENT'">
   <table-list-travel  *ngIf="!isEdited && !isAdded && !isDetailed" [updateTableEvent] = "updatedTableEvent" (detailed) = "onDetailed($event)" (added)= "onAdded($event)" (edited)="onEdited($event)" (deleted)="onDeleted($event)"></table-list-travel>  
   <travel-form *ngIf="isEdited || isAdded || isDetailed" (updateTableEvent) = "updateTableData($event)" (closeFormEvent)="onClose($event)" [isDetailed]="isDetailed" [editedTravel]="selectedTravel"></travel-form>
 </ng-container>

@@ -49,14 +49,28 @@ import { TravelComponent } from 'app/components/travel/travel.component';
 import { TableListTravelComponent } from 'app/components/travel/table/table-list-travel.component';
 import { TravelFormComponent } from 'app/components/travel/form/travel-form.component';
 
-import { CommentComponent } from 'app/components/comment/comment.component';
-import { TableListCommentComponent } from 'app/components/comment/table/table-list-comment.component';
+import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatDateFormats, NGX_MAT_DATE_FORMATS } from '@angular-material-components/datetime-picker';
+import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+import { NgxMatMomentModule, NGX_MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular-material-components/moment-adapter';
+import { TicketFormComponent } from 'app/components/ticket/form/ticket-form.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import { TravelSearchComponent } from 'app/components/travelSearch/travel-search.component';
+import { UserProfileChangePasswordComponent } from 'app/user-profile/user-profile-change-password.component';
 
-import { UserProfileViewComponent } from 'app/components/userProfileView/userProfileView.component';
-import { UserProfileViewFormComponent  } from 'app/components/userProfileView/form/userProfileView-form.component';
+export const MOMENT_DATETIME_WITH_SECONDS_FORMAT = 'DD-MM-YYYY HH:mm:ss';
 
-import { UserTravelViewComponent } from 'app/components/userTravelView/userTravelView.component'
-import { TableListUserTravelViewComponent  } from 'app/components/userTravelView/table/table-list-userTravelView.component';
+const CUSTOM_DATE_FORMAT: NgxMatDateFormats = {
+  parse: {
+    dateInput: MOMENT_DATETIME_WITH_SECONDS_FORMAT,
+  },
+  display: {
+    dateInput: MOMENT_DATETIME_WITH_SECONDS_FORMAT,
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  }
+};
+
 
 @NgModule({
   imports: [
@@ -77,8 +91,14 @@ import { TableListUserTravelViewComponent  } from 'app/components/userTravelView
     MatGridListModule,
     MatMenuModule,
     MatNativeDateModule,
-    MatCheckboxModule
-
+    MatCheckboxModule,
+    NgxMatDatetimePickerModule, 
+    NgxMatNativeDateModule,
+    MatMomentDateModule,
+    NgxMatMomentModule,
+    MatStepperModule
+    
+    
   ],
   declarations: [
     DashboardComponent,
@@ -96,6 +116,8 @@ import { TableListUserTravelViewComponent  } from 'app/components/userTravelView
     DriverComponent,
     TableListDriverComponent,
     DriverFormComponent,
+    TravelSearchComponent,
+    UserProfileChangePasswordComponent,
 
     PlaceComponent,
     TableListPlaceComponent,
@@ -112,6 +134,12 @@ import { TableListUserTravelViewComponent  } from 'app/components/userTravelView
     TravelComponent,
     TableListTravelComponent,
     TravelFormComponent,
+    TicketFormComponent,
+  ],
+  providers: [
+    {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}},
+    {provide: NGX_MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMAT},
+    {provide: NGX_MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}},
 
     CommentComponent,
     TableListCommentComponent,

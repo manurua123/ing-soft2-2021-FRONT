@@ -8,6 +8,8 @@ export interface Route {
     bus_id:number
     duration: number;
     distance: number;
+    total_minute?: number;
+    seat_numbers? : number;
 }
 
 export interface RouteData {

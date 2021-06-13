@@ -15,12 +15,14 @@ export const ROUTES: RouteInfo[] = [
   
     { path: '/my-travels', title: 'Mis Viajes',  icon:'luggage', class: '' , roles:'CLIENT'},
     { path: '/comments', title: 'Comentarios',  icon:'comment', class: '' , roles:'ADMIN'},
+    { path: '/searchTravels', title: 'Busquedas de viajes',  icon:'travel_explore', class: '' , roles:'CLIENT'},
     { path: '/travels', title: 'Viajes',  icon:'travel_explore', class: '' , roles:'ADMIN'},
     { path: '/routes', title: 'Rutas',  icon:'map', class: '' , roles:'ADMIN'},
     { path: '/places', title: 'Lugares',  icon:'room', class: '', roles:'ADMIN' },
     { path: '/drivers', title: 'Conductores',  icon:'badge', class: '', roles:'ADMIN' },
     { path: '/bus', title: 'Vehículos',  icon:'airport_shuttle', class: '', roles:'ADMIN' },
     { path: '/supplies', title: 'Insumos',  icon:'local_dining', class: '', roles:'ADMIN' },
+    { path: '/ticket', title: 'Comprar Pasaje',  icon:'travel_explore', class: '' , roles:'CLIENT'},
 ];
 
 @Component({
@@ -35,11 +37,13 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
-    this.authorizationService.getUserLogged().subscribe(userAccount=> 
+        this.authorizationService.getUserLogged().subscribe(userAccount=> 
       {
       this.userRole = userAccount.rol;
+      console.log(this.userRole);
       });
     this.authorizationService.updateUserLogged();
+    
   }
   isMobileMenu() {
       if ($(window).width() > 991) {
