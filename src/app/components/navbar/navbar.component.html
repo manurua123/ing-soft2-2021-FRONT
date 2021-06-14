@@ -13,7 +13,7 @@
 
                         <span *ngIf="this.username == ''">Iniciar sesión </span>
                         <span *ngIf="this.username != ''" style="text-transform: none !important">{{username}} </span>
-                        <span *ngIf="this.userGold === true " style="text-transform: none !important">
+                        <span *ngIf="this.userGold === '1' " style="text-transform: none !important">
                             <i class="material-icons pl-2" style="color: #ffd700 ; "
                                 matTooltip="Usuario GOLD">military_tech</i>
                         </span>
@@ -35,11 +35,24 @@
                         </a>
 
 
+<<<<<<< Updated upstream
                         <!-- <a *ngIf="this.username != ''" [routerLink]="'/my-travels'" class=" dropdown-item buttonMenu"
                             href="#"> <i class="material-icons pl-2"
                                 style="margin-right: 1em; font-size: large; ">luggage</i>
                             <span> Mis Viajes </span>
                         </a> -->
+=======
+
+                        <a *ngIf="this.username != ''" class=" dropdown-item buttonMenu"
+                            [routerLink]="['/changePassword']" >
+                            <i class="material-icons pl-2"
+                                style="margin-right: 1em; font-size: large; ">vpn_key</i>
+                            
+                            <span>Cambiar contraseña</span>
+
+                               
+                        </a>
+>>>>>>> Stashed changes
 
                         <a *ngIf="this.username != ''" (click)="closeSession()" class=" dropdown-item buttonMenu"
                             [routerLink]="'/'"><i class="material-icons pl-2"

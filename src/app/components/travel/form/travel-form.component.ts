@@ -180,6 +180,15 @@ export class TravelFormComponent {
         )
 
 
+<<<<<<< Updated upstream
+=======
+  changeRoute(ruta){
+    this.editedTravel.available_seats = ruta.seat_numbers;
+    if (this.editedTravel.departure_date) {
+      this.calculatedArrival()
+     
+    }
+>>>>>>> Stashed changes
   }
 
 }

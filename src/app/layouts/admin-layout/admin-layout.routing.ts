@@ -37,7 +37,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'my-travels',     component: UserTravelViewComponent },
     { path: 'profile',        component: UserProfileViewFormComponent },
     { path: '',               component: CommentComponent },
-    { path: 'comments',               component: CommentComponent },
+    { path: 'comments',       component: CommentComponent },
     { path: 'travels',        component: TravelComponent },
     { path: 'routes',         component: RouteComponent } ,
     { path: 'drivers',        component: DriverComponent },

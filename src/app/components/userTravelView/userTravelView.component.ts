@@ -60,6 +60,7 @@ export class UserTravelViewComponent implements OnInit {
         type: 'success'
         
       });
+      
       this.updatedTableEvent.emit()
     },
     errorResponse => {

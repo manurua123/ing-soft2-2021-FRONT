@@ -65,7 +65,7 @@
                 <ng-container matColumnDef="delete" stickyEnd >
                   <th mat-header-cell *matHeaderCellDef></th>
                   <td mat-cell (click)="delete(element)" *matCellDef="let element">
-                    <a *ngIf ="element.state !== 'Devuelto' || element['travel'].state === 'Pendiente' " href="javascript:void(0)" class="nav-link" matTooltip="Devolver Pasaje">
+                    <a *ngIf ="element.state === 'Activo' && element['travel'].state === 'Pendiente' " href="javascript:void(0)" class="nav-link" matTooltip="Devolver Pasaje">
                       <i class="material-icons">cancel_presentation</i>
                     </a>
                   </td>
