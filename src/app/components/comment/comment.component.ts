@@ -48,7 +48,7 @@ export class CommentComponent {
     this.commentService.delete(comment).subscribe(response => {
       $.notify({
         title: '<strong>Operanción exitosa.</strong>',
-        message: 'Se ha eliminado correctamente el coemtnario ' 
+        message: 'Se ha eliminado correctamente el comentario ' 
       }, {
         type: 'success'
       });

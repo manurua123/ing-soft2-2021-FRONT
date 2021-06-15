@@ -69,10 +69,10 @@ export class UserProfileComponent implements OnInit {
   this.profileFormGroup.updateValueAndValidity();
   }
   save(form: NgForm) {
+   
     if (!form.valid) {
       return
     }
-
     if (this.getAge() < 18) {
       $.notify({
         title: '<strong>Operanción erronea.</strong>',

@@ -52,15 +52,16 @@ export class UserTravelViewComponent implements OnInit {
   delete(ticket: Ticket) {
    
     this.travelService.returnTicket(ticket).subscribe(response => {
+      console.log(response)
       $.notify({
         title: '<strong>Operanción exitosa.</strong>',
-        message: response.message
+        message: response.message    
+      
       }, {
         delay:30000,
         type: 'success'
         
       });
-      
       this.updatedTableEvent.emit()
     },
     errorResponse => {

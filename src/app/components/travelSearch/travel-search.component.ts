@@ -30,7 +30,7 @@ export class TravelSearchComponent {
   selectedDestination: Place;
   selectedDeparture: Date;
   dataSource: any;
-  displayedColumns: string[] = [ 'origin','departure_date','departure_time', 'destination','arrival_date','arrival_time', 'price', 'available_seats', 'type'];
+  displayedColumns: string[] = [ 'origin','departure_date','departure_time', 'destination','arrival_date','arrival_time', 'price', 'available_seats'];
   searchFormGroup: FormGroup;
   
   

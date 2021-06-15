@@ -33,7 +33,5 @@ export class User {
     public security_code?: string;
     public gold?:boolean;
   }
-<<<<<<< Updated upstream
-=======
   
->>>>>>> Stashed changes
+ 

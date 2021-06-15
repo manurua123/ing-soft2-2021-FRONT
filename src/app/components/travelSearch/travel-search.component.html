@@ -6,6 +6,8 @@
                     <div class="card-header card-header-danger">
                         <h4 class="card-title ">Viajes</h4>
                         <p class="card-category"> Búsquedas de viajes</p>
+
+                        
                     </div>
                     <div class="card-body">
                         <form #searchForm [formGroup]="searchFormGroup"> 
@@ -70,19 +72,13 @@
                                     <td mat-cell *matCellDef="let element"> {{element.arrival_time}} </td>
                                 </ng-container>
                                 <ng-container matColumnDef="price">
-                                    <th class="w-10" mat-header-cell *matHeaderCellDef> Valor de pasaje</th>
+                                    <th class="w-15" mat-header-cell *matHeaderCellDef> Valor de pasaje</th>
                                     <td mat-cell *matCellDef="let element"> {{element.price}} </td>
                                 </ng-container>
                                 <ng-container matColumnDef="available_seats">
-                                    <th class="w-10" mat-header-cell *matHeaderCellDef> Asientos disponibles
+                                    <th class="w-15" mat-header-cell *matHeaderCellDef> Asientos disponibles
                                     </th>
                                     <td mat-cell *matCellDef="let element"> {{element.available_seats}} </td>
-                                </ng-container>
-
-                                <ng-container matColumnDef="type">
-                                    <th class="w-10" mat-header-cell *matHeaderCellDef> Tipo
-                                    </th>
-                                    <td mat-cell *matCellDef="let element"> {{element.type_bus}} </td>
                                 </ng-container>
                                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

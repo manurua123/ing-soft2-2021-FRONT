@@ -187,7 +187,7 @@ export class TicketFormComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (this.userId == 19) {
+    if (this.userId == 22) {
       $.notify({
         title: '<strong>Antención.</strong>',
         message: 'Sr pasajero. Ud no puede realizar la compra de un pasaje debido que un test realizado con anterioridad ha dado positivo y aún no se ha cumplido el tiempo de aislamiento'
@@ -256,8 +256,6 @@ export class TicketFormComponent implements OnInit, AfterViewInit {
   }
 
   goToDetailToPay() {
-    
-    debugger;
     const result = this.fourFormGroup.value.supplies.filter(supplie => supplie.amount != null && supplie.amount != '');
     this.detailToPayDataSource = [
       {
@@ -267,8 +265,7 @@ export class TicketFormComponent implements OnInit, AfterViewInit {
         type: 'ticket'
       }
     ];
-    console.log("aca esta el coso");
-    debugger;
+
     if (result.length > 0) {
       let total: number = result.map(supplie => Number(supplie.price.replace('$', '')) * supplie.amount).reduce(
         function (a, b) {
@@ -294,8 +291,6 @@ export class TicketFormComponent implements OnInit, AfterViewInit {
         type: 'discount'
       });
 
-
-
   }
 
   toggleRow(element) {
@@ -310,70 +305,70 @@ export class TicketFormComponent implements OnInit, AfterViewInit {
 
   pay() {
     switch (this.sixFormGroup.controls['card_number'].value) {
-
+     
       case 5536680330960099:
         console.log('Tarjeta inexistente')
         $.notify({
-          title: '<strong>Tarjeta rechazada</strong>',
-          message: 'La tarjeta ingresada es invalida .'
+          title: '<strong>Error de la tarjeta</strong>',
+          message: 'La tarjeta ingresada no existe.'
         }, {
           type: 'warning'
         })
-        return;
+        return
       case 5536680330960100:
         console.log('Falta de fondos')
         $.notify({
-          title: '<strong>Tarjeta rechazada</strong>',
-          message: 'La tarjeta ingresada no tiene fondos.'
+          title: '<strong>Error de la tarjeta</strong>',
+          message: 'La tarjeta ingresada no cuenta con fondos suficientes.'
         }, {
           type: 'warning'
         })
-        return;
+        return
       case 5536680330960101:
-        console.log('Titular fallido')
-        $.notify({
-          title: '<strong>Tarjeta rechazada</strong>',
-          message: 'El titular de la tarjeta es incorrecto'
-        }, {
-          type: 'warning'
-        })
-        return;
-      case 5536680330960102:
-        console.log('Código de seguridad fallido')
-        $.notify({
-          title: '<strong>Tarjeta rechazada</strong>',
-          message: 'Codigo de seguridad invalido'
-        }, {
-          type: 'warning'
-        })
-        return;
-
-      case 5536680330960103:
-
         console.log('No se pudo establecer comunicacion con el servidor externo')
         $.notify({
-          title: '<strong>Problemas de servidor</strong>',
-          message: 'Error con el servidor, pruebe mas tarde.'
+          title: '<strong>Problemas para conectarse con el servidor</strong>',
+          message: 'No se pudo conectar con el servidor, intente mas tarde'
         }, {
           type: 'warning'
         })
-        return;
+        return
+      case 5536680330960102:
+        console.log('Titular fallido')
+        $.notify({
+          title: '<strong>Error de la tarjeta</strong>',
+          message: 'El titular de la tarjeta es invalido'
+        }, {
+          type: 'warning'
+        })
+        return
 
+      case 5536680330960103:
+        console.log('Código de seguridad fallido')
+        $.notify({
+          title: '<strong>Error de la tarjeta</strong>',
+          message: 'Codigo de seguridad incorrecto'
+        }, {
+          type: 'warning'
+        })
+        return
 
-
+    
 
 
     }
     if (!this.isGold && !this.checkDate()) {
       $.notify({
-        title: '<strong>Tarjeta rechazada</strong>',
-        message: 'Las tarjeta ingresada esta vencida.'
+        title: '<strong>Error de la tarjeta</strong>',
+        message: 'La tarjeta ingresada se encuenta vencida.'
       }, {
         type: 'warning'
       })
       return
+
+      
     }
- 
+
     const supplies = this.fourFormGroup.value.supplies.filter(supplie => supplie.amount != null && supplie.amount != '').map(supplie =>
       ({ id: supplie.idSupplie, quantity: Number(supplie.amount), price: Number(supplie.price.replace('$', '')) })
     );
@@ -396,11 +391,10 @@ export class TicketFormComponent implements OnInit, AfterViewInit {
       .subscribe(travel => {
         $.notify({
           title: '<strong>Operanción exitosa.</strong>',
-          message: 'Se ha registrado la compra del pasaje correctamente correctamente el viaje'
+          message: 'Se ha registrado la compra del pasaje correctamente el viaje'
         }, {
           type: 'success'
         });
-        this.router.navigate([''])
       },
         errorResponse => {
           if (errorResponse.error.code == "not_seats_error") {
@@ -415,7 +409,7 @@ export class TicketFormComponent implements OnInit, AfterViewInit {
       )
 
 
-
+      this.router.navigate(['']);
 
   }
   checkDate() {

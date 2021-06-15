@@ -1,9 +1,7 @@
-export interface Supplies {
-    description: string;
-<<<<<<< Updated upstream
-    price: number ;
+import { FormControl, FormGroup } from "@angular/forms";
 
-=======
+export class Supplies {
+    description: string;
     price: string ;
     amount?: number;
     idSupplie?: number;
@@ -17,7 +15,6 @@ export interface Supplies {
         });
         return fg;
       }
->>>>>>> Stashed changes
 }
 
 export interface SuppliesData {

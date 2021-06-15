@@ -49,10 +49,6 @@ import { TravelComponent } from 'app/components/travel/travel.component';
 import { TableListTravelComponent } from 'app/components/travel/table/table-list-travel.component';
 import { TravelFormComponent } from 'app/components/travel/form/travel-form.component';
 
-<<<<<<< Updated upstream
-import { CommentComponent } from 'app/components/comment/comment.component';
-import { TableListCommentComponent } from 'app/components/comment/table/table-list-comment.component';
-=======
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatDateFormats, NGX_MAT_DATE_FORMATS } from '@angular-material-components/datetime-picker';
 import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { NgxMatMomentModule, NGX_MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular-material-components/moment-adapter';
@@ -60,8 +56,8 @@ import { TicketFormComponent } from 'app/components/ticket/form/ticket-form.comp
 import {MatStepperModule} from '@angular/material/stepper';
 import { TravelSearchComponent } from 'app/components/travelSearch/travel-search.component';
 import { UserProfileChangePasswordComponent } from 'app/user-profile/user-profile-change-password.component';
-import { CommentComponent } from 'app/components/comment/comment.component';
 import { TableListCommentComponent } from 'app/components/comment/table/table-list-comment.component';
+import { CommentComponent } from 'app/components/comment/comment.component';
 import { UserProfileViewFormComponent } from 'app/components/userProfileView/form/userProfileView-form.component';
 import { TableListUserTravelViewComponent } from 'app/components/userTravelView/table/table-list-userTravelView.component';
 import { UserTravelViewComponent } from 'app/components/userTravelView/userTravelView.component';
@@ -79,13 +75,7 @@ const CUSTOM_DATE_FORMAT: NgxMatDateFormats = {
     monthYearA11yLabel: 'MMMM YYYY',
   }
 };
->>>>>>> Stashed changes
 
-import { UserProfileViewComponent } from 'app/components/userProfileView/userProfileView.component';
-import { UserProfileViewFormComponent  } from 'app/components/userProfileView/form/userProfileView-form.component';
-
-import { UserTravelViewComponent } from 'app/components/userTravelView/userTravelView.component'
-import { TableListUserTravelViewComponent  } from 'app/components/userTravelView/table/table-list-userTravelView.component';
 
 @NgModule({
   imports: [
@@ -106,8 +96,14 @@ import { TableListUserTravelViewComponent  } from 'app/components/userTravelView
     MatGridListModule,
     MatMenuModule,
     MatNativeDateModule,
-    MatCheckboxModule
-
+    MatCheckboxModule,
+    NgxMatDatetimePickerModule, 
+    NgxMatNativeDateModule,
+    MatMomentDateModule,
+    NgxMatMomentModule,
+    MatStepperModule
+    
+    
   ],
   declarations: [
     DashboardComponent,
@@ -125,6 +121,8 @@ import { TableListUserTravelViewComponent  } from 'app/components/userTravelView
     DriverComponent,
     TableListDriverComponent,
     DriverFormComponent,
+    TravelSearchComponent,
+    UserProfileChangePasswordComponent,
 
     PlaceComponent,
     TableListPlaceComponent,
@@ -141,15 +139,12 @@ import { TableListUserTravelViewComponent  } from 'app/components/userTravelView
     TravelComponent,
     TableListTravelComponent,
     TravelFormComponent,
-<<<<<<< Updated upstream
-=======
-
     TicketFormComponent,
->>>>>>> Stashed changes
 
     CommentComponent,
     TableListCommentComponent,
-    
+   
+
     UserProfileViewFormComponent,
     TableListUserTravelViewComponent,
     UserTravelViewComponent,

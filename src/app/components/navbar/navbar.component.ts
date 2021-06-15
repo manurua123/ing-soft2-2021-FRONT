@@ -72,16 +72,8 @@ export class NavbarComponent implements OnInit {
             this.username = this.credential.username;
             this.isLoginPanelOpen = false;
             this.isMenuOpen = false;
-<<<<<<< Updated upstream
-            this.authorizationService.getUserData(this.credential.username, this.credential.password).subscribe(user => {
-                console.log(user)
-                this.authorizationService.saveUserData(user.user, user.rol, user.user_id, user.gold);
-                this.authorizationService.updateUserLogged();
-            })
-=======
             this.authorizationService.saveUserData(this.credential.username, data.rol, data.user_id, data.gold)
             this.authorizationService.updateUserLogged();
->>>>>>> Stashed changes
         },
             errorResponse => {
                 if (errorResponse.error.detail) {
@@ -89,6 +81,7 @@ export class NavbarComponent implements OnInit {
                 }
             }
         );
+
     }
 
 

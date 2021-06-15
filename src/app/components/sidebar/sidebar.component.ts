@@ -13,7 +13,7 @@ export const ROUTES: RouteInfo[] = [
     // { path: '/#', title: 'Usuarios',  icon:'person', class: '' , roles:'ADMIN'},
     // { path: '/#', title: 'Viajes',  icon:'content_paste', class: '', roles:'ADMIN' },
   
-   
+    
     { path: '/comments', title: 'Comentarios',  icon:'comment', class: '' , roles:'ADMIN'},
     { path: '/travels', title: 'Viajes',  icon:'travel_explore', class: '' , roles:'ADMIN'},
     { path: '/routes', title: 'Rutas',  icon:'map', class: '' , roles:'ADMIN'},
@@ -21,15 +21,10 @@ export const ROUTES: RouteInfo[] = [
     { path: '/drivers', title: 'Conductores',  icon:'badge', class: '', roles:'ADMIN' },
     { path: '/bus', title: 'Vehículos',  icon:'airport_shuttle', class: '', roles:'ADMIN' },
     { path: '/supplies', title: 'Insumos',  icon:'local_dining', class: '', roles:'ADMIN' },
-<<<<<<< Updated upstream
-=======
-
-
 
     { path: '/searchTravels', title: 'Busquedas de viajes',  icon:'travel_explore', class: '' , roles:'CLIENT'},
     { path: '/ticket', title: 'Comprar Pasaje',  icon:'shopping_cart', class: '' , roles:'CLIENT'},
     { path: '/my-travels', title: 'Mis Viajes',  icon:'luggage', class: '' , roles:'CLIENT'},
->>>>>>> Stashed changes
 ];
 
 @Component({
@@ -44,11 +39,13 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
-    this.authorizationService.getUserLogged().subscribe(userAccount=> 
+        this.authorizationService.getUserLogged().subscribe(userAccount=> 
       {
       this.userRole = userAccount.rol;
+      console.log(this.userRole);
       });
     this.authorizationService.updateUserLogged();
+    
   }
   isMobileMenu() {
       if ($(window).width() > 991) {

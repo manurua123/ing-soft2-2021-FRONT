@@ -19,7 +19,7 @@ export class TableListSuppliesComponent implements OnInit {
 
   pageEvent: PageEvent;
 
-  displayedColumns: string[] = ['description', 'price', 'edit', 'delete', 'overview'];
+  displayedColumns: string[] = ['description', 'price', 'edit', 'delete', ];
   dataSource: any;
 
   @Output() deleted = new EventEmitter<Supplies>();

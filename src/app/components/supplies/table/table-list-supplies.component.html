@@ -46,14 +46,7 @@
                                   </a>
                                 </td>
                             </ng-container>
-                            <ng-container matColumnDef="overview" stickyEnd>
-                              <th mat-header-cell *matHeaderCellDef></th>
-                              <td mat-cell (click)="detail(element)" *matCellDef="let element">
-                                <a  href="javascript:void(0)" class="nav-link">
-                                  <i class="material-icons">visibility</i>
-                                </a>  
-                              </td>
-                            </ng-container>
+                           
                             
                             <tr  mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

@@ -6,6 +6,8 @@
                     <div class="card-header card-header-danger">
                         <h4 class="card-title ">Compras de pasaje</h4>
                     </div>
+
+
                     <mat-horizontal-stepper [linear]="true" #stepper>
                         <mat-step [stepControl]="firstFormGroup">
                             <form [formGroup]="firstFormGroup">
@@ -38,7 +40,9 @@
                                     <mat-datepicker #picker></mat-datepicker>
                                 </mat-form-field>
                                 <div>
-                                    <button (click)="showTravel()" mat-button matStepperNext>Siguiente</button>
+                                    <button  mat-button class="btn btn-danger pull-right" (click)="showTravel()" mat-button matStepperNext>Siguiente
+                                        <i class="material-icons" >arrow_forward_ios</i>
+                                    </button>
                                 </div>
                             </form>
                         </mat-step>
@@ -97,8 +101,15 @@
                                     </table>
                                 </div>
                                 <div>
-                                    <button mat-button matStepperPrevious>Atras</button>
-                                    <button (click)="goToAmenities()" mat-button matStepperNext>Siguiente</button>
+
+
+                                    <button  mat-button class="btn btn-danger pull-left" mat-button matStepperPrevious>
+                                        <i class="material-icons" >arrow_back_ios</i>Atras</button>
+                                    <button  mat-button class="btn btn-danger pull-right" (click)="goToAmenities()" mat-button matStepperNext>Siguiente
+                                        <i class="material-icons" >arrow_forward_ios</i>
+                                    </button>
+                                  
+                                    
                                 </div>
                             </form>
                         </mat-step>
@@ -107,57 +118,60 @@
                         <mat-step [stepControl]="thirdFormGroup">
                             <form [formGroup]="thirdFormGroup">
                                 <ng-template matStepLabel>Información del pasajero </ng-template>
-                                <div class="row">
-                                    <div class="col-md-5">
+                                    <div class="row">
+                                      <div class="col-md-5">
                                         <mat-form-field class="example-full-width">
-                                            <input matInput formControlName="firstName" name="firstName"
-                                                placeholder="Nombre" required type="text">
+                                          <input  matInput formControlName="firstName" name="firstName"  placeholder="Nombre" required
+                                            type="text">
                                         </mat-form-field>
-                                    </div>
-                                    <div class="col-md-5">
+                                      </div>
+                                      <div class="col-md-5">
                                         <mat-form-field class="example-full-width">
-                                            <input matInput formControlName="lastName" name="lastName"
-                                                placeholder="Apellido" required type="text">
+                                          <input  matInput formControlName="lastName" name="lastName" placeholder="Apellido"  required
+                                            type="text">
                                         </mat-form-field>
+                                      </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-5">
+                                    <div class="row">
+                                      <div class="col-md-5">
                                         <mat-form-field class="example-full-width">
-                                            <input matInput formControlName="idCards" name="idCards" placeholder="DNI"
-                                                type="number" required>
+                                          <input  matInput formControlName="idCards" name="idCards" placeholder="DNI"  type="number"
+                                            required>
                                         </mat-form-field>
-                                    </div>
-                                    <div class="col-md-5">
+                                      </div>
+                                      <div class="col-md-5">
                                         <mat-form-field>
-                                            <input formControlName="birth_date" name="birth_date" matInput
-                                                [matDatepicker]="picker_birth_date" required
-                                                placeholder="Fecha de nacimiento">
-                                            <mat-datepicker-toggle matSuffix [for]="picker_birth_date">
-                                            </mat-datepicker-toggle>
-                                            <mat-datepicker #picker_birth_date></mat-datepicker>
+                                          <input  formControlName="birth_date" name="birth_date" matInput [matDatepicker]="picker_birth_date"
+                                            required placeholder="Fecha de nacimiento">
+                                          <mat-datepicker-toggle matSuffix [for]="picker_birth_date"></mat-datepicker-toggle>
+                                          <mat-datepicker #picker_birth_date></mat-datepicker>
                                         </mat-form-field>
+                                      </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-5">
+                                    <div class="row">
+                                      <div class="col-md-5">
                                         <mat-form-field class="example-full-width">
-                                            <input name="email" matInput formControlName="email"
-                                                placeholder="Correo electrónico" type="email" required>
+                                          <input  name="email" matInput formControlName="email" placeholder="Correo electrónico"
+                                            type="email" required>
                                         </mat-form-field>
-                                    </div>
-                                    <div class="col-md-4">
+                                      </div>
+                                      <div class="col-md-4">
                                         <mat-form-field class="example-full-width">
-                                            <input name="phone" formControlName="phone" matInput placeholder="Teléfono"
-                                                type="number" required>
+                                          <input  name="phone" formControlName="phone" matInput placeholder="Teléfono"  type="number"
+                                            required>
                                         </mat-form-field>
+                                      </div>
                                     </div>
-                                </div>
-
+                      
 
                                 <div>
-                                    <button mat-button matStepperPrevious>Atras</button>
-                                    <button mat-button matStepperNext>Siguiente</button>
+
+                                    <button  mat-button class="btn btn-danger pull-left" mat-button matStepperPrevious>
+                                        <i class="material-icons" >arrow_back_ios</i>Atras</button>
+                                    <button  mat-button class="btn btn-danger pull-right" mat-button matStepperNext>Siguiente
+                                        <i class="material-icons" >arrow_forward_ios</i>
+                                    </button>
+                                   
                                 </div>
                             </form>
                         </mat-step>
@@ -203,8 +217,14 @@
                                     </ng-container>
                                 </div>
                                 <div>
-                                    <button mat-button matStepperPrevious>Atras</button>
-                                    <button (click)="goToDetailToPay()" mat-button matStepperNext>Siguiente</button>
+
+                                    <button  mat-button class="btn btn-danger pull-left" mat-button matStepperPrevious>
+                                        <i class="material-icons" >arrow_back_ios</i>Atras</button>
+                                    <button  mat-button class="btn btn-danger pull-right" (click)="goToDetailToPay()" mat-button matStepperNext>Siguiente
+                                        <i class="material-icons" >arrow_forward_ios</i>
+                                    </button>
+                                   
+                                    
                                 </div>
                             </form>
                         </mat-step>
@@ -216,16 +236,13 @@
                                     <ng-container>
                                         <table style="width: 50% !important;" mat-table multiTemplateDataRows
                                             [dataSource]="detailToPayDataSource">
-
+                                            
                                             <ng-container matColumnDef="detail" stickyEnd>
                                                 <th mat-header-cell *matHeaderCellDef></th>
                                                 <td mat-cell *matCellDef="let element">
-                                                    <span *ngIf="element.type != 'discount'"
-                                                        class="material-icons-outlined">
-                                                        <i *ngIf="element == expandedElement"
-                                                            class="material-icons">arrow_drop_down</i>
-                                                        <i *ngIf="element != expandedElement"
-                                                            class="material-icons">arrow_right</i>
+                                                    <span *ngIf="element.type != 'discount'" class="material-icons-outlined">
+                                                        <i *ngIf="element == expandedElement" class="material-icons">arrow_drop_down</i> 
+                                                        <i *ngIf="element != expandedElement" class="material-icons">arrow_right</i> 
                                                     </span>
                                                 </td>
                                                 <td mat-footer-cell *matFooterCellDef
@@ -248,14 +265,13 @@
                                                             </span>
                                                             <br>
                                                         </div>
-                                                        <div>
-                                                            <div *ngSwitchCase="'discount'">
-                                                                <span
-                                                                    style="font-style:italic; font-weight: 500;">descuento
-                                                                </span>
-                                                            </div>
+                                                    <div>
+                                                        <div  *ngSwitchCase="'discount'">
+                                                            <span style="font-style:italic; font-weight: 500;">descuento
+                                                            </span>
                                                         </div>
                                                     </div>
+                                                   </div> 
                                                 </td>
                                                 <td mat-footer-cell *matFooterCellDef
                                                     style="font-weight: 500 !important;"> Total a pagar </td>
@@ -358,7 +374,7 @@
                                                                             <mat-form-field appearance="none"
                                                                                 floatLabel="never">
                                                                                 <input matInput formControlName="price"
-                                                                                    name="price" >
+                                                                                    name="price">
                                                                             </mat-form-field>
                                                                         </td>
                                                                     </ng-container>
@@ -373,7 +389,7 @@
                                                                                 floatLabel="never">
                                                                                 <input [readOnly]="true" matInput
                                                                                     formControlName="amount"
-                                                                                    name="amount">
+                                                                                    name="amount" readonly>
                                                                             </mat-form-field>
                                                                         </td>
                                                                     </ng-container>
@@ -403,9 +419,18 @@
                                     </ng-container>
                                 </div>
                                 <div>
-                                    <button mat-button matStepperPrevious>Atras</button>
-                                    <button *ngIf="!this.isGold" matStepperNext>Siguiente</button>
-                                    <button *ngIf="this.isGold" mat-button matStepperNext (click)="pay()">Pagar</button>
+
+
+                                    <button  mat-button class="btn btn-danger pull-left" mat-button matStepperPrevious>
+                                        <i class="material-icons" >arrow_back_ios</i>Atras</button>
+
+                                        <button  mat-button class="btn btn-danger pull-right" *ngIf="this.isGold" mat-button matStepperNext (click)="pay()" >Pagar
+                                            <i class="material-icons" >credit_card</i>
+                                        </button>
+                                    <button  mat-button class="btn btn-success pull-right" *ngIf="!this.isGold" mat-button matStepperNext>Siguiente
+                                        <i class="material-icons" >arrow_forward_ios</i>
+                                    </button>
+                                   
                                 </div>
                             </form>
                         </mat-step>
@@ -414,47 +439,55 @@
                             <form [formGroup]="sixFormGroup">
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <mat-form-field class="example-full-width">
-                                            <input name="card_holder" formControlName="card_holder" matInput
-                                                placeholder="Titular" type="text" maxlength="50">
-                                        </mat-form-field>
+                                      <mat-form-field class="example-full-width">
+                                        <input  name="card_holder" formControlName="card_holder" matInput placeholder="Titular"
+                                          type="text" maxlength="50">
+                                      </mat-form-field>
                                     </div>
-                                </div>
-                                <div class="row">
+                                  </div>
+                                  <div class="row">
                                     <div class="col-md-6">
-                                        <mat-form-field class="example-full-width">
-                                            <input name="card_number" formControlName="card_number" matInput
-                                                placeholder="Nro de tarjeta" type="number" min=0 max=9999999999999999>
-                                        </mat-form-field>
+                                      <mat-form-field class="example-full-width">
+                                        <input  name="card_number" formControlName="card_number" matInput placeholder="Nro de tarjeta"
+                                          type="number" min=0 max= 9999999999999999>
+                                      </mat-form-field>
                                     </div>
-                                </div>
-                                <div class="row">
+                                  </div>
+                                  <div class="row">
                                     <label class="mat-form-field-label">Vencimiento</label>
-                                </div>
-                                <div class="row">
+                                  </div>
+                                  <div class="row">
                                     <div class="col-md-2">
-                                        <mat-form-field class="example-full-width">
-                                            <input name="month_exp" formControlName="month_exp" matInput
-                                                placeholder="Mes" type="number">
-                                        </mat-form-field>
+                                      <mat-form-field class="example-full-width">
+                                        <input  name="month_exp" formControlName="month_exp"   matInput placeholder="Mes"
+                                          type="number" >
+                                      </mat-form-field>
+                                    </div>
+                                    <div class="col-md-2">
+                                      <mat-form-field class="example-full-width">
+                                        <input  name="year_exp" formControlName="year_exp"  matInput placeholder="Año"
+                                          type="number">
+                                      </mat-form-field>
                                     </div>
                                     <div class="col-md-2">
                                         <mat-form-field class="example-full-width">
-                                            <input name="year_exp" formControlName="year_exp" matInput placeholder="Año"
-                                                type="number">
+                                          <input  name="code_secure" formControlName="code_secure"  matInput placeholder="Código de seguridad"
+                                            type="number">
                                         </mat-form-field>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <mat-form-field class="example-full-width">
-                                            <input name="code_secure" formControlName="code_secure" matInput
-                                                placeholder="Código de seguridad" type="number">
-                                        </mat-form-field>
-                                    </div>
-                                </div>
+                                      </div>
+                                  </div>
+                
 
-                                <button mat-button matStepperPrevious>Atras</button>
-                                <button mat-button matStepperNext (click)="pay()">Pagar</button>
+                                  
+                                  <button  mat-button class="btn btn-danger pull-left" mat-button matStepperPrevious>
+                                    <i class="material-icons" >arrow_back_ios</i>Atras</button>
 
+                                    <button  mat-button class="btn btn-success pull-right"  mat-button matStepperNext (click)="pay()" [routerLink]="">Pagar
+                                        <i class="material-icons" >credit_card</i>
+                                    </button>
+                               
+                                 
+                                
                             </form>
                         </mat-step>
                     </mat-horizontal-stepper>

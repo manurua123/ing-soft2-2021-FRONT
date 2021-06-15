@@ -35,24 +35,13 @@
                         </a>
 
 
-<<<<<<< Updated upstream
-                        <!-- <a *ngIf="this.username != ''" [routerLink]="'/my-travels'" class=" dropdown-item buttonMenu"
-                            href="#"> <i class="material-icons pl-2"
-                                style="margin-right: 1em; font-size: large; ">luggage</i>
-                            <span> Mis Viajes </span>
-                        </a> -->
-=======
+                        
+                        <a *ngIf="this.username != ''" class=" dropdown-item buttonMenu" [routerLink]="['/changePassword']"> <i class="material-icons pl-2"
+                            style="margin-right: 1em; font-size: large; ">vpn_key</i>
+                            <span >Cambiar contraseña</span> 
+                        </a>    
 
-                        <a *ngIf="this.username != ''" class=" dropdown-item buttonMenu"
-                            [routerLink]="['/changePassword']" >
-                            <i class="material-icons pl-2"
-                                style="margin-right: 1em; font-size: large; ">vpn_key</i>
-                            
-                            <span>Cambiar contraseña</span>
-
-                               
-                        </a>
->>>>>>> Stashed changes
+        
 
                         <a *ngIf="this.username != ''" (click)="closeSession()" class=" dropdown-item buttonMenu"
                             [routerLink]="'/'"><i class="material-icons pl-2"
