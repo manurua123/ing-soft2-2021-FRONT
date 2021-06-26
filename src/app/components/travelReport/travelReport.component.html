@@ -1,0 +1,6 @@
+
+
+<ng-container *ngIf = "this.userRole === 'ADMIN'">
+  <table-list-travelReport  *ngIf="!isEdited && !isAdded && !isDetailed" [updateTableEvent] = "updatedTableEvent" (detailed) = "onDetailed($event)" (added)= "onAdded($event)" (edited)="onEdited($event)" (deleted)="onDeleted($event)"></table-list-travelReport>  
+ 
+</ng-container>

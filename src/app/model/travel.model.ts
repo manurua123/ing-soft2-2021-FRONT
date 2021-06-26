@@ -1,4 +1,5 @@
 import { Time } from "@angular/common"
+import { Tracing } from "trace_events";
 
 export interface Travel {
     id: number;
@@ -16,6 +17,10 @@ export interface TravelData {
     departure_date: string;
     arrival_date: string;
     available_seats: number;
+    
+
+
+
 }
 
 export interface TravelTicketData {
@@ -29,4 +34,11 @@ export interface TravelTicketData {
     price: number;
     available_seats: number;
     delete: boolean;
+    duration?:string;
+    state?:string;
+    type_bus?:string;
+    bus_id?: string;
+    ticket_sold?:number;
+    driver_name?:string;
+    route?: number;
 }

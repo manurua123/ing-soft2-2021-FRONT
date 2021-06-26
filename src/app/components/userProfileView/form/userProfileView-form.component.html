@@ -1,4 +1,4 @@
-<div class="main-content" >
+<div class="main-content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -51,13 +51,16 @@
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-3">
-                                    <div  *ngIf="this.editedUser.gold"
-                                        name="gold" type="checkbox">USUARIO GOLD
-                                        <i class="material-icons pl-2" style="color: #ffd700 ; " >military_tech</i>
-                                        </div>
+                                    <div *ngIf="this.editedUser.gold" name="gold" type="checkbox">USUARIO GOLD
+                                        <i class="material-icons pl-2" style="color: #ffd700 ; ">military_tech</i>
+
+                                        <button *ngIf="!isDetailed  " mat-raised-button type="submit"
+                                            (click)="unsubscribe(this.editedUser)"
+                                            class="btn btn-secondary pull-right">Desuscribirse GOLD</button>
+                                    </div>
                                 </div>
                             </div>
-                           
+
                             <div class="row" *ngIf="this.editedUser.gold === true">
                                 <div class="col-md-12">
                                     <h3>DATOS DE FACTURACION</h3>
@@ -101,9 +104,13 @@
 
                             </div>
                             <button mat-raised-button [routerLink]="'/'" class="btn btn-dark pull-right">Cerrar</button>
-                        
+
                             <button [disabled]="loginForm.form.invalid" *ngIf="!isDetailed" mat-raised-button
                                 type="submit" (click)="update()" class="btn btn-danger pull-right">Grabar</button>
+
+
+
+
                             <div class="clearfix"></div>
                             <div class="clearfix"></div>
                         </form>

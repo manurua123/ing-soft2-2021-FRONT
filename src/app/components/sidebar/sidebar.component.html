@@ -14,6 +14,32 @@
                 <p>{{menuItem.title}}</p>
             </a>
         </li>
+
+        <li routerLinkActive="active" class="nav-item">
+            <div class="dropdown show">
+                <a class=" nav-link" href="#"  id="dropdownMenuLink"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons">analytics</i>
+                    <p>Reportes</p>
+                </a>
+
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li  class="nav-item" >
+                        <a class="nav-link" [routerLink]="'/travelReport'">
+                            <p>Reporte de Viajes</p>
+                        </a>
+                    </li>
+                    <li class="nav-item" href="#">
+                        <a class="nav-link" [routerLink]="'/'">
+                            <p>Reporte de Pasajeros</p>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+
+
+
+        </li>
     </ul>
 </div>
-

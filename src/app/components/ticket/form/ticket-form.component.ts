@@ -187,7 +187,7 @@ export class TicketFormComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (this.userId == 22) {
+    if (this.userId == 19) {
       $.notify({
         title: '<strong>Antención.</strong>',
         message: 'Sr pasajero. Ud no puede realizar la compra de un pasaje debido que un test realizado con anterioridad ha dado positivo y aún no se ha cumplido el tiempo de aislamiento'
@@ -353,14 +353,22 @@ export class TicketFormComponent implements OnInit, AfterViewInit {
         })
         return
 
-    
+      case 5536680330960104:
+        console.log('No hay asientos disponibles')
+        $.notify({
+          title: '<strong>Asientos no disponibles</strong>',
+          message: 'No hay asientos disponibles'
+        }, {
+          type: 'warning'
+        })
+        return
 
 
     }
     if (!this.isGold && !this.checkDate()) {
       $.notify({
         title: '<strong>Error de la tarjeta</strong>',
-        message: 'La tarjeta ingresada se encuenta vencida.'
+        message: 'Las tarjeta esta vencida.'
       }, {
         type: 'warning'
       })

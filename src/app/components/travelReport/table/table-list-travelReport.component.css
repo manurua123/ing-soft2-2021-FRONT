@@ -1,0 +1,40 @@
+.card-title {
+  margin-left: 10px;
+  font-size: xx-large;
+}
+
+th {
+  border-bottom-width: 2px !important;
+  font-size: large;
+  font-weight: bold;
+  align-items: center;
+}
+
+
+
+.mat-table {
+  overflow: auto;
+}
+
+.mat-header-cell, .mat-cell {
+    min-width: 100px;
+    text-align: center;
+}
+.largo{
+  min-width: 150px !important;
+}
+.corto{
+  width: 20px !important;
+  
+}
+
+mat-form-field{
+  width: 80%;
+  margin: 0px 10%;
+  text-align: center;
+  font-size: small;
+}
+
+
+
+

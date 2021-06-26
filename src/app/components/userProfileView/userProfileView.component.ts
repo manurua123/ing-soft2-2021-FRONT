@@ -17,9 +17,9 @@ export class UserProfileViewComponent {
   closeResult = '';
   deleteUser = '';
   @ViewChild('content') content: any;
-  isEdited: boolean = false;
-  isAdded: boolean = false;
-  isDetailed: boolean = false;
+  isUnsubscribed: boolean = false;
+  
+
   selectedUser: User;
   username: string ;
 
@@ -28,18 +28,29 @@ export class UserProfileViewComponent {
   constructor(private _modalService: NgbModal, private userService: USerService,private authorizationService: AuthorizationService) { }
 
   ngOnInit() {
-   
-  
   }
 
-
-  updateTableData(event) {
-    this.updatedTableEvent.emit()
+  deletelUser='';
+  open(content: any, user: User) {
+    this.deletelUser = this.username ;
+    this._modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.unsubscribe(user);
+    }, (reason) => {
+      // Ver si se puede sacar esto
+    });
+  }
+  onUnsubscribed(user: User) {
+    this.open(this.content, user);
   }
 
-  onEdited(user: User) {
-    this.isEdited = true;
-    this.selectedUser = user;
-  }
-
+  unsubscribe(user: User) {
+    console.log(user)
+    this.userService.unsubscribe(user)
+      $.notify({
+        title: '<strong>Operanción exitosa.</strong>',
+        message: 'Se a desuscribto del Plan GOLD  ',
+      }, {
+        type: 'success'
+      });
+    }
 }

@@ -11,9 +11,8 @@ export class TravelService {
     private resourceURL = ' http://localhost:8000/api/travel/';
 
     constructor(private http: HttpClient) { }
-
-    getAllTravel(): Observable<Travel[]> {
-        return this.http.get<Travel[]>(this.resourceURL + 'all/');
+    getAllTravel(): Observable<TravelTicketData[]> {
+        return this.http.get<TravelTicketData[]>(this.resourceURL + 'all/');
     }
 
     getTravel(url: string): Observable<ResponseBody> {

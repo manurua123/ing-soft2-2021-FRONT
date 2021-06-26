@@ -25,6 +25,7 @@ export class UserProfileViewFormComponent implements OnInit {
   @Input()
   isDetailed: boolean;
 
+  @Output() unsubscribed = new EventEmitter<User>();
 
   constructor(private userService: USerService, private authorizationService: AuthorizationService) { }
 
@@ -32,7 +33,6 @@ export class UserProfileViewFormComponent implements OnInit {
   ngOnInit() {
     //evita un error en el HTML que no reconcer una cosa y no se que mierda
     this.editedUser = {
-     
       username: undefined,
       firstname: undefined,
       lastname: undefined,
@@ -74,9 +74,6 @@ export class UserProfileViewFormComponent implements OnInit {
     });
     this.authorizationService.updateUserLogged();
   }
-
-
-
 
 
   update() {
@@ -142,7 +139,6 @@ export class UserProfileViewFormComponent implements OnInit {
     this.closeFormEvent.emit();
   }
 
-
   checkDate() {
     const year_card_value: number = this.editedUser.year_exp;
     const current_year: number  = 2021;
@@ -150,7 +146,6 @@ export class UserProfileViewFormComponent implements OnInit {
     const current_month: number  = 6;
     return year_card_value >=  current_year && month_card_value >= current_month
   }
-
 
   getAge() {
     var today = new Date();
@@ -162,4 +157,10 @@ export class UserProfileViewFormComponent implements OnInit {
     }
     return age;
   }
+
+  unsubscribe(user) {
+    this.unsubscribed.emit(user);
+    this.isDetailed = true
+  }
 }
+

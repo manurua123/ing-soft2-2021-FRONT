@@ -19,6 +19,7 @@ import { MapsComponent } from './maps/maps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 import {
   AgmCoreModule
 } from '@agm/core';
@@ -37,7 +38,6 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     ComponentsModule,
     RouterModule,
     AppRoutingModule
-    
   ],
   declarations: [
     AppComponent,

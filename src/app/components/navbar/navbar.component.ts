@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
     isInvalidCredential = false;
     username = '';
     userRole = '';
-    userGold = false;
+    userGold = '';
 
     private listTitles: any[];
     location: Location;
@@ -92,7 +92,7 @@ export class NavbarComponent implements OnInit {
         // this.authorizationService.saveRolByUserLogged('', '',);
         this.authorizationService.saveUserData('', '', '-1', false)
         this.authorizationService.updateUserLogged();
-        this.userGold = false;
+        this.userGold = '';
 
     }
 

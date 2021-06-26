@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { Component, Input, OnInit } from '@angular/core';
 import { SidebarComponent } from './sidebar.component';
-
+import {MatMenuModule} from '@angular/material/menu'; 
 describe('SidebarComponent', () => {
   let component: SidebarComponent;
   let fixture: ComponentFixture<SidebarComponent>;

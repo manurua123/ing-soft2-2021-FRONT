@@ -26,7 +26,7 @@ export class TravelComponent implements OnInit {
   constructor(private _modalService: NgbModal, private travelService: TravelService, private authorizationService: AuthorizationService) { }
 
   ngOnInit() {
-    console.log('Ingresando a travel');
+    
     this.authorizationService.getUserLogged().subscribe(userAccount=> 
       {
       this.userRole = userAccount.rol
