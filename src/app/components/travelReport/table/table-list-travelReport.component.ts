@@ -28,6 +28,8 @@ export class travelData {
     ticket_sold:number;
     driver_name:string;
     route: number;
+    occupation: string;
+    ingresos: string;
 }
 
 declare var $: any;
@@ -93,6 +95,8 @@ export class TableListTravelReportComponent implements OnInit {
         ticket_sold:undefined,
         driver_name:undefined,
         route: undefined,
+        occupation: undefined,
+    ingresos: undefined,
     
     };
     this.filterType = MatTableFilter.ANYWHERE;
@@ -143,6 +147,8 @@ export class TableListTravelReportComponent implements OnInit {
       ticket_sold:undefined,
       driver_name:undefined,
       route: undefined,
+      occupation: undefined,
+      ingresos: undefined,
   }
 }
 
