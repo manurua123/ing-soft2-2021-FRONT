@@ -119,6 +119,7 @@ export class TicketFormComponent implements OnInit, AfterViewInit {
   isGold: boolean;
   userId: number;
 
+  another_card=false;
   checked = false;
   selectedTravel: TravelTicketData;
   expandedElement: PayResume | null;
@@ -429,5 +430,7 @@ export class TicketFormComponent implements OnInit, AfterViewInit {
 
   }
 
-
+  anotherCard(){
+    this.another_card = true;
+  }
 }

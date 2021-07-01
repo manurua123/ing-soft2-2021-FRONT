@@ -4,6 +4,9 @@ import { User } from 'app/model/user.model';
 import { USerService } from 'app/service/user.service';
 import { AuthorizationService } from 'app/service/authorization.service';
 declare var $: any;
+import { DialogoConfirmacionComponent } from "../dialogo-confirmacion/dialogo-confirmacion.component";
+import { MatDialog } from "@angular/material/dialog";
+import {NavbarComponent} from "../../navbar/navbar.component"
 
 @Component({
   selector: 'user-form',
@@ -27,7 +30,7 @@ export class UserProfileViewFormComponent implements OnInit {
 
   @Output() unsubscribed = new EventEmitter<User>();
 
-  constructor(private userService: USerService, private authorizationService: AuthorizationService) { }
+  constructor(private userService: USerService, private authorizationService: AuthorizationService, public dialogo: MatDialog) { }
 
 
   ngOnInit() {
@@ -36,22 +39,25 @@ export class UserProfileViewFormComponent implements OnInit {
       username: undefined,
       firstname: undefined,
       lastname: undefined,
-      email:undefined,
+      email: undefined,
       idCards: undefined,
-      birth_date:undefined,
-      phone:undefined,
+      birth_date: undefined,
+      phone: undefined,
       gold: undefined,
       month_exp: undefined,
-      year_exp:undefined,
+      year_exp: undefined,
       security_code: undefined,
       card_holder: undefined,
       card_number: undefined,
+      user_id: undefined,
     }
     this.isDetailed = false;
     this.authorizationService.getUserLogged().subscribe(userAccount => {
       if (userAccount.username != '') {
         this.userService.view_profile(userAccount.username).subscribe(u => {
+
           this.editedUser = {
+            user_id: u.user_id,
             id: u.id,
             username: u['user'].username,
             firstname: u['user'].first_name,
@@ -86,7 +92,7 @@ export class UserProfileViewFormComponent implements OnInit {
       })
       return
     }
-    if(!this.checkDate() && this.editedUser.gold){
+    if (!this.checkDate() && this.editedUser.gold) {
       $.notify({
         title: '<strong>Atención</strong>',
         message: 'Las tarjeta esta vencida.'
@@ -100,6 +106,7 @@ export class UserProfileViewFormComponent implements OnInit {
     //this.isDetailed = true;
     this.userService.update(
       {
+        user_id: this.editedUser.user_id,
         id: this.editedUser.id,
         username: this.editedUser.username,
         firstname: this.editedUser.firstname,
@@ -124,7 +131,7 @@ export class UserProfileViewFormComponent implements OnInit {
       this.isDetailed = true
     },
       errorResponse => {
-       {
+        {
           $.notify({
             title: '<strong>Operanción erronea.</strong>',
             message: "Error inesperado, contacte con el administrador"
@@ -132,8 +139,8 @@ export class UserProfileViewFormComponent implements OnInit {
             type: 'danger'
           })
         }
-  })
-}
+      })
+  }
 
   close() {
     this.closeFormEvent.emit();
@@ -141,10 +148,10 @@ export class UserProfileViewFormComponent implements OnInit {
 
   checkDate() {
     const year_card_value: number = this.editedUser.year_exp;
-    const current_year: number  = 2021;
-    const month_card_value: number =  this.editedUser.month_exp;
-    const current_month: number  = 6;
-    return year_card_value >=  current_year && month_card_value >= current_month
+    const current_year: number = 2021;
+    const month_card_value: number = this.editedUser.month_exp;
+    const current_month: number = 6;
+    return year_card_value >= current_year && month_card_value >= current_month
   }
 
   getAge() {
@@ -158,9 +165,30 @@ export class UserProfileViewFormComponent implements OnInit {
     return age;
   }
 
-  unsubscribe(user) {
-    this.unsubscribed.emit(user);
-    this.isDetailed = true
+  unsubscribe() {
+    this.dialogo
+      .open(DialogoConfirmacionComponent, {
+        data: '¿Esta seguro que desea cancelar su suscripcion GOLD?'
+      })
+      .afterClosed()
+      .subscribe((confirmado: Boolean) => {
+        if (confirmado) {
+          this.editedUser.gold = false;
+          this.isDetailed = true;
+          this.userService.unsubscribe(this.editedUser.user_id).subscribe(response => {
+            $.notify({
+              title: '<strong>Operanción exitosa.</strong>',
+              message: 'Se ha eliminado correctamente el insumo ',
+            }, {
+              type: 'success'
+            });
+
+          });
+          this.authorizationService.saveUserData( this.editedUser.username, 'CLIENT',this.editedUser.id, false);
+          this.authorizationService.updateUserLogged();
+        }
+      })
+     
   }
 }
 

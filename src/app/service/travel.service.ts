@@ -41,7 +41,6 @@ export class TravelService {
 
     private ticketURL = 'http://localhost:8000/api/ticket';
     get_my_travels(userID: string): Observable<Ticket> {
-      
         return this.http.get<Ticket>(this.ticketURL +'/get_my_travels', { params: { user: userID } });
     }
 

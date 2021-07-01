@@ -1,0 +1,26 @@
+.card-title {
+  margin-left: 10px;
+  font-size: xx-large;
+}
+
+th {
+  border-bottom-width: 2px !important;
+  font-size: large;
+  font-weight: bold;
+  align-items: center;
+}
+
+.table-responsive{
+  text-align: center !important;
+}
+.largo{
+  text-align: center !important;
+  width: 13% !important;
+}
+.corto{
+  text-align: center !important;
+  width: 8% !important;
+  
+}
+
+

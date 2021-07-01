@@ -11,21 +11,14 @@
                 file_download
               </i>
             </button>
-           
+
           </div>
           <div class="clearfix"></div>
           <div class="card-body" #TABLE #table>
             <div class="table-responsive">
               <mat-table matTableFilter [exampleEntity]="filterEntity" [filterType]="filterType"
-                [dataSource]="dataSource" class="mat-elevation-z8">>
-                <ng-container matColumnDef="id">
-                  <th class="corto" mat-header-cell *matHeaderCellDef mat-sort-header>ID
-                    <mat-form-field>
-                      <input matInput placeholder="ID" [(ngModel)]="filterEntity.id">
-                    </mat-form-field>
-                  </th>
-                  <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-                </ng-container>
+                [dataSource]="dataSource" class="mat-elevation-z8">
+
                 <ng-container matColumnDef="state">
                   <th class="corto" mat-header-cell *matHeaderCellDef mat-sort-header>Estado
                     <mat-form-field>
@@ -37,7 +30,12 @@
                 <ng-container matColumnDef="departure_date">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Dia desalida
                     <mat-form-field>
-                      <input matInput type="date" [(ngModel)]="filterEntity.departure_date">
+                      <mat-date-range-input [rangePicker]="picker">
+                        <input matStartDate placeholder="Start date" [(ngModel)]="filterEntity.departure_date">
+                        <input matEndDate placeholder="End date">
+                      </mat-date-range-input>
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-date-range-picker #picker></mat-date-range-picker>
                     </mat-form-field>
                   </th>
                   <td mat-cell *matCellDef="let element"> {{element.departure_date}} </td>
@@ -151,10 +149,10 @@
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                
+
               </mat-table>
               <button (click)="limpiarFiltro()" class="btn btn-info filtro"> Limpiar Filtro
-                <i class="material-icons pl-2"> 
+                <i class="material-icons pl-2">
                   cleaning_services
                 </i>
               </button>

@@ -1,4 +1,5 @@
 export class User {
+    public user_id?: string; 
     public id?:string;
     public username?: string;
     public firstname?: string;
@@ -17,6 +18,7 @@ export class User {
   }
 
   export class UserData {
+    public user_id?: string; 
     public id?:string;
     public username?: string;
     public firstname?: string;

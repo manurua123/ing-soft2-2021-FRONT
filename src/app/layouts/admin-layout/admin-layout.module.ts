@@ -65,9 +65,10 @@ import { UserProfileViewFormComponent } from 'app/components/userProfileView/for
 import { TableListUserTravelViewComponent } from 'app/components/userTravelView/table/table-list-userTravelView.component';
 import { UserTravelViewComponent } from 'app/components/userTravelView/userTravelView.component';
 
-import { TravelReportComponent } from 'app/components/travelReport/travelReport.component'
 import { TableListTravelReportComponent } from 'app/components/travelReport/table/table-list-travelReport.component'
 import { MatTableFilterModule } from 'mat-table-filter';
+import { TableListCovidReportComponent } from 'app/components/covidReport/table/table-list-covidReport.component';
+
 
 
 
@@ -158,11 +159,15 @@ const CUSTOM_DATE_FORMAT: NgxMatDateFormats = {
 
 
     UserProfileViewFormComponent,
+    
     TableListUserTravelViewComponent,
+  
     UserTravelViewComponent,
 
-    TravelReportComponent,
-    TableListTravelReportComponent
+    TableListTravelReportComponent,
+   
+    TableListCovidReportComponent,
+
 
 
 

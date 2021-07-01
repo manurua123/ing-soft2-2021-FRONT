@@ -23,23 +23,23 @@ import { UserTravelViewComponent } from 'app/components/userTravelView/userTrave
 import { TicketFormComponent } from 'app/components/ticket/form/ticket-form.component';
 import { TravelSearchComponent } from 'app/components/travelSearch/travel-search.component';
 import { UserProfileChangePasswordComponent } from 'app/user-profile/user-profile-change-password.component';
-import {TravelReportComponent } from 'app/components/travelReport/travelReport.component'
-import{UserProfileViewComponent} from 'app/components/userProfileView/userProfileView.component'
+import {TableListTravelReportComponent } from 'app/components/travelReport/table/table-list-travelReport.component'
+import { TableListCovidReportComponent } from 'app/components/covidReport/table/table-list-covidReport.component';
 
 
 
 export const AdminLayoutRoutes: Routes = [
     // { path: '',          component: AppComponent },
-
-    { path: 'travelReport',     component: TravelReportComponent },
+ 
+    { path: 'covidReport',     component: TableListCovidReportComponent },
+    { path: 'travelReport',   component: TableListTravelReportComponent },
     { path: 'changePassword', component: UserProfileChangePasswordComponent },
     { path: 'registration',   component: UserProfileComponent },
     { path: 'users',          component: DashboardComponent },
     { path: 'my-travels',     component: UserTravelViewComponent },
     { path: 'profile',        component: UserProfileViewFormComponent },
-    { path: 'profile2',        component: UserProfileViewComponent },
     { path: '',               component: CommentComponent },
-    { path: 'comments',               component: CommentComponent },
+    { path: 'comments',       component: CommentComponent },
     { path: 'travels',        component: TravelComponent },
     { path: 'routes',         component: RouteComponent } ,
     { path: 'drivers',        component: DriverComponent },

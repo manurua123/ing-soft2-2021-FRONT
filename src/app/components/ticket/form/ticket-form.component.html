@@ -427,14 +427,16 @@
                                         <button  mat-button class="btn btn-danger pull-right" *ngIf="this.isGold" mat-button matStepperNext (click)="pay()" >Pagar
                                             <i class="material-icons" >credit_card</i>
                                         </button>
+                                        <button  mat-button class="btn btn-danger pull-right" *ngIf="this.isGold" (click)="anotherCard()" mat-button matStepperNext >Usar otra Tarjeta
+                                            <i class="material-icons" >credit_card</i>
+                                        </button>
                                     <button  mat-button class="btn btn-success pull-right" *ngIf="!this.isGold" mat-button matStepperNext>Siguiente
                                         <i class="material-icons" >arrow_forward_ios</i>
                                     </button>
-                                   
                                 </div>
                             </form>
                         </mat-step>
-                        <mat-step *ngIf="!this.isGold" [stepControl]="sixFormGroup">
+                        <mat-step *ngIf="!this.isGold || this.another_card" [stepControl]="sixFormGroup">
                             <ng-template matStepLabel>Realizar Pago</ng-template>
                             <form [formGroup]="sixFormGroup">
                                 <div class="row">

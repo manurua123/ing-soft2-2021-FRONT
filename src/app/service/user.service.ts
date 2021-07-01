@@ -25,9 +25,9 @@ export class USerService {
         return this.http.put(this.resourceURL + user.id + '/', user);
     }
 
-    unsubscribe(user: User) {
-
-
+    unsubscribe(user_id:string) {
+        console.log('el ID a boorar es', user_id)
+        return this.http.post<User>(this.resourceURL+ 'unsubscribe_gold/', { 'user':user_id });
     }
 }
 

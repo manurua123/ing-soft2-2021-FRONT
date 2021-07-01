@@ -42,18 +42,11 @@ declare var $: any;
 export class TableListTravelReportComponent implements OnInit {
 
   public length = 0;
-
-
-
-
   dataSource: any;
   pageEvent: PageEvent;
- 
   filterEntity: travelData;
   filterType: MatTableFilter;
-
   displayedColumns: string[] = [
-    'id',
     'state',
     'departure_date',
     'arrival_date',
@@ -96,7 +89,7 @@ export class TableListTravelReportComponent implements OnInit {
         driver_name:undefined,
         route: undefined,
         occupation: undefined,
-    ingresos: undefined,
+        ingresos: undefined,
     
     };
     this.filterType = MatTableFilter.ANYWHERE;

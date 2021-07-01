@@ -1,4 +1,3 @@
-import { UserProfileViewComponent } from 'app/components/userProfileView/userProfileView.component';
 import { Component, OnInit, ElementRef, Output, EventEmitter } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
@@ -7,6 +6,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { AuthorizationService } from 'app/service/authorization.service';
 import { UserCredential } from 'app/model/session.model';
 
+declare var $: any;
 @Component({
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
@@ -76,14 +76,21 @@ export class NavbarComponent implements OnInit {
             this.authorizationService.updateUserLogged();
         },
             errorResponse => {
-                if (errorResponse.error.detail) {
-                    this.isInvalidCredential = true;
+                if (errorResponse.error.code == "authenticate_error") {
+                    $.notify({
+                        title: '<strong>Operanción erronea.</strong>',
+                        message: errorResponse.error.message
+                      }, {
+                        type: 'danger'
+                      })
+                      this.isInvalidCredential = true;
                 }
+                
+
             }
         );
 
     }
-
 
     closeSession() {
         this.username = '';
