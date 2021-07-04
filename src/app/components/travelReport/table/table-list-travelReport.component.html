@@ -6,162 +6,169 @@
           <div class="card-header card-header-danger">
             <h4 class="card-title "> Reporte de Viajes</h4>
 
-            <button (click)="ExportTOExcel()" class="btn btn-success pull-right">Exportar
-              <i class="material-icons pl-2">
-                file_download
-              </i>
-            </button>
 
+            <form class="formulario">
+              <div class="row">
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label>Conductor</mat-label>
+                  <mat-select [disabled]="filterDriver" name="diver" [(ngModel)]="selectedDriver"
+                    [disableOptionCentering]="true" [(value)]="selectedDriver">
+                    <mat-option *ngFor="let item of driverDatasource" [value]="item">
+                      {{item.lastName +", " + item.firstName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label>Origen</mat-label>
+                  <mat-select [disabled]="filterOrigine " name="origin" [(ngModel)]="selectedOrigen"
+                    [disableOptionCentering]="true" [(value)]="selectedOrigen">
+                    <mat-option *ngFor="let item of originDatasource" [value]="item">
+                      {{item.place}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label>Destino</mat-label>
+                  <mat-select [disabled]="filterDestination  " name="destination" [(ngModel)]="selectedDestination"
+                    [disableOptionCentering]="true" [(value)]="selectedDestination">
+                    <mat-option *ngFor="let item of destinationDatasource" [value]="item">
+                      {{item.place}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-4">
+              <mat-form-field>
+                <mat-label>Fecha de salida</mat-label>
+                <mat-date-range-input [disabled]="filterDepartureDate   " [formGroup]="departure_range"
+                  [rangePicker]="d_picker">
+                  <input matStartDate formControlName="start" placeholder="Fecha de inicio">
+                  <input matEndDate formControlName="end" placeholder="Fecha de fin">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="d_picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #d_picker></mat-date-range-picker>
+
+                <mat-error *ngIf="departure_range.controls.start.hasError('matStartDateInvalid')">Invalid start date
+                </mat-error>
+                <mat-error *ngIf="departure_range.controls.end.hasError('matEndDateInvalid')">Invalid end date
+                </mat-error>
+              </mat-form-field>
           </div>
-          <div class="clearfix"></div>
-          <div class="card-body" #TABLE #table>
-            <div class="table-responsive">
-              <mat-table matTableFilter [exampleEntity]="filterEntity" [filterType]="filterType"
-                [dataSource]="dataSource" class="mat-elevation-z8">
+ <div class="col-md-4">
+          <mat-form-field>
+            <mat-label>Fecha de llegada</mat-label>
+            <mat-date-range-input [disabled]="filterArrivalDate    " [formGroup]="arrival_range"
+              [rangePicker]="a_picker">
+              <input matStartDate formControlName="start" placeholder="Fecha de inicio">
+              <input matEndDate formControlName="end" placeholder="Fecha de fin">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="a_picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #a_picker></mat-date-range-picker>
 
-                <ng-container matColumnDef="state">
-                  <th class="corto" mat-header-cell *matHeaderCellDef mat-sort-header>Estado
-                    <mat-form-field>
-                      <input matInput placeholder="Estado" [(ngModel)]="filterEntity.state">
-                    </mat-form-field>
-                  </th>
-                  <td mat-cell *matCellDef="let element"> {{element.state}} </td>
-                </ng-container>
-                <ng-container matColumnDef="departure_date">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Dia desalida
-                    <mat-form-field>
-                      <mat-date-range-input [rangePicker]="picker">
-                        <input matStartDate placeholder="Start date" [(ngModel)]="filterEntity.departure_date">
-                        <input matEndDate placeholder="End date">
-                      </mat-date-range-input>
-                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                      <mat-date-range-picker #picker></mat-date-range-picker>
-                    </mat-form-field>
-                  </th>
-                  <td mat-cell *matCellDef="let element"> {{element.departure_date}} </td>
-                </ng-container>
-                <ng-container matColumnDef="arrival_date">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Dia dellegada
-                    <mat-form-field>
-                      <input matInput type="date" [(ngModel)]="filterEntity.arrival_date">
-                    </mat-form-field>
-                  </th>
-                  <td mat-cell *matCellDef="let element"> {{element.arrival_date}} </td>
-                </ng-container>
-                <ng-container matColumnDef="origin">
-                  <th class='largo' mat-header-cell *matHeaderCellDef mat-sort-header> Origen
-                    <mat-form-field>
-                      <input matInput placeholder="Origen" type="text" [(ngModel)]="filterEntity.origin">
-                    </mat-form-field>
-                  </th>
-                  <td mat-cell *matCellDef="let element"> {{element.origin}} </td>
-                </ng-container>
-                <ng-container matColumnDef="destination">
-                  <th class='largo' mat-header-cell *matHeaderCellDef mat-sort-header> Destino
-                    <mat-form-field>
-                      <input matInput placeholder="Destino" type="text" [(ngModel)]="filterEntity.destination">
-                    </mat-form-field>
-                  </th>
-                  <td mat-cell *matCellDef="let element"> {{element.destination}} </td>
-                </ng-container>
-                <ng-container matColumnDef="departure_time">
-                  <th class="corto" mat-header-cell *matHeaderCellDef mat-sort-header> Salida
-                    <mat-form-field>
-                      <input matInput placeholder="Salida" [(ngModel)]="filterEntity.departure_time">
-                    </mat-form-field>
-                  </th>
-                  <td mat-cell *matCellDef="let element"> {{element.departure_time}} </td>
-                </ng-container>
-                <ng-container matColumnDef="arrival_time">
-                  <th class="corto" mat-header-cell *matHeaderCellDef> Llegada
-                    <mat-form-field>
-                      <input matInput placeholder="Llegada" [(ngModel)]="filterEntity.arrival_time">
-                    </mat-form-field>
-                  </th>
-                  <td mat-cell *matCellDef="let element"> {{element.arrival_time}}
-                  </td>
-                </ng-container>
-                <ng-container matColumnDef="duration">
-                  <th class="corto" mat-header-cell *matHeaderCellDef> Duracion
-                    <mat-form-field>
-                      <input matInput placeholder="Duracion" [(ngModel)]="filterEntity.duration">
-                    </mat-form-field>
-                  </th>
-                  <td mat-cell *matCellDef="let element"> {{element.duration}} </td>
-                </ng-container>
-                <ng-container matColumnDef="price">
-                  <th class="corto" mat-header-cell *matHeaderCellDef> Precio
-                    <mat-form-field>
-                      <input matInput placeholder="Precio" [(ngModel)]="filterEntity.price">
-                    </mat-form-field>
-                  </th>
-                  <td mat-cell *matCellDef="let element"> {{element.price}} </td>
-                </ng-container>
-                <ng-container matColumnDef="available_seats">
-                  <th class="corto" mat-header-cell *matHeaderCellDef> LugaresTotales
-                    <mat-form-field>
-                      <input matInput placeholder="Lugares Totales" [(ngModel)]="filterEntity.available_seats">
-                    </mat-form-field>
-                  </th>
-                  <td mat-cell *matCellDef="let element"> {{element.available_seats}} </td>
-                </ng-container>
-                <ng-container matColumnDef="ticket_sold">
-                  <th class="corto" mat-header-cell *matHeaderCellDef> PasajesVendidos
-                    <mat-form-field>
-                      <input matInput placeholder="Pasajes Vendidos" [(ngModel)]="filterEntity.ticket_sold">
-                    </mat-form-field>
-                  </th>
-                  <td mat-cell *matCellDef="let element"> {{element.ticket_sold}} </td>
-                </ng-container>
-                <ng-container matColumnDef="occupation">
-                  <th class="corto" mat-header-cell *matHeaderCellDef> Ocupacion </th>
-                  <td mat-cell *matCellDef="let element">
-                    {{calcularPorcentaje(element.ticket_sold,element.available_seats) }}% </td>
-                </ng-container>
-                <ng-container matColumnDef="ingresos">
-                  <th class="corto" mat-header-cell *matHeaderCellDef> Ingresos </th>
-                  <td mat-cell *matCellDef="let element"> $ {{element.ticket_sold * element.price}} </td>
-                </ng-container>
-                <ng-container matColumnDef="bus_id">
-                  <th mat-header-cell *matHeaderCellDef> Id delVehiculo
-                    <mat-form-field>
-                      <input matInput placeholder="Vehiculo" [(ngModel)]="filterEntity.bus_id">
-                    </mat-form-field>
-                  </th>
-                  <td mat-cell *matCellDef="let element"> {{element.bus_id}} </td>
-                </ng-container>
-                <ng-container matColumnDef="type_bus">
-                  <th class="corto" mat-header-cell *matHeaderCellDef> Tipo devehiculo
-                    <mat-form-field>
-                      <input matInput placeholder="Tipo Vehiculo" [(ngModel)]="filterEntity.type_bus">
-                    </mat-form-field>
-                  </th>
-                  <td mat-cell *matCellDef="let element"> {{element.type_bus}} </td>
-                </ng-container>
-                <ng-container matColumnDef="driver_name">
-                  <th class='largo' mat-header-cell *matHeaderCellDef> Conductor
-                    <mat-form-field>
-                      <input matInput placeholder="Conductor" [(ngModel)]="filterEntity.driver_name">
-                    </mat-form-field>
-                  </th>
-                  <td mat-cell *matCellDef="let element"> {{element.driver_name}} </td>
-                </ng-container>
+            <mat-error *ngIf="arrival_range.controls.start.hasError('matStartDateInvalid')">Invalid start date
+            </mat-error>
+            <mat-error *ngIf="arrival_range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+          </mat-form-field>
+        </div>
 
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <button
+          *ngIf="!filterDriver || !filterOrigine || !filterDestination || !filterDepartureDate || !filterArrivalDate  "
+          (click)="filtrarDatos()" class="btn btn-success "> Filtrar
+          
+        </button>
+        <button *ngIf="filterDriver || filterOrigine || filterDestination || filterDepartureDate || filterArrivalDate  "
+          (click)="limpiarFiltro()" class="btn btn-info "> Limpiar Filtro
+          
+        </button>
+        </div>
+        </form>
+      </div>
 
-              </mat-table>
-              <button (click)="limpiarFiltro()" class="btn btn-info filtro"> Limpiar Filtro
-                <i class="material-icons pl-2">
-                  cleaning_services
-                </i>
-              </button>
-              <mat-paginator #paginator [pageSize]="10" (page)="pageEvent = getServerData($event)" [length]="length"
-                [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
-            </div>
-          </div>
+
+
+      <div class="clearfix"></div>
+      <div class="card-body" #TABLE #table>
+        <div class="table-responsive" *ngIf="dataSource.length > 0">
+          <mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
+            <ng-container matColumnDef="driver_name">
+              <th class='largo' mat-header-cell *matHeaderCellDef> Conductor </th>
+              <td mat-cell *matCellDef="let element"> {{element.driver_name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="departure_date">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Dia de<br>salida</th>
+              <td mat-cell *matCellDef="let element"> {{element.departure_date}} </td>
+            </ng-container>
+            <ng-container matColumnDef="arrival_date">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Dia del<br>legada</th>
+              <td mat-cell *matCellDef="let element"> {{element.arrival_date}} </td>
+            </ng-container>
+            <ng-container matColumnDef="origin">
+              <th class='largo' mat-header-cell *matHeaderCellDef mat-sort-header> Origen</th>
+              <td mat-cell *matCellDef="let element"> {{element.origin}} </td>
+            </ng-container>
+            <ng-container matColumnDef="destination">
+              <th class='largo' mat-header-cell *matHeaderCellDef mat-sort-header> Destino </th>
+              <td mat-cell *matCellDef="let element"> {{element.destination}} </td>
+            </ng-container>
+            <ng-container matColumnDef="departure_time">
+              <th class="corto" mat-header-cell *matHeaderCellDef mat-sort-header> Salida </th>
+              <td mat-cell *matCellDef="let element"> {{element.departure_time}} </td>
+            </ng-container>
+            <ng-container matColumnDef="arrival_time">
+              <th class="corto" mat-header-cell *matHeaderCellDef> Llegada </th>
+              <td mat-cell *matCellDef="let element"> {{element.arrival_time}} </td>
+            </ng-container>
+            <ng-container matColumnDef="duration">
+              <th class="corto" mat-header-cell *matHeaderCellDef> Duracion</th>
+              <td mat-cell *matCellDef="let element"> {{element.duration}} </td>
+            </ng-container>
+            <ng-container matColumnDef="price">
+              <th class="corto" mat-header-cell *matHeaderCellDef> Precio </th>
+              <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+            </ng-container>
+            <ng-container matColumnDef="available_seats">
+              <th class="corto" mat-header-cell *matHeaderCellDef> Lugares<br>Totales</th>
+              <td mat-cell *matCellDef="let element"> {{element.available_seats}} </td>
+            </ng-container>
+            <ng-container matColumnDef="ticket_sold">
+              <th class="corto" mat-header-cell *matHeaderCellDef> Pasajes<br>Vendidos </th>
+              <td mat-cell *matCellDef="let element"> {{element.ticket_sold}} </td>
+            </ng-container>
+           
+            <ng-container matColumnDef="bus_id">
+              <th mat-header-cell *matHeaderCellDef> Id<br>Vehiculo</th>
+              <td mat-cell *matCellDef="let element"> {{element.bus_id}} </td>
+            </ng-container>
+            <ng-container matColumnDef="type_bus">
+              <th class="corto" mat-header-cell *matHeaderCellDef> Tipo<br>vehiculo </th>
+              <td mat-cell *matCellDef="let element"> {{element.type_bus}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </mat-table>
+          <button (click)="ExportTOExcel()" class="btn btn-success pull-right">Exportar
+            <i class="material-icons pl-2">
+              file_download
+            </i>
+          </button>
+          
+        </div>
+        <div *ngIf="dataSource.length === 0">
+          
+            <h4>  No se encontro ningun viaje.</h4>
+
         </div>
       </div>
     </div>
   </div>
+</div>
+</div>
 </div>

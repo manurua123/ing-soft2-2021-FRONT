@@ -66,7 +66,7 @@ export class TableListCovidReportComponent implements OnInit {
     var hoy = moment();
     var datos = [];
     for (let i of this.dataSource) {
-      if ((moment(i['travel'].arrival_date).month() + 1) === (hoy.month()))
+      if ((moment(i['travel'].arrival_date).month() ) === (hoy.month()))
 
         datos.push(i)
     }

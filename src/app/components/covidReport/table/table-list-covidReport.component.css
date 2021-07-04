@@ -13,14 +13,15 @@ th {
 .table-responsive{
   text-align: center !important;
 }
+
 .largo{
   text-align: center !important;
-  width: 13% !important;
+  width: 15% !important;
+ 
 }
 .corto{
   text-align: center !important;
-  width: 8% !important;
-  
+  width: 7% !important;
 }
 
 

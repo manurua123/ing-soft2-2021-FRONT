@@ -1,38 +1,21 @@
+
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, EventEmitter, Output, Input } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgbModule, NgbDate, NgbActiveModal, NgbModal, ModalDismissReasons, NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { MatSort } from '@angular/material/sort';
-import { Travel, TravelTicketData } from 'app/model/travel.model';
 import { TravelService } from 'app/service/travel.service';
 import * as XLSX from 'xlsx';
-import { MatTableFilter } from 'mat-table-filter';
-
-
-
-export class travelData {
-    id: number;
-    origin: string;
-    destination: string;
-    departure_date: string;
-    departure_time: string;
-    arrival_date: string;
-    arrival_time: string;
-    price: number;
-    available_seats: number;
-    delete: boolean;
-    duration:string;
-    state:string;
-    type_bus:string;
-    bus_id: string;
-    ticket_sold:number;
-    driver_name:string;
-    route: number;
-    occupation: string;
-    ingresos: string;
-}
+import { FormGroup, FormControl } from '@angular/forms';
+import { DriverService } from 'app/service/driver.service';
+import { Driver } from 'app/model/driver.model';
+import { Place } from 'app/model/place.model';
+import { PlaceService } from 'app/service/place.service';
+import * as moment from 'moment';
 
 declare var $: any;
+
+
 @Component({
   selector: 'table-list-travelReport',
   templateUrl: './table-list-travelReport.component.html',
@@ -40,14 +23,20 @@ declare var $: any;
 })
 
 export class TableListTravelReportComponent implements OnInit {
+  @Input() selectedDriver: Driver;
+  @Input() selectedOrigen: Place;
+  @Input() selectedDestination: Place;
+  @Input() originDatasource: Place[];
+  @Input() destinationDatasource: Place[];
+  @Input() driverDatasource: Driver[];
+
 
   public length = 0;
   dataSource: any;
   pageEvent: PageEvent;
-  filterEntity: travelData;
-  filterType: MatTableFilter;
+
   displayedColumns: string[] = [
-    'state',
+    'driver_name',
     'departure_date',
     'arrival_date',
     'origin',
@@ -58,55 +47,44 @@ export class TableListTravelReportComponent implements OnInit {
     'price',
     'available_seats',
     'ticket_sold',
-    'occupation',
-    'ingresos',
     'bus_id',
     'type_bus',
-    'driver_name',
-  ];
 
+  ];
+  departure_range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl(),
+  });
+  arrival_range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl(),
+  });
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor(private _modalService: NgbModal, private travelService: TravelService) {}
+  constructor(private placeService: PlaceService, private driverService: DriverService, private _modalService: NgbModal, private travelService: TravelService) { }
 
   ngOnInit() {
-    this.filterEntity = {
-        id :undefined,
-        origin: undefined,
-        destination: undefined,
-        departure_date: undefined,
-        departure_time: undefined,
-        arrival_date: undefined,
-        arrival_time: undefined,
-        price: undefined,
-        available_seats: undefined,
-        duration:undefined,
-        state:undefined,
-        delete: undefined,
-        type_bus:undefined,
-        bus_id: undefined,
-        ticket_sold:undefined,
-        driver_name:undefined,
-        route: undefined,
-        occupation: undefined,
-        ingresos: undefined,
-    
-    };
-    this.filterType = MatTableFilter.ANYWHERE;
+  
     this.updateTable();
+    this.driverService.getAllDriver().subscribe((driverList: Driver[]) => {
+      this.driverDatasource = driverList;
+
+    });
+    this.placeService.getAllPlace().subscribe((listPlace: Place[]) => {
+      this.originDatasource = listPlace;
+      this.destinationDatasource = listPlace;
+    });
+
 
   }
 
-  
-  
   updateTable() {
     this.travelService.getTravel('http://localhost:8000/api/travel/').subscribe(
       responseBody => {
-        this.dataSource = new MatTableDataSource<TravelTicketData>(responseBody.results)
+        this.dataSource = (responseBody.results)
         this.length = responseBody.count;
       }
     );
-   
   }
 
   public getServerData(event?: PageEvent) {
@@ -119,44 +97,64 @@ export class TableListTravelReportComponent implements OnInit {
     );
     return event;
   }
+
+
  
 
-  limpiarFiltro(){
-    this.filterEntity = {
-      id :undefined,
-      origin: undefined,
-      destination: undefined,
-      departure_date: undefined,
-      departure_time: undefined,
-      arrival_date: undefined,
-      arrival_time: undefined,
-      price: undefined,
-      available_seats: undefined,
-      duration:undefined,
-      state:undefined,
-      delete: undefined,
-      type_bus:undefined,
-      bus_id: undefined,
-      ticket_sold:undefined,
-      driver_name:undefined,
-      route: undefined,
-      occupation: undefined,
-      ingresos: undefined,
+  filterDriver = false;
+  filterOrigine = false;
+  filterDestination = false;
+  filterDepartureDate = false;
+  filterArrivalDate = false;
+
+  fechaToString(unaFecha) {
+    return (moment(unaFecha._d).format("YYYY-MM-DD"))
   }
-}
+
+  filtrarDatos() {
+    if (this.selectedDriver) {
+      this.dataSource = this.dataSource.filter(e => e.driver_name === (this.selectedDriver.lastName + ", " + this.selectedDriver.firstName))
+      this.filterDriver = true;
+    }
+    if (this.selectedOrigen) {
+      this.dataSource = this.dataSource.filter(e => e.origin === this.selectedOrigen.place);
+      this.filterOrigine = true;
+    }
+    if (this.selectedDestination) {
+      this.dataSource = this.dataSource.filter(e => e.origin === this.selectedDestination.place);
+      this.filterDestination = true;
+    }
+    if (this.departure_range.value.start && this.departure_range.value.end) {
+      this.dataSource = this.dataSource.filter(e =>
+        moment(e.departure_date).isSameOrAfter(moment(this.departure_range.value.start))
+        && moment(e.departure_date).isSameOrBefore(moment(this.departure_range.value.end))
+      )
+      this.filterDepartureDate = true;
+    }
+    if (this.arrival_range.value.start && this.arrival_range.value.end) {
+      this.dataSource = this.dataSource.filter(e =>
+        moment(e.arrival_date).isSameOrAfter(moment(this.arrival_range.value.start))
+        && moment(e.arrival_date).isSameOrBefore(moment(this.arrival_range.value.end))
+      )
+      this.filterArrivalDate = true;
+    }
+
+  
+  }
+  limpiarFiltro() {
+    this.filterDriver = false;
+    this.filterOrigine = false;
+    this.filterDestination = false;
+    this.filterDepartureDate = false;
+    this.filterArrivalDate = false;
+    this.ngOnInit();
+  }
 
 
 
 
-//----------------------------------------------------------------------
-@ViewChild(MatSort) sort: MatSort;
-ngAfterViewInit() {
-  this.dataSource.sort = this.sort;
-}
+  //----------------------------------------------------------------------
 
-applyFilter(filterValue: string) {
-  this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
-}
   @ViewChild('TABLE', { static: false }) TABLE: ElementRef;
   title = 'Excel';
   ExportTOExcel() {
@@ -165,11 +163,11 @@ applyFilter(filterValue: string) {
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
     XLSX.writeFile(wb, 'Viajes-Combi19.xlsx');
   }
-  calcularPorcentaje(vendidos:number, totales:number){
-    var valor = vendidos / totales *100
-    return(this.trunc(valor,2))
+  calcularPorcentaje(vendidos: number, totales: number) {
+    var valor = vendidos / totales * 100
+    return (this.trunc(valor, 2))
   }
-   trunc (x, posiciones = 0) {
+  trunc(x, posiciones = 0) {
     var s = x.toString()
     var l = s.length
     var decimalLength = s.indexOf('.') + 1
