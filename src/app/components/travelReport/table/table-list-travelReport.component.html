@@ -97,7 +97,7 @@
       <div class="clearfix"></div>
       <div class="card-body" #TABLE #table>
         <div class="table-responsive" *ngIf="dataSource.length > 0">
-          <mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
+          <mat-table [dataSource]="dataSource"  >
             <ng-container matColumnDef="driver_name">
               <th class='largo' mat-header-cell *matHeaderCellDef> Conductor </th>
               <td mat-cell *matCellDef="let element"> {{element.driver_name}} </td>
