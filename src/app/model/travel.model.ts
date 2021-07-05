@@ -30,3 +30,19 @@ export interface TravelTicketData {
     available_seats: number;
     delete: boolean;
 }
+
+export interface NextTravelData {
+    id?: number;
+    origin: string;
+    destination: string;
+    departure_date: string;
+    departure_time: string;
+    arrival_date: string;
+    arrival_time: string;
+    bus_id: string;
+    ticket_sold: number;
+    state: string;
+    canInitTravel: boolean;
+    available_seats?: number;
+    price?: number;
+}

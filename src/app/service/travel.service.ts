@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 import { ResponseBody } from './utils/response.body.model';
-import { Travel, TravelData,TravelTicketData } from 'app/model/travel.model';
+import { NextTravelData, Travel, TravelData,TravelTicketData } from 'app/model/travel.model';
 import { Ticket, TicketError } from 'app/model/ticket.model';
-import { tick } from '@angular/core/testing';
+import { of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class TravelService {
@@ -36,6 +36,19 @@ export class TravelService {
         return this.http.put<Travel>(this.resourceURL + travel.id + '/', travel);
     }
 
+    init(idTravel: number): Observable<any> {
+        return this.http.post<any>(this.resourceURL+ 'init_travel/', {travel: idTravel});
+    }
+
+    cancel(idTravel: number): Observable<any> {
+        return this.http.post<any>(this.resourceURL+ 'cancel_travel/', {travel: idTravel});
+    }
+
+    finish(idTravel: number): Observable<any> {
+        return this.http.post<any>(this.resourceURL+ 'finish_travel/', {travel: idTravel});
+    }
+
+    
     delete(travel: Travel): Observable<Travel> {
         return this.http.delete<Travel>(this.resourceURL + travel.id + '/');
     }
@@ -45,8 +58,18 @@ export class TravelService {
       
         return this.http.get<Ticket>(this.ticketURL +'/get_my_travels', { params: { user: userID } });
     }
-
-   
+    
+    get_all_travel_pending(): Observable<NextTravelData[]> {
+        return this.http.get<NextTravelData[]>(this.resourceURL +'get_all_travel_pending');
+    }
+    nextTravel(userID: string): Observable<NextTravelData[]> {
+        return this.http.get<NextTravelData[]>(this.resourceURL +'get_travel_pending', { params: { driver: userID } });
+    }
+    
+    completedTravel(userID: string): Observable<NextTravelData[]> {
+            return this.http.get<NextTravelData[]>(this.resourceURL +'get_travel_over', { params: { driver: userID } });
+    }
+    
     returnTicket(ticket:Ticket): Observable<TicketError>{
 
         return this.http.post<TicketError>(this.ticketURL + '/return_ticket/', { 'ticket': ticket.id} );

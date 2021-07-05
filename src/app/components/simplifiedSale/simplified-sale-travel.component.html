@@ -1,0 +1,99 @@
+<ng-template #contentSale let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title-finish">Aviso</h4>
+    <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
+      (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <p><strong>¿Ud. está seguro de finalizar el viaje?</strong></p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancelar</button>
+    <button type="button" ngbAutofocus class="btn btn-danger" (click)="modal.close('Ok click')">Aceptar</button>
+  </div>
+</ng-template>
+
+|<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title ">Venta simplificada de viaje</h4>
+                  </div>
+                  <div class="card-body">
+                      <div class="card-header">
+                          <h4 class="card-title ">Próximo viaje a salir</h4>
+                      </div>
+                      <table style="width: 100%;" mat-table [dataSource]="dataSource">
+                          <ng-container matColumnDef="origin">
+                              <th style="padding-left: 25px !important;" class="w-20" mat-header-cell
+                                  *matHeaderCellDef> Origen </th>
+                              <td mat-cell *matCellDef="let element"> {{element.origin}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="departure_date">
+                              <th class="w-10" mat-header-cell *matHeaderCellDef> Fecha de salida</th>
+                              <td mat-cell *matCellDef="let element"> {{element.departure_date}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="departure_time">
+                              <th class="w-10" mat-header-cell *matHeaderCellDef> Hora de salida</th>
+                              <td mat-cell *matCellDef="let element"> {{element.departure_time}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="destination">
+                              <th class="w-20" mat-header-cell *matHeaderCellDef> Destino </th>
+                              <td mat-cell *matCellDef="let element"> {{element.destination}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="arrival_date">
+                              <th class="w-10" mat-header-cell *matHeaderCellDef> Dia de llegada</th>
+                              <td mat-cell *matCellDef="let element"> {{element.arrival_date}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="arrival_time">
+                              <th class="w-10" mat-header-cell *matHeaderCellDef> Hora de llegada</th>
+                              <td mat-cell *matCellDef="let element"> {{element.arrival_time}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="bus">
+                              <th class="w-10" mat-header-cell *matHeaderCellDef>Vehículo</th>
+                              <td mat-cell *matCellDef="let element"> {{element.bus_id}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="ticket_sold">
+                              <th class="w-10" mat-header-cell *matHeaderCellDef>Pasajes vendidos</th>
+                              <td mat-cell *matCellDef="let element"> {{element.ticket_sold}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="travel_price">
+                            <th class="w-10" mat-header-cell *matHeaderCellDef>Precio</th>
+                            <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+                        </ng-container>
+                          <ng-container matColumnDef="state">
+                              <th class="w-10" mat-header-cell *matHeaderCellDef>Estado</th>
+                              <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+                          </ng-container>
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                      </table>
+                  </div>
+                  <div *ngIf="currentTravel && currentTravel.available_seats > 0" style ="flex-direction: column;align-items: flex-start;padding-left: 25px; padding-top: 20px;" class="card-footer">
+                    <div>
+                        <h4  class="card-title">Complete los datos</h4>
+                    </div>
+                    <form #saleForm="ngForm">
+                        <mat-form-field style="display: flex !important">
+                            <input [(ngModel)]="email"  required="true" name="email"  matInput placeholder="correo electrónico" type="email">
+                        </mat-form-field>
+                        <button [disabled]="saleForm.form.invalid"  mat-raised-button
+                        type="submit" (click)="save();" name="save" class="btn btn-danger pull-right">Grabar</button>
+                          
+                    </form>      
+                  </div>
+              </div>
+              <div *ngIf="currentTravel && currentTravel.available_seats == 0" class="card">
+                  <div class="card-header" style="padding-left: 40px !important;">
+                      <h4 class="card-title ">No existen asientos disponibles para el viaje en cuestión</h4>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

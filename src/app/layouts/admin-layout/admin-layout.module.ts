@@ -1,3 +1,5 @@
+import { CompletedTravelComponent } from './../../components/traverlListCompleted/completed-travel.component';
+import { QuestionnaireComponent } from '../../components/questionnaire/questionnaire.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -11,6 +13,7 @@ import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card'
 import { MatInputModule } from '@angular/material/input';
 import { MatRippleModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -54,6 +57,8 @@ import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/m
 import { NgxMatMomentModule, NGX_MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular-material-components/moment-adapter';
 import { TicketFormComponent } from 'app/components/ticket/form/ticket-form.component';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatRadioModule} from '@angular/material/radio';
+
 import { TravelSearchComponent } from 'app/components/travelSearch/travel-search.component';
 import { UserProfileChangePasswordComponent } from 'app/user-profile/user-profile-change-password.component';
 import { TableListCommentComponent } from 'app/components/comment/table/table-list-comment.component';
@@ -61,6 +66,11 @@ import { CommentComponent } from 'app/components/comment/comment.component';
 import { UserProfileViewFormComponent } from 'app/components/userProfileView/form/userProfileView-form.component';
 import { TableListUserTravelViewComponent } from 'app/components/userTravelView/table/table-list-userTravelView.component';
 import { UserTravelViewComponent } from 'app/components/userTravelView/userTravelView.component';
+import { NextTravelComponent } from 'app/components/nextTravel/next-travel.component';
+import { QuestionnaireRoutes } from 'app/components/nextTravel/next-travel.routing';
+import { PendingTravelComponent } from 'app/components/pendingTravel/pending-travel.component';
+import { SimplifiedSaleComponent } from 'app/components/simplifiedSale/simplified-sale-travel.component';
+
 
 export const MOMENT_DATETIME_WITH_SECONDS_FORMAT = 'DD-MM-YYYY HH:mm:ss';
 
@@ -81,6 +91,7 @@ const CUSTOM_DATE_FORMAT: NgxMatDateFormats = {
   imports: [
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
+    RouterModule.forChild(QuestionnaireRoutes),
     FormsModule,
     NgbModule,
     ReactiveFormsModule,
@@ -101,7 +112,9 @@ const CUSTOM_DATE_FORMAT: NgxMatDateFormats = {
     NgxMatNativeDateModule,
     MatMomentDateModule,
     NgxMatMomentModule,
-    MatStepperModule
+    MatStepperModule,
+    MatCardModule,
+    MatRadioModule
     
     
   ],
@@ -122,7 +135,12 @@ const CUSTOM_DATE_FORMAT: NgxMatDateFormats = {
     TableListDriverComponent,
     DriverFormComponent,
     TravelSearchComponent,
+    NextTravelComponent,
+    CompletedTravelComponent,
+    PendingTravelComponent,
     UserProfileChangePasswordComponent,
+    SimplifiedSaleComponent,
+    QuestionnaireComponent,
 
     PlaceComponent,
     TableListPlaceComponent,
