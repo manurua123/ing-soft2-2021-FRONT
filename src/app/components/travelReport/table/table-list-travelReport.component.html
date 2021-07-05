@@ -7,7 +7,7 @@
             <h4 class="card-title "> Reporte de Viajes</h4>
 
 
-            <form class="formulario">
+            <form class="formulario" #formulario1>
               <div class="row">
               <div class="col-md-4">
                 <mat-form-field>
@@ -65,7 +65,7 @@
  <div class="col-md-4">
           <mat-form-field>
             <mat-label>Fecha de llegada</mat-label>
-            <mat-date-range-input [disabled]="filterArrivalDate    " [formGroup]="arrival_range"
+            <mat-date-range-input [disabled]="filterArrivalDate" [formGroup]="arrival_range"
               [rangePicker]="a_picker">
               <input matStartDate formControlName="start" placeholder="Fecha de inicio">
               <input matEndDate formControlName="end" placeholder="Fecha de fin">
@@ -85,7 +85,7 @@
           
         </button>
         <button *ngIf="filterDriver || filterOrigine || filterDestination || filterDepartureDate || filterArrivalDate  "
-          (click)="limpiarFiltro()" class="btn btn-info "> Limpiar Filtro
+          (click)="limpiarFiltro(); formulario1.resetForm()"   class="btn btn-info "> Limpiar Filtro
           
         </button>
         </div>

@@ -178,7 +178,7 @@ export class UserProfileViewFormComponent implements OnInit {
           this.userService.unsubscribe(this.editedUser.user_id).subscribe(response => {
             $.notify({
               title: '<strong>Operanción exitosa.</strong>',
-              message: 'Se ha eliminado correctamente el insumo ',
+              message: 'La desuscripcion GOLD ha sido exitosa  ',
             }, {
               type: 'success'
             });
@@ -188,7 +188,8 @@ export class UserProfileViewFormComponent implements OnInit {
           this.authorizationService.updateUserLogged();
         }
       })
-     
+     this.ngOnInit()
+
   }
 }
 

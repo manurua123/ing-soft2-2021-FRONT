@@ -75,7 +75,6 @@ export class TableListTravelReportComponent implements OnInit {
       this.destinationDatasource = listPlace;
     });
 
-
   }
 
   updateTable() {
@@ -112,6 +111,7 @@ export class TableListTravelReportComponent implements OnInit {
   }
 
   filtrarDatos() {
+    debugger;
     if (this.selectedDriver) {
       this.dataSource = this.dataSource.filter(e => e.driver_name === (this.selectedDriver.lastName + ", " + this.selectedDriver.firstName))
       this.filterDriver = true;
@@ -138,7 +138,7 @@ export class TableListTravelReportComponent implements OnInit {
       )
       this.filterArrivalDate = true;
     }
-
+    debugger;
   
   }
   limpiarFiltro() {
@@ -147,7 +147,17 @@ export class TableListTravelReportComponent implements OnInit {
     this.filterDestination = false;
     this.filterDepartureDate = false;
     this.filterArrivalDate = false;
-    this.ngOnInit();
+    debugger;
+    this.arrival_range.value.start = null;
+    this.arrival_range.value.end = null;
+    this.departure_range.value.start = null;
+    this.departure_range.value.end = null;
+    this.arrival_range.value.start = null;
+    this.arrival_range.value.end = null;
+    this.departure_range.value.start = null;
+    this.departure_range.value.end = null;
+    this.ngOnInit()
+    
   }
 
 
