@@ -118,7 +118,7 @@ export class TicketFormComponent implements OnInit, AfterViewInit {
   secondStep = false;
   isGold: boolean;
   userId: number;
-
+  suspension= false;
   another_card=false;
   checked = false;
   selectedTravel: TravelTicketData;
@@ -137,6 +137,7 @@ export class TicketFormComponent implements OnInit, AfterViewInit {
 
     this.authorizationService.getUserLogged().subscribe(user => {
       this.isGold = user.gold === '1';
+      this.suspension  = user.suspension === '1';
       this.userId = user.id
     }
     );
@@ -188,7 +189,7 @@ export class TicketFormComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (this.userId == 19) {
+    if (this.suspension) {
       $.notify({
         title: '<strong>Antención.</strong>',
         message: 'Sr pasajero. Ud no puede realizar la compra de un pasaje debido que un test realizado con anterioridad ha dado positivo y aún no se ha cumplido el tiempo de aislamiento'

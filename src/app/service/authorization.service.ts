@@ -42,11 +42,12 @@ export class AuthorizationService implements OnInit {
         return this.http.get<any>(this.resourceAuthorityURL, {params :{"username":username}});
    }
    
-   saveUserData(username: string, rol: string, id: string, gold: boolean) {
+   saveUserData(username: string, rol: string, id: string, gold: boolean, suspension: boolean ) {
     this.localStore.set('username', username);
     this.localStore.set('rol', rol);
     this.localStore.set('id', id);
-    this.localStore.set('gold', gold ? '1' : '0')
+    this.localStore.set('gold', gold ? '1' : '0');
+    this.localStore.set('suspension', suspension ? '1' : '0');
 }
    
     updateUserLogged() {
@@ -54,7 +55,8 @@ export class AuthorizationService implements OnInit {
         username: this.localStore.get('username'),
         'rol': this.localStore.get('rol'),
         'id': this.localStore.get('id'),
-        'gold': this.localStore.get('gold')
+        'gold': this.localStore.get('gold'),
+        'suspension': this.localStore.get('suspension')
     })
 }
 

@@ -1,0 +1,130 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Pasajeros</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-header">
+                            <h4 class="card-title">Registros de pasajeros</h4>
+                        </div>
+                        <table mat-table [dataSource]="dataSource">
+                            <ng-container matColumnDef="firstName">
+                                <th class="w-25"
+                                    mat-header-cell
+                                    *matHeaderCellDef
+                                    >
+                                    Nombre
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{ element.firstName }}
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="lastName">
+                                <th class="w-25" mat-header-cell *matHeaderCellDef>Apellido</th>
+                                <td mat-cell *matCellDef="let element">
+                                {{ element.lastName }}
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="idCards">
+                                <th class="w-25" mat-header-cell *matHeaderCellDef>DNI</th>
+                                <td mat-cell *matCellDef="let element">
+                                {{ element.idCards }}
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="email">
+                                <th class="w-25" mat-header-cell *matHeaderCellDef>Email</th>
+                                <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="state">
+                                <th class="w-25" mat-header-cell *matHeaderCellDef>Estado</th>
+                                <td mat-cell *matCellDef="let element">{{ element.state }}</td>
+                            </ng-container>
+                           
+                            <ng-container matColumnDef="test" stickyEnd>
+                                <th style= "text-align: center; padding-left: 30px;" mat-header-cell *matHeaderCellDef>Test COVID-19</th>
+                                <td style="text-align: end !important;" mat-cell (click)="showQuestionnaire(element)" *matCellDef="let element">
+                                        <a *ngIf="!isQuetionnaireActive && element.state =='Activo'" href="javascript:void(0)" class="nav-link">
+                                            <i style="color:black !important; margin-top: -5px !important;" class="material-icons">app_registration</i>
+                                        </a>
+                                 </td>
+                             </ng-container>
+                              <!-- <ng-container matColumnDef="absence" stickyEnd>
+                                <th mat-header-cell *matHeaderCellDef>Ausente</th>
+                                <td mat-cell *matCellDef="let element">
+                                  <a *ngIf="!isQuetionnaireActive" href="javascript:void(0)" class="nav-link">
+                                    <i style="color:black !important; margin-top: -5px !important;" class="material-icons">cancel</i>
+                                  </a>
+                                </td>
+                              </ng-container> -->
+              
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                        </table>
+                        <div *ngIf="!isQuetionnaireActive" style="display: flex !important; justify-content: end;">
+                            <button class="btn btn-danger" [routerLink]="['/nextTravels']" mat-raised-button type="submit">
+                                <span><strong>Volver</strong></span>
+                            </button>
+                        </div>    
+                        <div *ngIf="isQuetionnaireActive">
+                            <form #questionnaireForm="ngForm">
+                                <mat-card>
+                                    <div style="background: linear-gradient(60deg, #115571, #1e84a4);" class="card-header">
+                                        <h4 style="color:white" class="card-title">Cuestionario COVID-19</h4>
+                                    </div>
+                                    <mat-card-content>
+                                        <br>
+                                        <h4  class="card-title"><span>Estimado </span> <span>{{ticketQuetionnaire.firstName +' '+ ticketQuetionnaire.lastName}}</span><span>. ¿Usted en la última semana presento algunos de estos sintomas?</span></h4>
+                                        <br>
+                                        <h5 style ="color: black;font-weight: bolder;" class="card-title">Tuvo fiebre</h5>
+                                        <mat-radio-group [(ngModel)]="fever" name ="fever" required aria-label="Select an option">
+                                            <mat-radio-button value="true">Si</mat-radio-button>
+                                            <mat-radio-button  style="padding-left: 15px;" value="false">NO</mat-radio-button>
+                                        </mat-radio-group>
+                                        <br>
+                                        <h5 style ="color: black;font-weight: bolder;" class="card-title">Perdida de gusto</h5>
+                                        <mat-radio-group [(ngModel)]="losstTaste" name ="losstTaste" required  aria-label="Select an option" >
+                                            <mat-radio-button value="true">Si</mat-radio-button>
+                                            <mat-radio-button style="padding-left: 15px;" value="false">NO</mat-radio-button>
+                                        </mat-radio-group>
+                                        <br>
+                                        <h5 style ="color: black;font-weight: bolder;" class="card-title">Perdida de olfato</h5>
+                                        <mat-radio-group  [(ngModel)]="lossSmell" name ="lossSmell" required aria-label="Select an option">
+                                            <mat-radio-button value="true">Si</mat-radio-button>
+                                            <mat-radio-button style="padding-left: 15px;" value="false">NO</mat-radio-button>
+                                        </mat-radio-group>
+                                        <br>
+                                        <h5 style ="color: black;font-weight: bolder;" class="card-title">Dolor de garganta</h5>
+                                        <mat-radio-group [(ngModel)]="throatPain" name ="throatPain" required>
+                                            <mat-radio-button value="true">Si</mat-radio-button>
+                                            <mat-radio-button style="padding-left: 15px;" value="false">NO</mat-radio-button>
+                                        </mat-radio-group>
+                                        <br>
+                                        <h5 style ="color: black;font-weight: bolder;" class="card-title">Dificultad para respirar</h5>
+                                        <mat-radio-group  [(ngModel)]="difficultBreathe" name ="difficultBreathe"  required>
+                                            <mat-radio-button value="true">Si</mat-radio-button>
+                                            <mat-radio-button style="padding-left: 15px;" value="false">NO</mat-radio-button>
+                                        </mat-radio-group>
+                                        <br>
+                                        <h5 style ="color: black;font-weight: bolder;" class="card-title">Temperatura corporal actualmente</h5>
+                                        <mat-form-field style="display: flex !important"required  class="example-full-width">
+                                            <input [(ngModel)]="temperature"  required="true" name="temperature"  matInput placeholder="Temperatura" type="number">
+                                        </mat-form-field>
+                                    </mat-card-content>                                        
+                                </mat-card>
+                                <button mat-raised-button  (click)="cancel()" class="btn btn-dark pull-right">Cancelar</button>
+                                <button [disabled]="questionnaireForm.form.invalid"  mat-raised-button
+                                type="submit" (click)="save(); questionnaireForm.resetForm()" name="save" class="btn btn-danger pull-right">Grabar</button>
+
+                            </form>    
+                        </div>
+
+                    </div>
+                </div>
+            </div>                
+        </div>
+    </div>                    
+</div>

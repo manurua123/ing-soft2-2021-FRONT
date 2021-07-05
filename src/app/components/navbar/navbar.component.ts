@@ -72,7 +72,7 @@ export class NavbarComponent implements OnInit {
             this.username = this.credential.username;
             this.isLoginPanelOpen = false;
             this.isMenuOpen = false;
-            this.authorizationService.saveUserData(this.credential.username, data.rol, data.user_id, data.gold)
+            this.authorizationService.saveUserData(this.credential.username, data.rol, data.user_id, data.gold, data.suspension)
             this.authorizationService.updateUserLogged();
         },
             errorResponse => {
@@ -97,7 +97,7 @@ export class NavbarComponent implements OnInit {
         this.isLoginPanelOpen = false;
         this.isMenuOpen = false;
         // this.authorizationService.saveRolByUserLogged('', '',);
-        this.authorizationService.saveUserData('', '', '-1', false)
+        this.authorizationService.saveUserData('', '', '-1', false, false)
         this.authorizationService.updateUserLogged();
         this.userGold = '';
 

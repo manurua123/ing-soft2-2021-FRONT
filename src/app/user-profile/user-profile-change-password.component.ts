@@ -79,7 +79,7 @@ this.authorizationService.updateUserLogged();
       }, {
         type: 'success'
       }));
-      this.authorizationService.saveUserData('','','',false);
+      this.authorizationService.saveUserData('','','',false,false);
       this.authorizationService.updateUserLogged();
       this.router.navigate(['']);  
   }

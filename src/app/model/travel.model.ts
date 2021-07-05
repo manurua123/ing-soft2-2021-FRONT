@@ -42,3 +42,19 @@ export interface TravelTicketData {
     driver_name?:string;
     route?: number;
 }
+
+export interface NextTravelData {
+    id?: number;
+    origin: string;
+    destination: string;
+    departure_date: string;
+    departure_time: string;
+    arrival_date: string;
+    arrival_time: string;
+    bus_id: string;
+    ticket_sold: number;
+    state: string;
+    canInitTravel: boolean;
+    available_seats?: number;
+    price?: number;
+}

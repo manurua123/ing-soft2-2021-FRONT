@@ -23,9 +23,13 @@ import { UserTravelViewComponent } from 'app/components/userTravelView/userTrave
 import { TicketFormComponent } from 'app/components/ticket/form/ticket-form.component';
 import { TravelSearchComponent } from 'app/components/travelSearch/travel-search.component';
 import { UserProfileChangePasswordComponent } from 'app/user-profile/user-profile-change-password.component';
+import { NextTravelComponent } from 'app/components/nextTravel/next-travel.component';
+import { QuestionnaireComponent } from 'app/components/questionnaire/questionnaire.component';
+import { CompletedTravelComponent } from 'app/components/traverlListCompleted/completed-travel.component';
+import { PendingTravelComponent } from 'app/components/pendingTravel/pending-travel.component';
+import { SimplifiedSaleComponent } from 'app/components/simplifiedSale/simplified-sale-travel.component';
 import {TableListTravelReportComponent } from 'app/components/travelReport/table/table-list-travelReport.component'
 import { TableListCovidReportComponent } from 'app/components/covidReport/table/table-list-covidReport.component';
-
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -49,5 +53,11 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'notifications',  component: NotificationsComponent },
     { path: 'ticket',         component: TicketFormComponent },
     { path: 'searchTravels',  component: TravelSearchComponent },
-   
+    { path: 'nextTravels',    component: NextTravelComponent },
+    { path: 'completedTravels',  component: CompletedTravelComponent },
+    {path:  'questionnaire/:id', component:QuestionnaireComponent},
+    {path:  'pendingTravels', component:PendingTravelComponent},
+    {path:  'simplifiedSale', component:SimplifiedSaleComponent}
+    
+    
 ];
