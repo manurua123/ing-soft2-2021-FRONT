@@ -184,7 +184,7 @@ export class UserProfileViewFormComponent implements OnInit {
             });
 
           });
-          this.authorizationService.saveUserData( this.editedUser.username, 'CLIENT',this.editedUser.id, false);
+          this.authorizationService.saveUserData( this.editedUser.username, 'CLIENT',this.editedUser.id, false,false);
           this.authorizationService.updateUserLogged();
         }
       })

@@ -15,21 +15,8 @@
     <p><strong>¿Ud. está seguro de finalizar el viaje?</strong></p>
   </div>
   <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-outline-secondary"
-      (click)="modal.dismiss('cancel click')"
-    >
-      Cancelar
-    </button>
-    <button
-      type="button"
-      ngbAutofocus
-      class="btn btn-danger"
-      (click)="modal.close('Ok click')"
-    >
-      Aceptar
-    </button>
+    <button type="button" class="btn btn-dark" (click)="modal.dismiss('cancel click')">Cancelar</button>
+    <button type="button" ngbAutofocus class="btn btn-info" (click)="modal.close('Ok click')">Aceptar</button>
   </div>
 </ng-template>
 <div class="main-content">
@@ -39,6 +26,7 @@
         <div class="card">
           <div class="card-header card-header-danger">
             <h4 class="card-title">Viajes</h4>
+         
           </div>
           <div class="card-body">
             <div class="card-header">
@@ -111,7 +99,7 @@
                   <a href="javascript:void(0)" class="nav-link">
                     <i
                       style="
-                        color: black !important;
+                        
                         margin-top: -5px !important;
                       "
                       class="material-icons"

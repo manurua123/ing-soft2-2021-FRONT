@@ -23,13 +23,14 @@ export const ROUTES: RouteInfo[] = [
     { path: '/drivers', title: 'Conductores',  icon:'badge', class: '', roles:'ADMIN', visible: true },
     { path: '/bus', title: 'Vehículos',  icon:'airport_shuttle', class: '', roles:'ADMIN', visible: true },
     { path: '/supplies', title: 'Insumos',  icon:'local_dining', class: '', roles:'ADMIN', visible: true },
+    { path: '/pendingTravels', title: 'Viajes pendientes',  icon:'pending_actions', class: '', roles:'ADMIN', visible: true },
+
     { path: '/questionnaire', title: '',  icon:'', class: '', roles:'', visible: false },
     
-    { path: '/nextTravels', title: 'Próximos viajes',  icon:'local_dining', class: '', roles:'DRIVER', visible: true },
-    { path: '/completedTravels', title: 'Viajes realizados',  icon:'local_dining', class: '', roles:'DRIVER', visible: true },
-    
-    { path: '/pendingTravels', title: 'Viajes pendientes',  icon:'local_dining', class: '', roles:'ADMIN', visible: true },
-    { path: '/simplifiedSale', title: 'Venta simplificada',  icon:'local_dining', class: '', roles:'DRIVER', visible: true },
+    { path: '/nextTravels', title: 'Próximos viajes',  icon:'next_week', class: '', roles:'DRIVER', visible: true },
+    { path: '/completedTravels', title: 'Viajes realizados',  icon:'event_available', class: '', roles:'DRIVER', visible: true },
+    { path: '/simplifiedSale', title: 'Venta simplificada',  icon:'payments', class: '', roles:'DRIVER', visible: true },
+   
 
 
     { path: '/searchTravels', title: 'Busquedas de viajes',  icon:'travel_explore', class: '' , roles:'CLIENT', visible: true},

@@ -68,7 +68,8 @@
                         </ng-container>
                           <ng-container matColumnDef="state">
                               <th class="w-10" mat-header-cell *matHeaderCellDef>Estado</th>
-                              <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+                              <td  
+                              class=" {{element.state}} " mat-cell *matCellDef="let element"> {{element.state}} </td>
                           </ng-container>
                           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
