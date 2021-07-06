@@ -2,4 +2,31 @@
     justify-content: flex-end !important;
 }
 
+.Pendiente{
+    color: #FF8800 !important;
+    font-weight: bold !important;
+  }
+  .Iniciado	
+  {
+    color: #007E33 !important;
+    font-weight: bold !important;
+  }
+  .Activo	
+  {
+    color: #007E33 !important;
+    font-weight: bold !important;
+  }
+  .Rechazado {
+    color: #CC0000 !important;
+    font-weight: bold !important;
+  }
+  .Cancelado{
+    color: #CC0000 !important;
+    font-weight: bold !important;
+  }
+  
+  .Terminado{
+    color: #616161 !important;
+    font-weight: bold !important;
+  }
   
