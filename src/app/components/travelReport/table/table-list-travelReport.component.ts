@@ -12,6 +12,7 @@ import { Driver } from 'app/model/driver.model';
 import { Place } from 'app/model/place.model';
 import { PlaceService } from 'app/service/place.service';
 import * as moment from 'moment';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 declare var $: any;
 
@@ -59,12 +60,16 @@ export class TableListTravelReportComponent implements OnInit {
     start: new FormControl(),
     end: new FormControl(),
   });
-
+  filterDriver = false;
+  filterOrigine = false;
+  filterDestination = false;
+  filterDepartureDate = false;
+  filterArrivalDate = false;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private placeService: PlaceService, private driverService: DriverService, private _modalService: NgbModal, private travelService: TravelService) { }
 
   ngOnInit() {
-  
+
     this.updateTable();
     this.driverService.getAllDriver().subscribe((driverList: Driver[]) => {
       this.driverDatasource = driverList;
@@ -74,6 +79,15 @@ export class TableListTravelReportComponent implements OnInit {
       this.originDatasource = listPlace;
       this.destinationDatasource = listPlace;
     });
+
+    this.filterDriver = false;
+    this.filterOrigine = false;
+    this.filterDestination = false;
+    this.filterDepartureDate = false;
+    this.filterArrivalDate = false;
+    this.selectedDriver = undefined;
+    this.selectedOrigen = undefined;
+    this.selectedDestination= undefined;
 
   }
 
@@ -98,13 +112,6 @@ export class TableListTravelReportComponent implements OnInit {
   }
 
 
- 
-
-  filterDriver = false;
-  filterOrigine = false;
-  filterDestination = false;
-  filterDepartureDate = false;
-  filterArrivalDate = false;
 
   fechaToString(unaFecha) {
     return (moment(unaFecha._d).format("YYYY-MM-DD"))
@@ -127,43 +134,25 @@ export class TableListTravelReportComponent implements OnInit {
     if (this.departure_range.value.start && this.departure_range.value.end) {
       this.dataSource = this.dataSource.filter(e =>
         moment(e.departure_date).isSameOrAfter(moment(this.departure_range.value.start))
-        && moment(e.departure_date).isSameOrBefore(moment(this.departure_range.value.end))
-      )
+        && moment(e.departure_date).isSameOrBefore(moment(this.departure_range.value.end)))
       this.filterDepartureDate = true;
     }
     if (this.arrival_range.value.start && this.arrival_range.value.end) {
       this.dataSource = this.dataSource.filter(e =>
         moment(e.arrival_date).isSameOrAfter(moment(this.arrival_range.value.start))
-        && moment(e.arrival_date).isSameOrBefore(moment(this.arrival_range.value.end))
-      )
+        && moment(e.arrival_date).isSameOrBefore(moment(this.arrival_range.value.end)))
       this.filterArrivalDate = true;
     }
-    debugger;
-  
   }
+
   limpiarFiltro() {
-    this.filterDriver = false;
-    this.filterOrigine = false;
-    this.filterDestination = false;
-    this.filterDepartureDate = false;
-    this.filterArrivalDate = false;
-    debugger;
-    this.arrival_range.value.start = null;
-    this.arrival_range.value.end = null;
-    this.departure_range.value.start = null;
-    this.departure_range.value.end = null;
-    this.arrival_range.value.start = null;
-    this.arrival_range.value.end = null;
-    this.departure_range.value.start = null;
-    this.departure_range.value.end = null;
+    this.arrival_range.reset();
+    this.departure_range.reset()
     this.ngOnInit()
-    
+
   }
 
 
-
-
-  //----------------------------------------------------------------------
 
   @ViewChild('TABLE', { static: false }) TABLE: ElementRef;
   title = 'Excel';
