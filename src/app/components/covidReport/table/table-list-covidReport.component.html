@@ -19,7 +19,7 @@
           </div>
           <div class="clearfix"></div>
           <div class="card-body" #TABLE #table>
-            <div class="table-responsive" *ngIf="dataSource.length > 0">
+            <div class="table-responsive" >
               <mat-table [dataSource]="dataSource">
                 <ng-container matColumnDef="departure_date">
                   <th class="corto" mat-header-cell *matHeaderCellDef mat-sort-header> Dia de<br>salida</th>
@@ -73,7 +73,7 @@
 
            
             </div>
-            <div *ngIf="dataSource.length === 0">
+            <div *ngIf="!dataSource || dataSource.length == 0">
           
               <h4> No se encotraron resultados</h4>
   

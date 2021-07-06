@@ -42,17 +42,41 @@ export class TableListCovidReportComponent implements OnInit {
   constructor(private ticketService: TicketService) { }
 
   ngOnInit() {
-    this.updateTable();
+    this.ticketService.get_ticket_rejected('http://localhost:8000/api/ticket/get_ticket_rejected/').subscribe(
+      responseBody => {
+        this.dataSource = (responseBody),
+        errorResponse => {
+        if (errorResponse.error.code === "ticjets_no_exists_error") {
+          $.notify({
+            title: '<strong>No existen pasajeros riesgoso</strong>',
+            message: errorResponse.error.message
+          }, {
+            type: 'warning'
+          })
+        };
+      };
+      })
 
   }
 
   updateTable() {
     this.ticketService.get_ticket_rejected('http://localhost:8000/api/ticket/get_ticket_rejected/').subscribe(
       responseBody => {
-        this.dataSource = (responseBody)
-      }
-    );
-  }
+        this.dataSource = (responseBody),
+        errorResponse => {
+        if (errorResponse.error.code == "ticjets_no_exists_error") {
+          $.notify({
+            title: '<strong>No existen pasajeros riesgoso</strong>',
+            message: errorResponse.error.message
+          }, {
+            type: 'warning'
+          })
+        };
+      };
+      })
+    }
+  
+  
 
   end_date_suspension(date: string) {
     return moment(date).add(15, 'days').format('DD/MM/YYYY')
